@@ -26,7 +26,7 @@ var assemble    = require('fabricator-assemble'),
 
 var args            = minimist(process.argv.slice(2)),
 	buildConfigFile = lodash.get(args, 'buildConfig', './configs/fabricator.json'),
-	config          = createConfig(getProjectConfig(args), getFileName(buildConfigFile)),
+	config          = createConfig(getFabricatorConfig(args.config), getFileName(buildConfigFile)),
 	webpackConfig   = require('./webpack.config')(config),
 	webpackCompiler = webpack(webpackConfig);
 
@@ -204,7 +204,6 @@ gulp.task('serve', function () {
 // The 'required' ones, which have the following defaults:
 //
 //	"useWebpack": true  // Webpack doesn't work well with bower modules!
-//	"package"   : "./package.json",
 //	"views"     : ["./src/views/**/*", "!./src/views/+(layouts)/**"],
 //	"materials" : ["./src/materials/**/*"],
 //	"data"      : ["./src/data/**/*.{json,yml}"],
@@ -228,12 +227,18 @@ gulp.task('serve', function () {
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+function getFabricatorConfig(projectConfigFilePath) {
+	return lodash.merge({},
+		getBuilderFabricatorConfig(),
+		getProjectFabricatorConfig(projectConfigFilePath));
 
-function getProjectConfig(args) { return args.config ? require(args.config) : {}; }
+	function getBuilderFabricatorConfig() { return require('./fabricatorConfig.json'); }
 
-function createConfig(projectFabricatorConfig, build) {
+	function getProjectFabricatorConfig(configFilePath) { return configFilePath ? require(configFilePath) : {}; }
+}
+
+function createConfig(fabricatorConfig, build) {
 	var development = gutil.env.dev;
-	var fabricatorConfig = lodash.merge({}, require('./fabricatorConfig.json'), projectFabricatorConfig);
 
 	var config = {
 		dev: development,

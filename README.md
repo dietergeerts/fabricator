@@ -41,18 +41,26 @@ $ npm install fabricator-builder --save-dev
 }
 ```
 
-The config file is required, the buildConfig one is not.
+Both the config and buildConfig files are optional.
 
 ## Documentation
+
+Also see the [original Fabricator project](https://github.com/fbrctr/fabricator) for more info. I'll only document the
+build process by config and all the extra options.
 
 ### Config file
 
 The config file can just be an empty object. It's used to tell Fabricator builder what your paths and configuration is.
 If nothing is specified, all required paths will be defaulted, configured in fabricatorConfig of Fabricator builder.
 
+#### package
+
+Specify the package.json file that needs to be used. It will be added to the Fabricator data.
+The name and version are used in the title of the default layout, which is displayed in your browser tabs.
+
 ### BuildConfig file
 
-The buildConfig file is not required. It's used to add extra data and to fill in placeholders in sass files.
+The buildConfig file is used to add extra data and to fill in placeholders in sass files.
 
 ## Credits
 
