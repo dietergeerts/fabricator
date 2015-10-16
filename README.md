@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/dietergeerts/fabricator/blob/master/logo.svg" width="500">
+  <img src="http://1drv.ms/1NfUcdG" width="500">
 </p>
 
 # REMARK: In Development!
@@ -20,29 +20,21 @@ Fabricator builder is a tool for building website UI toolkits - _think ["Tiny Bo
 It's a builder version of the [original Fabricator project](https://github.com/fbrctr/fabricator), which means you
 create your project, add the needed configuration files and let Fabricator builder build your toolkit.
 
-
-
-
 ## Quick Start
 
-```shell
-$ curl -L https://github.com/fbrctr/fabricator/archive/master.tar.gz | tar zx --strip 1
-$ npm start
+```
+$ npm install fabricator-builder --save-dev
 ```
 
 ## Documentation
 
-#### [Read the docs →](http://fbrctr.github.io/docs)
-
-## Demo
-
-#### [Default Fabricator Instance →](http://fbrctr.github.io/demo)
-
 ## Credits
 
-Created by [Luke Askew](http://twitter.com/lukeaskew).
+Fabricator builder created by [Dieter Geerts](http://github.com/dietergeerts).
 
-Logo by [Abby Putinski](https://abbyputinski.com/)
+Original Fabricator created by [Luke Askew](http://twitter.com/lukeaskew).
+
+Original Fabricator Logo by [Abby Putinski](https://abbyputinski.com/).
 
 ## License
 
