@@ -1,7 +1,7 @@
-![img tag](logo.svg)
+![img tag](https://rawgit.com/dietergeerts/fabricator/master/logo.svg)
 
 <p align="center">
-  <img src="logo.svg" width="500">
+  <img src="https://rawgit.com/dietergeerts/fabricator/master/logo.svg" width="500">
 </p>
 
 # REMARK: In Development!
