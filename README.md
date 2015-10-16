@@ -1,7 +1,7 @@
 ![img tag](https://github.com/dietergeerts/fabricator/blob/master/logo.svg)
 
 <p align="center">
-  <img src="https://onedrive.live.com/redir?resid=F270ADEDA194238D!53034&authkey=!AOOWwMcd--RZ5nc&ithint=file%2csvg" width="500">
+  <img src="https://github.com/dietergeerts/fabricator/blob/master/logo.svg" width="500">
 </p>
 
 # REMARK: In Development!
