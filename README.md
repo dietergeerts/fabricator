@@ -1,5 +1,3 @@
-![img tag](https://rawgit.com/dietergeerts/fabricator/master/logo.svg)
-
 <p align="center">
   <img src="https://rawgit.com/dietergeerts/fabricator/master/logo.svg" width="500">
 </p>
