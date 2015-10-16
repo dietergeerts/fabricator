@@ -22,11 +22,37 @@ create your project, add the needed configuration files and let Fabricator build
 
 ## Quick Start
 
+### Installing Fabricator builder
+
 ```
 $ npm install fabricator-builder --save-dev
 ```
 
+### Setup your package.json
+
+```javascript
+{
+	"scripts": {
+		"prestart": "npm install",
+		"start": "cd node_modules && cd fabricator-builder && npm start -- --config=\"../../fabricatorConfig.json\"" --buildConfig=\"../../toolkitConfig.json\" && cd .. && cd ..",
+		"prebuild": "npm install",
+		"build": "cd node_modules && cd fabricator-builder && npm run build -- --config=\"../../fabricatorConfig.json\"" --buildConfig=\"../../toolkitConfig.json\" && cd .. && cd ..",
+	}
+}
+```
+
+The config file is required, the buildConfig one is not.
+
 ## Documentation
+
+### Config file
+
+The config file can just be an empty object. It's used to tell Fabricator builder what your paths and configuration is.
+If nothing is specified, all required paths will be defaulted, configured in fabricatorConfig of Fabricator builder.
+
+### BuildConfig file
+
+The buildConfig file is not required. It's used to add extra data and to fill in placeholders in sass files.
 
 ## Credits
 
