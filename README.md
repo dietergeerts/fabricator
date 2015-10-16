@@ -1,7 +1,7 @@
-![img tag](https://github.com/dietergeerts/fabricator/blob/master/logo.svg)
+![img tag](logo.svg)
 
 <p align="center">
-  <img src="https://github.com/dietergeerts/fabricator/blob/master/logo.svg" width="500">
+  <img src="logo.svg" width="500">
 </p>
 
 # REMARK: In Development!
