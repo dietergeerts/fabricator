@@ -30,6 +30,10 @@ var args            = minimist(process.argv.slice(2)),
 	webpackConfig   = require('./webpack.config')(config),
 	webpackCompiler = webpack(webpackConfig);
 
+var sassOptions = {
+	precision: 10
+};
+
 initializeBuild();
 
 gulp.task('default', ['clean'], function () {
@@ -44,7 +48,7 @@ gulp.task('clean', function (cb) { del([config.paths.dest], {force: true}, cb); 
 gulp.task('styles:fabricator', function () {
 	gulp.src(config.paths.fabricator.styles)
 		.pipe(sourcemaps.init())
-		.pipe(sass().on('error', sass.logError))
+		.pipe(sass(sassOptions).on('error', sass.logError))
 		.pipe(prefix('last 1 version'))
 		.pipe(gulpif(!config.dev, csso()))
 		.pipe(rename('f.css'))
@@ -68,7 +72,7 @@ gulp.task('styles:toolkit', ['styles:toolkit:fonts'], function () {
 		return gulp.src(namedSrc[1])
 			.pipe(sourcemaps.init())
 			.pipe(replace({patterns: [{json: styleReplacements}], usePrefix: false}))
-			.pipe(sass().on('error', sass.logError))
+			.pipe(sass(sassOptions).on('error', sass.logError))
 			.pipe(prefix('last 1 version'))
 			.pipe(gulpif(!config.dev, csso()))
 			.pipe(concat(namedSrc[0] + '.css'))
