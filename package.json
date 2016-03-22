@@ -1,6 +1,6 @@
 {
   "name": "fabricator-builder",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A tool for building website UI toolkits",
   "homepage": "https://github.com/dietergeerts/fabricator",
   "main": "README.md",
