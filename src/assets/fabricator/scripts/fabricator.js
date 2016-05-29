@@ -91,130 +91,6 @@ fabricator.buildColorChips = function () {
 
 
 /**
- * Add `f-active` class to active menu item
- */
-fabricator.setActiveItem = function () {
-
-	/**
-	 * @return {Array} Sorted array of menu item 'ids'
-	 */
-	var parsedItems = function () {
-
-		var items = [],
-			id, href;
-
-		for (var i = fabricator.dom.menuItems.length - 1; i >= 0; i--) {
-
-			// remove active class from items
-			fabricator.dom.menuItems[i].className =
-				fabricator.dom.menuItems[i].className.replace(' f-active', '').replace('f-active', '');
-
-			// get item href
-			href = fabricator.dom.menuItems[i].getAttribute('href');
-
-			// get id
-			if (href.indexOf('#') > -1) {
-				id = href.split('#').pop();
-			} else {
-				id = href.split('/').pop().replace(/\.[^/.]+$/, '');
-			}
-
-			items.push(id);
-
-		}
-
-		return items.reverse();
-
-	};
-
-
-	/**
-	 * Match the 'id' in the window location with the menu item, set menu item as active
-	 */
-	var setActive = function () {
-
-		var href = window.location.href,
-			items = parsedItems(),
-			id, index;
-
-		// get window 'id'
-		if (href.indexOf('#') > -1) {
-			id = window.location.hash.replace('#', '');
-		} else {
-			id = window.location.pathname.split('/').pop().replace(/\.[^/.]+$/, '');
-		}
-
-		// In case the first menu item isn't the index page.
-		if (id === '') {
-			id = 'index';
-		}
-
-		// find the window id in the items array
-		index = (items.indexOf(id) > -1) ? items.indexOf(id) : 0;
-
-		// set the matched item as active
-		fabricator.dom.menuItems[index].className =
-			fabricator.dom.menuItems[index].className + ' f-active';
-	};
-
-	window.addEventListener('hashchange', setActive);
-
-	setActive();
-
-	return this;
-
-};
-
-
-/**
- * Click handler to primary menu toggle
- * @return {Object} fabricator
- */
-fabricator.menuToggle = function () {
-
-	// shortcut menu DOM
-	var toggle = fabricator.dom.menuToggle;
-
-	var options = fabricator.getOptions();
-
-	// toggle classes on certain elements
-	var toggleClasses = function () {
-		options.menu = !fabricator.dom.root.className.indexOf('f-menu-active') > -1;
-		if (options.menu) {
-			fabricator.dom.root.className =
-				fabricator.dom.root.className.replace(' f-menu-active', '').replace('f-menu-active', '');
-		} else {
-			fabricator.dom.root.className =
-				fabricator.dom.root.className + ' f-menu-active';
-		}
-
-		if (fabricator.test.sessionStorage) {
-			sessionStorage.setItem('fabricator', JSON.stringify(options));
-		}
-	};
-
-	// toggle classes on click
-	toggle.addEventListener('click', function () {
-		toggleClasses();
-	});
-
-	// close menu when clicking on item (for collapsed menu view)
-	var closeMenu = function () {
-		if (!window.matchMedia(fabricator.options.mq).matches) {
-			toggleClasses();
-		}
-	};
-
-	for (var i = 0; i < fabricator.dom.menuItems.length; i++) {
-		fabricator.dom.menuItems[i].addEventListener('click', closeMenu);
-	}
-
-	return this;
-
-};
-
-
-/**
  * Handler for preview and code toggles
  * @return {Object} fabricator
  */
@@ -337,6 +213,7 @@ fabricator.bindCodeAutoSelect = function () {
 		codeBlocks[i].addEventListener('click', select.bind(this, codeBlocks[i]));
 	}
 
+	return this;
 };
 
 
@@ -373,6 +250,35 @@ fabricator.setInitialMenuState = function () {
 
 
 /**
+ * Init the deep menu toggles.
+ * @returns {Window.fabricator}
+ */
+fabricator.initDeepMenuToggles = function () {
+
+	var deepMenus = document.querySelectorAll('.f-menu-toggle');
+
+	for (var index = 0; index < deepMenus.length; index++) {
+		deepMenus[index].addEventListener('click', toggleDeepMenu);
+	}
+
+	function toggleDeepMenu(event) {
+		event.stopPropagation();
+		var target = event.currentTarget;
+		target.className = target.className + ' f-active';
+		
+		var closeDeepMenu = function (event) {
+			target.className = target.className.replace(' f-active', '').replace('f-active', '');
+			document.removeEventListener('click', closeDeepMenu);
+		};
+		
+		document.addEventListener('click', closeDeepMenu);
+	}
+
+	return this;
+};
+
+
+/**
  * Initialization
  */
 (function () {
@@ -380,11 +286,10 @@ fabricator.setInitialMenuState = function () {
 	// invoke
 	fabricator
 		.setInitialMenuState()
-		.menuToggle()
 		.allItemsToggles()
 		.singleItemToggle()
 		.buildColorChips()
-		.setActiveItem()
-		.bindCodeAutoSelect();
+		.bindCodeAutoSelect()
+		.initDeepMenuToggles();
 
 }());

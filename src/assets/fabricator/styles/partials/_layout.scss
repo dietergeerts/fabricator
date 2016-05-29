@@ -1,45 +1,29 @@
-html {
-	height: 100%;
 
-	&.f-menu-active {
-		overflow: hidden;
+.f-html { }
 
-		@media (min-width: 60em) {
-			overflow: auto;
-		}
-	}
+.f-body { margin: 0; }
+
+.f-menu {
+	position: fixed; top: 0; left: 0; right: 0; z-index: 1;
+	display: flex; flex-wrap: wrap; background: #444; color: #BBB;
 }
 
-body {
-	margin: 0;
-	position: relative;
-
-	.f-menu-active & {
-		width:100%;
-		height: 100%;
-		overflow: hidden;
-
-		@media (min-width: 60em) {
-			overflow: auto;
-		}
-	}
+.f-menu-item,
+.f-menu-toggle {
+	line-height: 24px; font-size: 12px; text-transform: uppercase;
+	&:hover { cursor: pointer; background: #222; color: #FFF; }
 }
 
-.f-container {
-	@include clearfix;
-	@include border-box;
-	position: relative;
-	padding: 0 1em;
-	z-index: 0;
-	min-height: 100vh;
-
-	.f-menu-active & {
-		transform: translate($menu-width, 0);
-
-		@media (min-width: 60em) {
-			margin-left: $menu-width;
-			transform: translate(0, 0);
-		}
-	}
-
+.f-menu-item { padding: 0 10px; }
+.f-menu-toggle {
+	&:before { content: '\25BC'; } padding: 0 5px; margin-left: -10px;
+	&:not(.f-active) + .f-menu { display: none; }
 }
+
+.f-container { z-index: 0; margin: 36px 10px 10px 10px; }
+
+
+
+
+
+.f-controls { display: none; }
