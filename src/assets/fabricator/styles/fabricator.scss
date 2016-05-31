@@ -4,9 +4,9 @@
  * Class selectors are namespaced with "f-"
  */
 
-@import 'partials/general';
 @import 'partials/variables';
+@import 'partials/general';
+@import 'partials/layout';
+@import 'partials/item';
 @import 'partials/code';
 @import 'partials/color-chips';
-@import 'partials/item';
-@import 'partials/layout';

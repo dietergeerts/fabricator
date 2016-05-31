@@ -1,2 +1,27 @@
+
+
+// GENERAL LAYOUT
+
 div[class^="f-"],
 div[class*=" f-"] { box-sizing: border-box; }
+
+
+// CONTROL LAYOUT
+
+.f-controls { margin-left: auto; display: flex; }
+
+.f-control { padding: 0 10px; }
+
+.f-control svg { width: 18px; height: 18px; vertical-align: middle; }
+
+
+// CONTROL STYLING
+
+.f-control svg { fill: $base; }
+
+
+// CONTROL ALTERNATIVE STYLING
+
+.f-control { &:hover { cursor: pointer; } }
+
+.f-control { &:hover, &.f-active { svg { fill: $base-hl; } } }
