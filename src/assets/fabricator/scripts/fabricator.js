@@ -291,5 +291,4 @@ fabricator.initDeepMenuToggles = function () {
 		.buildColorChips()
 		.bindCodeAutoSelect()
 		.initDeepMenuToggles();
-
 }());
