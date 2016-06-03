@@ -1,6 +1,6 @@
 <!doctype html>
-<html {{#if buildConfig.ngAppName}}data-ng-app="{{buildConfig.ngAppName}}"{{/if}}
-      {{#if fabricator}}class="f-html"{{/if}}>
+<html {{#if buildConfig.ngAppName}}data-ng-app="{{buildConfig.ngAppName}}" {{/if}}
+{{#if fabricator}}class="f-html"{{/if}}>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,18 +14,18 @@
   {{/each}}
 </head>
 <body {{#if fabricator}}class="f-body"{{/if}}>
-  {{#if fabricator}}
-    {{> f-icons}}
-    {{> f-menu}}
-    <div class="f-container">
-  {{/if}}
+{{#if fabricator}}
+  {{> f-icons}}
+  {{> f-menu}}
+  <div class="f-container">
+{{/if}}
   {% body %}
-  {{#if fabricator}}
-    </div>
-    <script src="./{{baseurl}}/assets/fabricator/scripts/f.js"></script>
-  {{/if}}
-  {{#each buildConfig.toolkitScripts}}
-    <script src="./{{../baseurl}}/assets/toolkit/scripts/{{this}}.js"></script>
-  {{/each}}
+{{#if fabricator}}
+  </div>
+  <script src="./{{baseurl}}/assets/fabricator/scripts/f.js"></script>
+{{/if}}
+{{#each buildConfig.toolkitScripts}}
+  <script src="./{{../baseurl}}/assets/toolkit/scripts/{{this}}.js"></script>
+{{/each}}
 </body>
 </html>

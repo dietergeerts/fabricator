@@ -37,7 +37,7 @@ table code {
 
 code,
 :not(pre) > code[class*='language-'],
-pre[class*='language-'] { background: darken(map-get($code-colors, light-gray), 5); }
+pre[class*='language-'] { background: darken(map-get($code-colors, light-gray), 9); }
 
 // inline code
 :not(pre) > code[class*='language-'] { padding: 0.1em; border-radius: 0.3em; }

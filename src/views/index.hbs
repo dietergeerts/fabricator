@@ -1,0 +1,29 @@
+---
+fabricator: true
+---
+
+<div class="f-view-header">Home</div>
+<div class="f-item-notes">
+  This UI toolkit is a highly-modular design system for rapid web page development. It contains different materials that
+  can be assembled into more complex page layouts.<br/>
+  This guide contains real working examples, code snippets, documentation, and style guidelines.
+</div>
+<div class="f-item-group">
+  <div class="f-item-heading-group">
+    <div class="f-item-heading">Usage</div>
+  </div>
+  <div class="f-item-notes">
+    Start by adding the following files to your page (depending on which extensions you want to include):<br/>
+    All needed assets can be found in the <code class="language-css">'assets/toolkit'</code> folder.
+  </div>
+  <div class="f-item-code">
+    <pre><code class="language-markup">
+      {{#each buildConfig.toolkitStyles}}
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/toolkit/styles/{{this}}.css&quot;&gt;
+      {{/each}}
+      {{#each buildConfig.toolkitScripts}}
+        &lt;script src=&quot;assets/toolkit/scripts/{{this}}.js&quot;&gt;&lt;/script&gt;
+      {{/each}}
+    </code></pre>
+  </div>
+</div>
