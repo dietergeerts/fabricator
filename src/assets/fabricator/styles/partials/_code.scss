@@ -40,7 +40,8 @@ code,
 pre[class*='language-'] { background: darken(map-get($code-colors, light-gray), 9); }
 
 // inline code
-:not(pre) > code[class*='language-'] { padding: 0.1em; border-radius: 0.3em; }
+:not(pre) > code,
+:not(pre) > code[class*='language-'] { padding: 0.1em; border-radius: 0.3em; color: map-get($code-colors, maroon); }
 
 // token colors
 .token {

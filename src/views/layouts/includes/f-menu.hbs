@@ -1,11 +1,15 @@
 <div class="f-menu">
-  {{#if buildConfigInfo}}
-    <div class="f-menu-item" onclick="location.href='configuration.html'">Configuration</div>
-  {{/if}}
   <div class="f-control" onclick="location.href='index.html'" title="Go Home">
     <svg>
       <use xlink:href="#f-icon-home"></use>
     </svg>
+  </div>
+  <div class="f-menu-item" onclick="location.href='docs.html'">Docs</div>
+  <div class="f-menu-toggle"></div>
+  <div class="f-menu">
+    {{#each docs}}
+      <div class="f-menu-item" onclick="location.href='docs.html#{{@key}}'">{{name}}</div>
+    {{/each}}
   </div>
   {{#each materials}}
     <div class="f-menu-item" onclick="location.href='{{@key}}.html'">{{name}}</div>
@@ -33,13 +37,6 @@
       {{/each}}
     </div>
   {{/each}}
-  <div class="f-menu-item" onclick="location.href='docs.html'">Docs</div>
-  <div class="f-menu-toggle"></div>
-  <div class="f-menu">
-    {{#each docs}}
-      <div class="f-menu-item" onclick="location.href='docs.html#{{@key}}'">{{name}}</div>
-    {{/each}}
-  </div>
   <div class="f-controls">
     <div class="f-control" data-f-toggle-control="notes" title="Toggle Notes">
       <svg>

@@ -24,7 +24,7 @@
 
 // MENU STYLING
 
-.f-menu { background: $dark; color: $light; box-shadow: 0 0 8px 4px rgba($dark-hl, 0.4); }
+.f-menu { background: $dark; color: $light; box-shadow: 0 0 8px 4px rgba($dark-hl, 0.4); font-family: $font; }
 
 .f-menu .f-control svg { fill: $light; }
 
@@ -46,9 +46,9 @@
 
 // VIEW LAYOUT
 
-.f-view-header { }
+.f-view-header { padding-bottom: 6px; }
 
 
 // VIEW STYLING
 
-.f-view-header { text-transform: uppercase; color: $base; padding-bottom: 6px; border-bottom: 1px solid $base; }
+.f-view-header { text-transform: uppercase; color: $base; border-bottom: 1px solid $base; font-family: $font; }

@@ -1,6 +1,5 @@
 <!doctype html>
-<html {{#if buildConfig.ngAppName}}data-ng-app="{{buildConfig.ngAppName}}" {{/if}}
-{{#if fabricator}}class="f-html"{{/if}}>
+<html {{#if buildConfig.ngAppName}}data-ng-app="{{buildConfig.ngAppName}}" {{/if}}{{#if fabricator}}class="f-html"{{/if}}>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,9 +8,11 @@
   {{#if fabricator}}
     <link rel="stylesheet" href="./{{baseurl}}/assets/fabricator/styles/f.css">
   {{/if}}
-  {{#each buildConfig.toolkitStyles}}
-    <link rel="stylesheet" href="./{{../baseurl}}/assets/toolkit/styles/{{this}}.css">
-  {{/each}}
+  {{#unless documentation}}
+    {{#each buildConfig.toolkitStyles}}
+      <link rel="stylesheet" href="./{{../baseurl}}/assets/toolkit/styles/{{this}}.css">
+    {{/each}}
+  {{/unless}}
 </head>
 <body {{#if fabricator}}class="f-body"{{/if}}>
 {{#if fabricator}}
@@ -24,8 +25,10 @@
   </div>
   <script src="./{{baseurl}}/assets/fabricator/scripts/f.js"></script>
 {{/if}}
-{{#each buildConfig.toolkitScripts}}
-  <script src="./{{../baseurl}}/assets/toolkit/scripts/{{this}}.js"></script>
-{{/each}}
+{{#unless documentation}}
+  {{#each buildConfig.toolkitScripts}}
+    <script src="./{{../baseurl}}/assets/toolkit/scripts/{{this}}.js"></script>
+  {{/each}}
+{{/unless}}
 </body>
 </html>

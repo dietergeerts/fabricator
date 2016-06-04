@@ -14,6 +14,8 @@
 
 .f-item-notes, .f-item-preview, .f-item-code { margin-top: 18px; }
 
+.f-item-notes { max-width: 500px; text-align: justify; }
+
 .f-item-hidden { display: none; }
 
 
@@ -25,7 +27,7 @@
 
 .f-item-heading-group { color: $base; padding-bottom: 6px; border-bottom: 1px solid $base; }
 
-.f-item-heading, .f-item-notes { font-size: 14px; }
+.f-item-heading, .f-item-notes { font-size: 14px; font-family: $font; }
 
 .f-item-heading-link:hover { cursor: pointer; color: $light-hl; background: $base; font-size: 16px; }
 

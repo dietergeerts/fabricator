@@ -1,14 +1,16 @@
 ---
 fabricator: true
+documentation: true
 ---
 
-<h1 data-f-toggle="labels">Docs</h1>
-
+<div class="f-view-header">Docs</div>
 {{#each docs}}
-
-  <div class="f-item-group">
-    <h2 id="{{@key}}"><a href="#{{@key}}">{{name}}</a></h2>
-    {{{content}}}
+  <div class="f-item-group" id="{{@key}}">
+    <div class="f-item-heading-group">
+      <div class="f-item-heading">{{name}}</div>
+    </div>
+    <div class="f-item-preview">
+      {{{content}}}
+    </div>
   </div>
-
 {{/each}}
