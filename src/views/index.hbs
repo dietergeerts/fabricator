@@ -1,0 +1,47 @@
+---
+fabricator: true
+documentation: true
+---
+
+<div class="f-view-header">Home</div>
+<div class="f-item-notes">
+  This UI toolkit is a highly-modular design system for rapid web page development.
+  It contains different materials that can be assembled into more complex page layouts.
+  This guide contains real working examples, code snippets, documentation, and style guidelines.
+</div>
+<div class="f-item-group">
+  <div class="f-item-heading-group">
+    <div class="f-item-heading">Usage</div>
+  </div>
+  <div class="f-item-notes">
+    Start by adding the following files to your page:<br/>
+    <em>(depending on which extensions you want to include)</em><br/><br/>
+    <em>All needed assets can be found in the <code>'assets/toolkit'</code> folder.</em>
+  </div>
+  <div class="f-item-code">
+    <pre><code class="language-markup">
+      {{#each buildConfig.toolkitStyles}}
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/toolkit/styles/{{this}}.css&quot;&gt;
+      {{/each}}
+      {{#each buildConfig.toolkitScripts}}
+        &lt;script src=&quot;assets/toolkit/scripts/{{this}}.js&quot;&gt;&lt;/script&gt;
+      {{/each}}
+    </code></pre>
+  </div>
+</div>
+{{#if buildConfigInfo}}
+  <div class="f-item-group">
+    <div class="f-item-heading-group">
+      <div class="f-item-heading">Configuration</div>
+    </div>
+    <div class="f-item-notes">
+      The following parameters can be configured to create a custom build:
+      {{#each buildConfigInfo}}
+        <h3>{{@key}}</h3>
+        {{#each this}}
+          <div><code>'{{@key}}'</code>: {{this}}</div><br/>
+        {{/each}}
+      {{/each}}
+    </div>
+  </div>
+{{/if}}

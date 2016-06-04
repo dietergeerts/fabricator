@@ -1,89 +1,36 @@
-.f-item-group {
-	@include clearfix;
-	margin-top: 3rem;
-	margin-bottom: 3rem;
-	padding-bottom: 3rem;
-	border-bottom: 1px solid map-get($colors, light);
-
-	&:last-child {
-		border-bottom: 0;
-		margin-bottom: 0;
-	}
-
-	& ~ & {
-		margin-top: 0;
-	}
-
-	& > & {
-		padding-bottom: 1.5rem;
-		margin-bottom: 1.5rem;
-		border-bottom: 0;
-
-		&:first-of-type {
-			margin-top: 0;
-		}
-
-		&:last-child {
-			margin-bottom: 0;
-			padding-bottom: 0;
-		}
-	}
-}
-
-.f-item-code {
-	margin-top: 2rem;
-}
-
-.f-item-preview {
-	@include clearfix;
-}
-
-.f-item-border-bottom {
-	border-bottom: 1px solid map-get($colors, light);
-}
-
-.f-item-heading-group {
-	@include clearfix;
-	margin-bottom: 2rem;
-	vertical-align: middle;
-}
-
-.f-item-heading {
-	margin-top: 0;
-	margin-bottom: 0;
-	display: inline-block;
-	vertical-align: middle;
-	line-height: 1;
-}
 
 
-.f-item-controls {
-	display: inline-block;
-	vertical-align: middle;
-	margin-left: 0.5rem;
+// ITEM LAYOUT
 
-	.f-control {
-		width: 14px;
-		height: 14px;
-		display: block;
-		float: left;
+.f-item-group { padding-top: 48px; margin-bottom: 48px; }
 
-		&:hover {
-			use {
-				fill: map-get($colors, normal);
-			}
-		}
+.f-item-heading-group { display: flex; }
 
-		use {
-			fill: map-get($colors, light);
-		}
-	}
-}
+.f-item-heading { line-height: 24px; }
 
-.f-item-hidden {
-	display: none;
-}
+.f-item-heading-link { width: 100%; &:hover { padding-left: 5px; } }
 
-.f-item-notes {
-	font-size: 0.875rem;
-}
+.f-item-notes, .f-item-preview, .f-item-code { margin-top: 18px; }
+
+.f-item-notes { max-width: 500px; text-align: justify; }
+
+.f-item-hidden { display: none; }
+
+
+// ITEM STYLING
+
+.f-item-group { }
+
+:not(.f-item-group) > .f-item-group > .f-item-heading-group { text-transform: uppercase; }
+
+.f-item-heading-group { padding-bottom: 6px; border-bottom: 1px solid $base; }
+
+.f-item-heading, .f-item-notes { font-size: 14px; font-family: $font; color: $base; }
+
+.f-item-heading-link:hover { cursor: pointer; color: $light-hl; background: $base; font-size: 16px; }
+
+.f-item-notes { color: $dark; }
+
+.f-item-preview { }
+
+.f-item-code { }

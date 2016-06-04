@@ -1,0 +1,17 @@
+---
+fabricator: true
+documentation: true
+---
+
+<div class="f-view-header">Templates</div>
+{{#each views.templates.items}}
+  <div class="f-item-group" id="{{@key}}">
+    <div class="f-item-heading-group">
+      <div class="f-item-heading f-item-heading-link"
+           onclick="window.open('templates/{{@key}}.html', '_blank')">
+        {{name}}
+      </div>
+    </div>
+    <div class="f-item-notes">{{data.description}}</div>
+  </div>
+{{/each}}

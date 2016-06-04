@@ -1,45 +1,59 @@
-html {
-	height: 100%;
 
-	&.f-menu-active {
-		overflow: hidden;
 
-		@media (min-width: 60em) {
-			overflow: auto;
-		}
-	}
-}
+// MAIN LAYOUT
 
-body {
-	margin: 0;
-	position: relative;
+.f-html { }
 
-	.f-menu-active & {
-		width:100%;
-		height: 100%;
-		overflow: hidden;
+.f-body { margin: 0; }
 
-		@media (min-width: 60em) {
-			overflow: auto;
-		}
-	}
-}
+.f-menu { position: fixed; top: 0; left: 0; right: 0; z-index: 1; }
 
-.f-container {
-	@include clearfix;
-	@include border-box;
-	position: relative;
-	padding: 0 1em;
-	z-index: 0;
-	min-height: 100vh;
+.f-container { margin: 36px 10px 10px 10px; z-index: 0; }
 
-	.f-menu-active & {
-		transform: translate($menu-width, 0);
 
-		@media (min-width: 60em) {
-			margin-left: $menu-width;
-			transform: translate(0, 0);
-		}
-	}
+// MAIN STYLING
 
-}
+.f-body { background: #FFFFFF; }
+
+
+// MENU LAYOUT
+
+.f-menu { display: flex; flex-wrap: wrap; }
+
+.f-menu-item, .f-menu-toggle { line-height: 24px; }
+
+.f-menu-item { padding: 0 10px; }
+
+.f-menu-toggle { padding: 0 5px; margin-left: -10px; &:not(.f-active) + .f-menu { display: none; } }
+
+
+// MENU STYLING
+
+.f-menu { background: $dark; color: $light; box-shadow: 0 0 8px 4px rgba($dark-hl, 0.4); font-family: $font; }
+
+.f-menu .f-control svg { fill: $light; }
+
+.f-menu-item, .f-menu-toggle { font-size: 12px; text-transform: uppercase; }
+
+.f-menu-toggle { &:before { content: '\25BC'; } }
+
+
+// MENU ALTERNATIVE STYLING
+
+.f-menu-item, .f-menu-toggle { &:hover { cursor: pointer; } }
+
+.f-menu-item, .f-menu-toggle, .f-menu .f-control { &:hover, &.f-active { background: $dark-hl; } }
+
+.f-menu-item, .f-menu-toggle { &:hover, &.f-active { color: $light-hl; } }
+
+.f-menu .f-control { &:hover, &.f-active { svg { fill: $light-hl; } } }
+
+
+// VIEW LAYOUT
+
+.f-view-header { padding-bottom: 6px; }
+
+
+// VIEW STYLING
+
+.f-view-header { text-transform: uppercase; color: $base; border-bottom: 1px solid $base; font-family: $font; }
