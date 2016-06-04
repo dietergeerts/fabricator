@@ -285,7 +285,7 @@ function createConfigViewsPaths(fabricatorConfig) {
 	var projectPages = lodash.get(fabricatorConfig, 'pages', []);
 	return lodash.union(
 		fabricatorConfig.views,
-		lodash.size(projectPages) > 0 ? ['!./src/views/pages{,/**}'] : [],
+		lodash.size(projectPages) > 0 ? ['!./src/views/templates{,/**}'] : [],
 		projectPages,
 		(lodash.has(fabricatorConfig, 'buildConfigInfo') ? '' : '!') + './src/views/configuration.html'
 	);
