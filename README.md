@@ -1,3 +1,8 @@
+[![GitHub release](https://img.shields.io/github/release/dietergeerts/fabricator.svg)]()
+[![Build Status](https://travis-ci.org/dietergeerts/fabricator.svg)](https://travis-ci.org/dietergeerts/fabricator)
+[![devDependency Status](https://david-dm.org/dietergeerts/fabricator/dev-status.svg)](https://david-dm.org/dietergeerts/fabricator#info=devDependencies)
+
+
 <p align="center">
   <img src="https://rawgit.com/dietergeerts/fabricator/master/logo.svg" width="500">
 </p>
