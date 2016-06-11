@@ -1,6 +1,6 @@
-[![GitHub release](https://img.shields.io/github/release/dietergeerts/fabricator.svg)]()
+[![GitHub release](https://img.shields.io/github/release/dietergeerts/fabricator-builder.svg)]()
 [![Build Status](https://travis-ci.org/dietergeerts/fabricator.svg)](https://travis-ci.org/dietergeerts/fabricator)
-[![devDependency Status](https://david-dm.org/dietergeerts/fabricator/dev-status.svg)](https://david-dm.org/dietergeerts/fabricator#info=devDependencies)
+[![devDependency Status](https://david-dm.org/dietergeerts/fabricator-builder/dev-status.svg)](https://david-dm.org/dietergeerts/fabricator-builder#info=devDependencies)
 
 
 <p align="center">
