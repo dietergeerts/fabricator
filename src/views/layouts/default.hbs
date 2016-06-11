@@ -1,5 +1,5 @@
 <!doctype html>
-<html {{#if buildConfig.ngAppName}}data-ng-app="{{buildConfig.ngAppName}}" {{/if}}{{#if fabricator}}class="f-html"{{/if}}>
+<html {{#if toolkitConfig.ngAppName}}data-ng-app="{{toolkitConfig.ngAppName}}" {{/if}}{{#if fabricator}}class="f-html"{{/if}}>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./{{baseurl}}/assets/fabricator/styles/f.css">
   {{/if}}
   {{#unless documentation}}
-    {{#each buildConfig.toolkitStyles}}
+    {{#each toolkitConfig.toolkitStyles}}
       <link rel="stylesheet" href="./{{../baseurl}}/assets/toolkit/styles/{{this}}.css">
     {{/each}}
   {{/unless}}
@@ -26,7 +26,7 @@
   <script src="./{{baseurl}}/assets/fabricator/scripts/f.js"></script>
 {{/if}}
 {{#unless documentation}}
-  {{#each buildConfig.toolkitScripts}}
+  {{#each toolkitConfig.toolkitScripts}}
     <script src="./{{../baseurl}}/assets/toolkit/scripts/{{this}}.js"></script>
   {{/each}}
 {{/unless}}

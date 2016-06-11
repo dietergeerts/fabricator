@@ -2,9 +2,8 @@
 [![Build Status](https://travis-ci.org/dietergeerts/fabricator-builder.svg)](https://travis-ci.org/dietergeerts/fabricator-builder)
 [![devDependency Status](https://david-dm.org/dietergeerts/fabricator-builder/dev-status.svg)](https://david-dm.org/dietergeerts/fabricator-builder#info=devDependencies)
 
-
 <p align="center">
-  <img src="https://rawgit.com/dietergeerts/fabricator/master/logo.svg" width="500">
+  <img src="https://rawgit.com/dietergeerts/fabricator/master/logo.svg" width="300">
 </p>
 
 # REMARK: In Development!
@@ -39,14 +38,14 @@ $ npm install fabricator-builder --save-dev
 {
 	"scripts": {
 		"prestart": "npm install",
-		"start": "cd node_modules && cd fabricator-builder && npm start -- --config=\"../../fabricatorConfig.json\"" --buildConfig=\"../../toolkitConfig.json\" && cd .. && cd ..",
+		"start": "cd node_modules && cd fabricator-builder && npm start -- --config=\"../../fabricatorConfig.json\"" --toolkitConfig=\"../../toolkitConfig.json\" && cd .. && cd ..",
 		"prebuild": "npm install",
-		"build": "cd node_modules && cd fabricator-builder && npm run build -- --config=\"../../fabricatorConfig.json\"" --buildConfig=\"../../toolkitConfig.json\" && cd .. && cd ..",
+		"build": "cd node_modules && cd fabricator-builder && npm run build -- --config=\"../../fabricatorConfig.json\"" --toolkitConfig=\"../../toolkitConfig.json\" && cd .. && cd ..",
 	}
 }
 ```
 
-Both the config and buildConfig files are optional.
+Both the config and toolkitConfig files are optional.
 
 ## Documentation
 
@@ -63,9 +62,9 @@ If nothing is specified, all required paths will be defaulted, configured in fab
 Specify the package.json file that needs to be used. It will be added to the Fabricator data.
 The name and version are used in the title of the default layout, which is displayed in your browser tabs.
 
-### BuildConfig file
+### ToolkitConfig file
 
-The buildConfig file is used to add extra data and to fill in placeholders in sass files.
+The toolkitConfig file is used to add extra data and to fill in placeholders in sass files.
 
 ## Credits
 

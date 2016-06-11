@@ -43,5 +43,8 @@ jspm_packages
 
 dist
 .sass-cache
-buildConfig.json
+
+# We generate our own toolkitConfig file as we add data besides the optional tookitConfig file of the project.
+toolkitConfig.json
+
 buildConfigInfo.json
