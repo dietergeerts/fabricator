@@ -18,7 +18,7 @@ module.exports = function (gulp, plugins, config) {
 function generateData(config) {
 
 	var projectData = config.toolkit.paths.toolkitConfig
-		? require(config.toolkit.paths.toolkitConfig) 
+		? require('../' + config.toolkit.paths.toolkitConfig) 
 		: {};
 
 	var data =

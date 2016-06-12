@@ -69,6 +69,23 @@ The toolkitConfig file is used for two things:
 1. To add extra data you can use in your views and pages. Access through `toolkitConfig.{insertKeyHere}`.
 2. To fill in placeholders in sass files, like `/* key */` will become `key: value !default;`.
 
+### Available includes
+
+#### f-color-chip & f-color-chips
+
+You can use includes to render color chips. like this:
+
+```
+{{#each toolkitConfig.colors}}
+  {{> f-color-chips this}}
+{{/each}}
+```
+```
+{{#each this}}
+{{> f-color-chip this}}
+{{/each}}
+```
+
 ## Credits
 
 Fabricator builder created by [Dieter Geerts](http://github.com/dietergeerts).
