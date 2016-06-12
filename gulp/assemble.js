@@ -2,10 +2,9 @@
 var _ = require('lodash');
 var assemble = require('fabricator-assemble');
 
-
-module.exports = function (gulp, plugins, config) {
+module.exports = function (config) {
 	return function (callback) {
-		
+
 		assemble({
 			logErrors: config.fabricator.dev,
 			views    : config.fabricator.paths.views,
@@ -15,9 +14,9 @@ module.exports = function (gulp, plugins, config) {
 			data     : _.union(config.fabricator.paths.data, [config.fabricator.paths.toolkitConfig]),
 
 			docs     : config.fabricator.paths.docs,
-			dest     : config.fabricator.paths.dest
+			dest     : config.fabricator.paths.dest.base
 		});
-		
+
 		callback();
 	};
 };

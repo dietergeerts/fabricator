@@ -4,6 +4,6 @@ var del = require('del');
 
 module.exports = function (gulp, plugins, config) {
 	return function (callback) {
-		del(config.fabricator.paths.dest + config.fabricator.paths.dest_fonts, {force: true}, callback);
+		del(config.fabricator.paths.dest.fonts, {force: true}, callback);
 	};
 };

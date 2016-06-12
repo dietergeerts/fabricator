@@ -21,7 +21,7 @@ module.exports = function (gulp, plugins, config) {
 				.pipe(plugins.if(!config.fabricator.dev, plugins.csso()))
 				.pipe(plugins.concat(namedSrc[0] + '.css'))
 				.pipe(plugins.sourcemaps.write())
-				.pipe(gulp.dest(config.fabricator.paths.dest + config.fabricator.paths.dest_styles));
+				.pipe(gulp.dest(config.fabricator.paths.dest.styles));
 		}
 	};
 };
