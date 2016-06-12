@@ -1,13 +1,11 @@
 'use strict';
 
 var _           = require('lodash');
-var assemble    = require('fabricator-assemble');
 var browserSync = require('browser-sync');
 var concat      = require('gulp-concat');
 var csso        = require('gulp-csso');
 var del         = require('del');
 var fs          = require('fs');
-var gulp        = require('gulp');
 var gutil       = require('gulp-util');
 var gulpif      = require('gulp-if');
 var imagemin    = require('gulp-imagemin');
@@ -24,21 +22,81 @@ var sourcemaps  = require('gulp-sourcemaps');
 var uglify      = require('gulp-uglify');
 var webpack     = require('webpack');
 
+var gulp    = require('gulp');
+var plugins = require('gulp-load-plugins')();
+
 var args             = minimist(process.argv.slice(2));
-var toolkitConfig    = args.toolkitConfig;
 var fabricatorConfig = createConfig(getFabricatorConfig(args.config));
 var webpackConfig    = require('./webpack.config')(fabricatorConfig);
 var webpackCompiler  = webpack(webpackConfig);
 
-var sassOptions = {
-	precision: 10
+
+
+
+var config = {
+	fabricator: {
+		dev: fabricatorConfig.dev,
+		paths: {
+			buildConfigInfoFile: fabricatorConfig.buildConfigInfoFile,
+			data: fabricatorConfig.paths.data,
+			dest: fabricatorConfig.paths.dest,
+			dest_fonts: '/assets/toolkit/fonts',
+			dest_styles: '/assets/toolkit/styles',
+			docs: fabricatorConfig.paths.docs,
+			materials: fabricatorConfig.paths.materials,
+			ngAppFile: fabricatorConfig.ngAppFile,
+			toolkitConfig: './toolkitConfig.json',
+			views: fabricatorConfig.paths.views
+		}
+	},
+	toolkit: {
+		paths: {
+			fonts: fabricatorConfig.paths.toolkit.fonts,
+			scripts: fabricatorConfig.paths.toolkit.scripts,
+			styles: fabricatorConfig.paths.toolkit.styles,
+			toolkitConfig: args.toolkitConfig
+		}
+	}
 };
 
-initializeBuild();
+
+
+initializeBuildConfigInfo();
+
+
+
+gulp.task('toolkitConfig:changed', ['toolkit:styles', 'assemble'], reload);
+gulp.task('toolkitConfig:clearCache', require('./gulp/toolkitConfig.clearCache')(gulp, plugins, config));
+gulp.task('toolkitConfig:generate', ['toolkitConfig:clearCache'], require('./gulp/toolkitConfig.generate')(gulp, plugins, config));
+
+gulp.task('toolkit:fonts', ['toolkit:fonts:clean'], require('./gulp/toolkit.fonts')(gulp, plugins, config));
+gulp.task('toolkit:fonts:clean', require('./gulp/toolkit.fonts.clean')(gulp, plugins, config));
+
+gulp.task('toolkit:styles', ['toolkit:styles:clean', 'toolkitConfig:clearCache'], require('./gulp/toolkit.styles')(gulp, plugins, config));
+gulp.task('toolkit:styles:clean', require('./gulp/toolkit.styles.clean')(gulp, plugins, config));
+
+gulp.task('assemble', ['toolkitConfig:generate'], require('./gulp/assemble')(gulp, plugins, config));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 gulp.task('default', ['clean'], function () {
 	runSequence(
-		['styles', 'scripts', 'images', 'samples', 'assemble'],
+		['styles', 'scripts', 'images', 'samples', 'toolkit:fonts', 'assemble'],
 		function () { if (fabricatorConfig.dev) { gulp.start('serve'); } }
 	);
 });
@@ -48,37 +106,13 @@ gulp.task('clean', function (cb) { del([fabricatorConfig.paths.dest], {force: tr
 gulp.task('styles:fabricator', function () {
 	gulp.src(fabricatorConfig.paths.fabricator.styles)
 		.pipe(sourcemaps.init())
-		.pipe(sass(sassOptions).on('error', sass.logError))
+		.pipe(sass().on('error', sass.logError))
 		.pipe(prefix('last 1 version'))
 		.pipe(gulpif(!fabricatorConfig.dev, csso()))
 		.pipe(rename('f.css'))
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest(fabricatorConfig.paths.dest + '/assets/fabricator/styles'))
 		.pipe(gulpif(fabricatorConfig.dev, reload({stream:true})));
-});
-
-gulp.task('toolkit:styles:fonts', function () {
-	return gulp.src(fabricatorConfig.paths.toolkit.fonts)
-		.pipe(gulp.dest(fabricatorConfig.paths.dest + '/assets/toolkit/fonts'));
-});
-
-gulp.task('toolkit:styles', ['toolkit:styles:fonts'], function () {
-	var styleReplacements = createStyleReplacementsFromConfig();
-
-	return merge(_.map(_.pairs(fabricatorConfig.paths.toolkit.styles), createToolkitStyleStream))
-		.pipe(gulpif(fabricatorConfig.dev, reload({stream: true})));
-
-	function createToolkitStyleStream(namedSrc) {
-		return gulp.src(namedSrc[1])
-			.pipe(sourcemaps.init())
-			.pipe(replace({patterns: [{json: styleReplacements}], usePrefix: false}))
-			.pipe(sass(sassOptions).on('error', sass.logError))
-			.pipe(prefix('last 1 version'))
-			.pipe(gulpif(!fabricatorConfig.dev, csso()))
-			.pipe(concat(namedSrc[0] + '.css'))
-			.pipe(sourcemaps.write())
-			.pipe(gulp.dest(fabricatorConfig.paths.dest + '/assets/toolkit/styles'));
-	}
 });
 
 gulp.task('styles', ['styles:fabricator', 'toolkit:styles']);
@@ -141,36 +175,7 @@ gulp.task('samples', function () {
 		.pipe(gulp.dest(fabricatorConfig.paths.dest + '/assets/samples'));
 });
 
-gulp.task('assemble', function (done) {
-	initializeBuildConfigInfo();
-	assemble({
-		logErrors: fabricatorConfig.dev,
-		views    : fabricatorConfig.paths.views,
-		materials: fabricatorConfig.paths.materials,
-		data     : fabricatorConfig.paths.data,
-		docs     : fabricatorConfig.paths.docs,
-		dest     : fabricatorConfig.paths.dest
-	});
-	done();
-});
 
-
-// This task will be run when the project toolkitConfig file has changed.
-// It is set-up in the serve task, which will watch the toolkitConfig file.
-gulp.task('toolkitConfigChanged', function (callback) {
-
-	// We use require to get the contents of the toolkitConfig file.
-	// So we need to delete it from the cache, so it will get updated.
-	delete require.cache[require.resolve(toolkitConfig)];
-
-	// We generate our own toolkitConfig file, as we use it to add
-	// other data to it, which can then be used by our views and pages.
-	generateToolkitConfigFile();
-
-	// After the toolkitConfig file is generated,
-	// we run the tasks that depends on it for its data.
-	runSequence(['toolkit:styles', 'assemble'], callback);
-});
 
 
 gulp.task('serve', function () {
@@ -212,8 +217,10 @@ gulp.task('serve', function () {
 	gulp.task('samples:watch', ['samples'], reload);
 	gulp.watch(fabricatorConfig.paths.samples, ['samples:watch']);
 
-	gulp.task('toolkitConfig:watch', ['toolkitConfigChanged'], reload);
-	gulp.watch(toolkitConfig, ['toolkitConfig:watch']);
+
+
+
+	gulp.watch(config.toolkit.paths.toolkitConfig, ['toolkitConfig:changed']);
 });
 
 
@@ -275,7 +282,7 @@ function createConfig(fabricatorConfig, build) {
 			samples: fabricatorConfig.samples,
 			views: createConfigViewsPaths(fabricatorConfig),
 			materials: fabricatorConfig.materials,
-			data: createConfigDataPaths(fabricatorConfig),
+			data: generateFabricatorConfigDataPaths(fabricatorConfig),
 			docs: fabricatorConfig.docs,
 			dest: createConfigDestPath(fabricatorConfig, build, development)
 		}
@@ -305,9 +312,11 @@ function createConfigViewsPaths(fabricatorConfig) {
 	);
 }
 
-function createConfigDataPaths(fabricatorConfig) {
+
+// Generate the glob pattern to use as data for fabricator-assemble.
+function generateFabricatorConfigDataPaths(fabricatorConfig) {
 	return _.union(
-		[fabricatorConfig.package, './toolkitConfig.json'],
+		[fabricatorConfig.package],
 		_.has(fabricatorConfig, 'buildConfigInfo') ? ['./buildConfigInfo.json'] : []
 	);
 }
@@ -335,28 +344,10 @@ function createPathFromArrayOfStrings(strings) {
 	return _.reduce(strings, function (result, piece) { return result + '/' + piece; });
 }
 
-function initializeBuild() {
-	generateToolkitConfigFile();
-	initializeBuildConfigInfo();
-}
 
-function generateToolkitConfigFile() {
 
-	fs.writeFileSync('./toolkitConfig.json', JSON.stringify(createBuildConfigData()));
-
-	function createBuildConfigData() {
-		var buildConfigData = _.chain(toolkitConfig ? require(toolkitConfig) : {})
-			.set('toolkitScripts', _.keys(fabricatorConfig.paths.toolkit.scripts))
-			.set('toolkitStyles', _.keys(fabricatorConfig.paths.toolkit.styles))
-			.value();
-
-		var ngAppFile = _.get(fabricatorConfig, 'ngAppFile', '');
-		if (ngAppFile !== '') { buildConfigData.ngAppName = getFileName(ngAppFile); }
-
-		return buildConfigData;
-	}
-}
-
+// TODO: buildConfigInfo should be done differently, with a .md or .hbs file!
+// TODO: this also is in the assemble task!
 function initializeBuildConfigInfo() {
 	// Besides the use of toolkitConfig, it's possible to list info about these configurations on a
 	// separate page. When buildConfigInfo is filled into the fabricatorConfig file, we'll add this page.
@@ -369,20 +360,6 @@ function initializeBuildConfigInfo() {
 	}
 }
 
-function createStyleReplacementsFromConfig() {
-	var replacements = {};
-	if (toolkitConfig) {
-		fillReplacementsWithData(replacements, require(toolkitConfig));
-	}
-	return replacements;
-
-	function fillReplacementsWithData(replacements, data) {
-		_.forOwn(data, function (value, key) {
-			if (_.isObject(value)) { fillReplacementsWithData(replacements, value); }
-			else { replacements['/* ' + key + ' */'] = key + ': ' + value + ' !default;'; }
-		});
-	}
-}
 
 function constructAssembleSourcesToWatch() {
 	var buildConfigInfoFile = _.get(fabricatorConfig, 'buildConfigInfoFile', '');
@@ -411,8 +388,3 @@ function constructScriptSourcesToWatch() {
 	return scriptsToWatch;
 }
 
-function getFileName(filePath) {
-	return _.reduce(
-		filePath.split('/').pop(-1).split('.').slice(0, -1),
-		function (result, piece) { return result + '.' + piece; });
-}

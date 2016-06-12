@@ -64,7 +64,10 @@ The name and version are used in the title of the default layout, which is displ
 
 ### ToolkitConfig file
 
-The toolkitConfig file is used to add extra data and to fill in placeholders in sass files.
+The toolkitConfig file is used for two things:
+ 
+1. To add extra data you can use in your views and pages. Access through `toolkitConfig.{insertKeyHere}`.
+2. To fill in placeholders in sass files, like `/* key */` will become `key: value !default;`.
 
 ## Credits
 
