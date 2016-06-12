@@ -1,0 +1,24 @@
+{
+  "data"     : "./test/data/**/*.{json,yml}",
+  "dest"     : "./dest",
+  "docs"     : "./test/docs/**/*.md",
+  "fonts"    : "./test/assets/toolkit/fonts/**/*",
+  "materials": "./test/materials/**/*",
+  "package"  : "./test/package.json",
+  "scripts"  : {
+    "toolkit": "./test/assets/scripts/toolkit.js"
+  },
+  "styles"   : {
+    "toolkit": "./test/assets/styles/toolkit.scss"
+  },
+  "templates": "./test/views/templates/**/*",
+
+
+
+
+
+
+  "useWebpack": true,
+  "samples"   : ["./src/samples/**/*"],
+  "images"    : ["./src/assets/toolkit/images/**/*"]
+}

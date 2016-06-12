@@ -1,7 +1,9 @@
+'use strict';
 
-module.exports = function (gulp, plugins, config) {
-	return function () {
-		return gulp.src(config.toolkit.paths.fonts)
-			.pipe(gulp.dest(config.fabricator.paths.dest.fonts));
-	};
+var config = require('./config');
+var gulp   = require('gulp');
+
+module.exports = function () {
+	return gulp.src(config.toolkit.paths.fonts)
+		.pipe(gulp.dest(config.toolkit.paths.dest.fonts));
 };

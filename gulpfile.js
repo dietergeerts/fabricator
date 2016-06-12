@@ -13,7 +13,6 @@ var merge       = require('merge2');
 var ngAnnotate  = require('gulp-ng-annotate');
 var prefix      = require('gulp-autoprefixer');
 var rename      = require('gulp-rename');
-var reload      = browserSync.reload;
 var replace     = require('gulp-replace-task');
 var runSequence = require('run-sequence');
 var sass        = require('gulp-sass');
@@ -21,67 +20,38 @@ var sourcemaps  = require('gulp-sourcemaps');
 var uglify      = require('gulp-uglify');
 var webpack     = require('webpack');
 
-var gulp    = require('gulp');
-var plugins = require('gulp-load-plugins')();
+var gulp = require('gulp');
 
 var fabricatorConfig = createConfig(gutil.env.config);
 var webpackConfig    = require('./webpack.config')(fabricatorConfig);
 var webpackCompiler  = webpack(webpackConfig);
 
 
+
+
+
+
 var config = require('./gulp/config');
 
-var config = {
-	fabricator: {
-		paths: {
-			ngAppFile: fabricatorConfig.ngAppFile,
+gulp.task('toolkitConfig:clearCache', require('./gulp/toolkitConfig.clearCache'));
+gulp.task('toolkitConfig:generate', ['toolkitConfig:clearCache'], require('./gulp/toolkitConfig.generate'));
 
-			views: fabricatorConfig.paths.views
-		}
-	},
-	toolkit: {
-		paths: {
-			fonts: fabricatorConfig.paths.toolkit.fonts,
-			scripts: fabricatorConfig.paths.toolkit.scripts,
-			styles: fabricatorConfig.paths.toolkit.styles,
-			toolkitConfig: gutil.env.toolkitConfig
-		}
-	}
-};
+gulp.task('assemble', ['toolkitConfig:generate'], require('./gulp/assemble'));
+
+gulp.task('toolkit:fonts:clean', require('./gulp/toolkit.fonts.clean'));
+gulp.task('toolkit:fonts', ['toolkit:fonts:clean'], require('./gulp/toolkit.fonts'));
+
+gulp.task('toolkit:styles:clean', require('./gulp/toolkit.styles.clean'));
+gulp.task('toolkit:styles', ['toolkit:styles:clean', 'toolkitConfig:clearCache'], require('./gulp/toolkit.styles'));
+
+gulp.task('fabricator:styles:clean', require('./gulp/fabricator.styles.clean'));
+gulp.task('fabricator:styles', ['fabricator:styles:clean'], require('./gulp/fabricator.styles'));
 
 
 
 
 
-
-gulp.task('toolkitConfig:changed', ['toolkit:styles', 'assemble'], reload);
-gulp.task('toolkitConfig:clearCache', require('./gulp/toolkitConfig.clearCache')(gulp, plugins, config));
-gulp.task('toolkitConfig:generate', ['toolkitConfig:clearCache'], require('./gulp/toolkitConfig.generate')(gulp, plugins, config));
-
-gulp.task('toolkit:fonts', ['toolkit:fonts:clean'], require('./gulp/toolkit.fonts')(gulp, plugins, config));
-gulp.task('toolkit:fonts:clean', require('./gulp/toolkit.fonts.clean')(gulp, plugins, config));
-
-gulp.task('toolkit:styles', ['toolkit:styles:clean', 'toolkitConfig:clearCache'], require('./gulp/toolkit.styles')(gulp, plugins, config));
-gulp.task('toolkit:styles:clean', require('./gulp/toolkit.styles.clean')(gulp, plugins, config));
-
-gulp.task('assemble', ['toolkitConfig:generate'], require('./gulp/assemble')(config));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+gulp.task('toolkitConfig:changed', ['toolkit:styles', 'assemble'], browserSync.reload);
 
 gulp.task('default', ['clean'], function () {
 	runSequence(
@@ -92,19 +62,7 @@ gulp.task('default', ['clean'], function () {
 
 gulp.task('clean', function (cb) { del(config.fabricator.paths.dest.base, {force: true}, cb); });
 
-gulp.task('styles:fabricator', function () {
-	gulp.src(fabricatorConfig.paths.fabricator.styles)
-		.pipe(sourcemaps.init())
-		.pipe(sass().on('error', sass.logError))
-		.pipe(prefix('last 1 version'))
-		.pipe(gulpif(!config.fabricator.dev, csso()))
-		.pipe(rename('f.css'))
-		.pipe(sourcemaps.write())
-		.pipe(gulp.dest(config.fabricator.paths.dest.base + '/assets/fabricator/styles'))
-		.pipe(gulpif(config.fabricator.dev, reload({stream:true})));
-});
 
-gulp.task('styles', ['styles:fabricator', 'toolkit:styles']);
 
 gulp.task('scripts', function (done) {
 	if (fabricatorConfig.useWebpack) {
@@ -119,7 +77,7 @@ gulp.task('scripts', function (done) {
 	} else {
 		return merge(
 			createScriptStream(constructFabricatorScriptSrc(), '/assets/fabricator/scripts', 'f.js'),
-			createToolkitScriptStreams(fabricatorConfig.paths.toolkit.scripts, '/assets/toolkit/scripts')
+			createToolkitScriptStreams(config.toolkit.paths.scripts, '/assets/toolkit/scripts')
 		);
 	}
 
@@ -187,7 +145,7 @@ gulp.task('serve', function () {
 		if (matchedKey) { delete webpackConfig.cache[matchedKey]; }
 	}
 
-	gulp.task('assemble:watch', ['assemble'], reload);
+	gulp.task('assemble:watch', ['assemble'], browserSync.reload);
 	gulp.watch(constructAssembleSourcesToWatch(), ['assemble:watch']);
 
 	gulp.task('styles:fabricator:watch', ['styles:fabricator']);
@@ -196,14 +154,14 @@ gulp.task('serve', function () {
 	gulp.task('toolkit:styles:watch', ['toolkit:styles']);
 	gulp.watch(constructToolkitStyleSourcesToWatch(), ['toolkit:styles:watch']);
 
-	gulp.task('scripts:watch', ['scripts'], reload);
+	gulp.task('scripts:watch', ['scripts'], browserSync.reload);
 	gulp.watch(constructScriptSourcesToWatch(), ['scripts:watch'])
 		.on('change', webpackCache);
 
-	gulp.task('images:watch', ['images'], reload);
+	gulp.task('images:watch', ['images'], browserSync.reload);
 	gulp.watch(fabricatorConfig.paths.toolkit.images, ['images:watch']);
 
-	gulp.task('samples:watch', ['samples'], reload);
+	gulp.task('samples:watch', ['samples'], browserSync.reload);
 	gulp.watch(fabricatorConfig.paths.samples, ['samples:watch']);
 
 
@@ -218,7 +176,6 @@ gulp.task('serve', function () {
 // The 'required' ones, which have the following defaults:
 //
 //	"useWebpack": true  // Webpack doesn't work well with bower modules!
-//	"views"     : ["./src/views/**/*", "!./src/views/+(layouts)/**"],
 //	"materials" : ["./src/materials/**/*"],
 //	"data"      : ["./src/data/**/*.{json,yml}"],
 //	"samples"   : ["./src/samples/**/*"],
@@ -234,9 +191,8 @@ gulp.task('serve', function () {
 //
 // The 'optional' ones:
 //
-//  "pages"          : ['']  // If you use your own pages (from another project).
-//	"ngApp"          :  ''   // A js file which is the app for your toolkit, added to f.js.
-//	"dest"      :  ''   // A custom folder to build production to, %s will be replaced by build name.
+//  "templates"          : ['']  // If you use your own templates (from another project).
+//	"dest"      :  ''   // A custom folder to build production to.
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -246,38 +202,16 @@ function createConfig(fabricatorConfig, build) {
 		useWebpack: fabricatorConfig.useWebpack,
 		paths: {
 			fabricator: {
-				scripts: ['./src/assets/fabricator/scripts/fabricator.js'],
-				styles: ['./src/assets/fabricator/styles/fabricator.scss']
+				scripts: ['./src/assets/fabricator/scripts/fabricator.js']
 			},
 			toolkit: {
-				scripts: fabricatorConfig.scripts,
-				styles: fabricatorConfig.styles,
-				images: createPathsForBuild(fabricatorConfig.images, build),
-				fonts: fabricatorConfig.fonts
+				images: createPathsForBuild(fabricatorConfig.images, build)
 			},
-			samples: fabricatorConfig.samples,
-			views: createConfigViewsPaths(fabricatorConfig)
+			samples: fabricatorConfig.samples
 		}
 	};
 
-	var pages = _.get(fabricatorConfig, 'pages', []);
-	if (_.size(pages) > 0) { fabricatorConfig.paths.pages = fabricatorConfig.pages; }
-
-	var ngAppFile = _.get(fabricatorConfig, 'ngApp', '');
-	if (ngAppFile !== '') {
-		fabricatorConfig.ngAppFile = ngAppFile;
-		fabricatorConfig.paths.toolkit.scripts['toolkit-test-app'] = [ngAppFile];	}
-
 	return fabricatorConfig;
-}
-
-function createConfigViewsPaths(fabricatorConfig) {
-	var projectPages = _.get(fabricatorConfig, 'pages', []);
-	return _.union(
-		fabricatorConfig.views,
-		_.size(projectPages) > 0 ? ['!./src/views/templates{,/**}'] : [],
-		projectPages
-	);
 }
 
 
@@ -304,9 +238,9 @@ function createPathFromArrayOfStrings(strings) {
 
 function constructAssembleSourcesToWatch() {
 	return _.union(
-		fabricatorConfig.paths.views,
+		config.fabricator.paths.views,
 		config.fabricator.paths.materials,
-		_.get(fabricatorConfig.paths, 'pages', []),
+		_.get(config.fabricator.paths, 'templates', []),
 		config.fabricator.paths.data,
 		config.fabricator.paths.docs,
 		[config.fabricator.paths.package]
@@ -315,14 +249,14 @@ function constructAssembleSourcesToWatch() {
 
 function constructToolkitStyleSourcesToWatch() {
 	var stylesToWatch = [];
-	_.forOwn(fabricatorConfig.paths.toolkit.styles, function (src) {
+	_.forOwn(config.toolkit.paths.styles, function (src) {
 		stylesToWatch = _.union(stylesToWatch, src); });
 	return createPathsForWatchingStyles(stylesToWatch);
 }
 
 function constructScriptSourcesToWatch() {
 	var scriptsToWatch = fabricatorConfig.paths.fabricator.scripts;
-	_.forOwn(fabricatorConfig.paths.toolkit.scripts, function (src) {
+	_.forOwn(config.toolkit.paths.scripts, function (src) {
 		scriptsToWatch = _.union(scriptsToWatch, src); });
 	return scriptsToWatch;
 }

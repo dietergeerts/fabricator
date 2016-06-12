@@ -4,5 +4,5 @@ var config = require('./config');
 var del    = require('del');
 
 module.exports = function (callback) {
-	del(config.toolkit.paths.dest.styles, {force: true}, callback);
+	del(config.fabricator.paths.dest.styles, {force: true}, callback);
 };

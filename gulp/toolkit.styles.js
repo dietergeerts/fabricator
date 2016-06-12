@@ -1,29 +1,36 @@
+'use strict';
 
-var _ = require('lodash');
-var merge = require('merge2');
+var _          = require('lodash');
+var concat     = require('gulp-concat');
+var config     = require('./config');
+var csso       = require('gulp-csso');
+var gulp       = require('gulp');
+var gulpif     = require('gulp-if');
+var merge      = require('merge2');
+var prefix     = require('gulp-autoprefixer');
+var replace    = require('gulp-replace-task');
+var sass       = require('gulp-sass');
+var sourcemaps = require('gulp-sourcemaps');
 
+module.exports = function () {
 
-module.exports = function (gulp, plugins, config) {
-	return function () {
+	var styleReplacements = config.toolkit.paths.toolkitConfig
+		? generateStyleReplacements(config.toolkit.paths.toolkitConfig)
+		: {};
 
-		var styleReplacements = config.toolkit.paths.toolkitConfig
-			? generateStyleReplacements(config.toolkit.paths.toolkitConfig)
-			: {};
+	return merge(_(config.toolkit.paths.styles).pairs().map(createStyleStream).value());
 
-		return merge(_(config.toolkit.paths.styles).pairs().map(createStyleStream).value());
-
-		function createStyleStream(namedSrc) {
-			return gulp.src(namedSrc[1])
-				.pipe(plugins.sourcemaps.init())
-				.pipe(plugins.replaceTask({patterns: [{json: styleReplacements}], usePrefix: false}))
-				.pipe(plugins.sass().on('error', plugins.sass.logError))
-				.pipe(plugins.autoprefixer('last 1 version'))
-				.pipe(plugins.if(!config.fabricator.dev, plugins.csso()))
-				.pipe(plugins.concat(namedSrc[0] + '.css'))
-				.pipe(plugins.sourcemaps.write())
-				.pipe(gulp.dest(config.fabricator.paths.dest.styles));
-		}
-	};
+	function createStyleStream(namedSrc) {
+		return gulp.src(namedSrc[1])
+			.pipe(sourcemaps.init())
+			.pipe(replace({patterns: [{json: styleReplacements}], usePrefix: false}))
+			.pipe(sass().on('error', sass.logError))
+			.pipe(prefix('last 1 version'))
+			.pipe(gulpif(!config.fabricator.dev, csso()))
+			.pipe(concat(namedSrc[0] + '.css'))
+			.pipe(sourcemaps.write())
+			.pipe(gulp.dest(config.toolkit.paths.dest.styles));
+	}
 };
 
 function generateStyleReplacements(path) {
@@ -33,14 +40,13 @@ function generateStyleReplacements(path) {
 	function fillWithDataAndReturn(replacements, data) {
 		
 		_.forOwn(data, function (value, key) {
-			
 			if (_.isObject(value)) {
 				fillWithDataAndReturn(replacements, value);
 			} else {
 				replacements['/* ' + key + ' */'] = key + ': ' + value + ' !default;';
 			}
 		});
-		
+
 		return replacements;
 	}
 }

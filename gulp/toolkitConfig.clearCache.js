@@ -1,11 +1,12 @@
+'use strict';
 
-module.exports = function (gulp, plugins, config) {
-	return function (callback) {
+var config = require('./config');
 
-		if (config.toolkit.paths.toolkitConfig) {
-			delete require.cache[require.resolve('../' + config.toolkit.paths.toolkitConfig)];
-		}
+module.exports = function (callback) {
 
-		callback();
-	};
+	if (config.toolkit.paths.toolkitConfig) {
+		delete require.cache[require.resolve('../' + config.toolkit.paths.toolkitConfig)];
+	}
+
+	callback();
 };

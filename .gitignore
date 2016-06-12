@@ -41,12 +41,11 @@ jspm_packages
 
 ### Custom stuff
 
-# This is the folder used for running the toolkit, so not a normal build.
-dist
-
 .sass-cache
 
-# We generate our own toolkitConfig file as we add data besides the optional tookitConfig file of the project.
-toolkitConfig.json
+# This is the folder used for running the toolkit, so not a normal build.
+/dist
+/dest
 
-buildConfigInfo.json
+# We generate our own toolkitConfig file as we add data besides the optional tookitConfig file of the project.
+/toolkitConfig.json

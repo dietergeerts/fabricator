@@ -5,11 +5,11 @@
   "homepage": "https://github.com/dietergeerts/fabricator",
   "main": "README.md",
   "scripts": {
-    "gulp": "gulp --config fabricatorConfig.json",
     "prestart": "npm install",
-    "build": "npm install && gulp --config fabricatorConfig.json",
-    "start": "gulp --dev --config fabricatorConfig.json",
-    "test": "npm run build"
+    "start": "gulp --dev",
+    "prebuild": "npm install",
+    "build": "gulp",
+    "test": "npm run build -- --config=\"./test/fabricatorConfig.json\" --toolkitConfig=\"./test/toolkitConfig\""
   },
   "keywords": [
     "toolkit",
@@ -41,7 +41,6 @@
     "gulp-csso": "^1.0.0",
     "gulp-if": "^1.2.5",
     "gulp-imagemin": "^2.2.1",
-    "gulp-load-plugins": "^1.2.4",
     "gulp-ng-annotate": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace-task": "^0.2.1",
