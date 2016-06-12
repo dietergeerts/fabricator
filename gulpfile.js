@@ -37,7 +37,6 @@ var config = {
 	fabricator: {
 		dev: fabricatorConfig.dev,
 		paths: {
-			buildConfigInfoFile: fabricatorConfig.buildConfigInfoFile,
 			data: fabricatorConfig.paths.data,
 			dest: fabricatorConfig.paths.dest,
 			dest_fonts: '/assets/toolkit/fonts',
@@ -61,7 +60,6 @@ var config = {
 
 
 
-initializeBuildConfigInfo();
 
 
 
@@ -245,7 +243,6 @@ gulp.task('serve', function () {
 //
 // The 'optional' ones:
 //
-//	"buildConfigInfo":  ''   // A file with buildConfigInfo.
 //  "pages"          : ['']  // If you use your own pages (from another project).
 //	"ngApp"          :  ''   // A js file which is the app for your toolkit, added to f.js.
 //	"buildDest"      :  ''   // A custom folder to build production to, %s will be replaced by build name.
@@ -288,9 +285,6 @@ function createConfig(fabricatorConfig, build) {
 		}
 	};
 
-	var buildConfigInfoFile = _.get(fabricatorConfig, 'buildConfigInfo', '');
-	if (buildConfigInfoFile !== '') { fabricatorConfig.buildConfigInfoFile = buildConfigInfoFile; }
-
 	var pages = _.get(fabricatorConfig, 'pages', []);
 	if (_.size(pages) > 0) { fabricatorConfig.paths.pages = fabricatorConfig.pages; }
 
@@ -307,18 +301,14 @@ function createConfigViewsPaths(fabricatorConfig) {
 	return _.union(
 		fabricatorConfig.views,
 		_.size(projectPages) > 0 ? ['!./src/views/templates{,/**}'] : [],
-		projectPages,
-		(_.has(fabricatorConfig, 'buildConfigInfo') ? '' : '!') + './src/views/configuration.html'
+		projectPages
 	);
 }
 
 
 // Generate the glob pattern to use as data for fabricator-assemble.
 function generateFabricatorConfigDataPaths(fabricatorConfig) {
-	return _.union(
-		[fabricatorConfig.package],
-		_.has(fabricatorConfig, 'buildConfigInfo') ? ['./buildConfigInfo.json'] : []
-	);
+	return [fabricatorConfig.package];
 }
 
 function createConfigDestPath(fabricatorConfig, build, development) {
@@ -346,31 +336,14 @@ function createPathFromArrayOfStrings(strings) {
 
 
 
-// TODO: buildConfigInfo should be done differently, with a .md or .hbs file!
-// TODO: this also is in the assemble task!
-function initializeBuildConfigInfo() {
-	// Besides the use of toolkitConfig, it's possible to list info about these configurations on a
-	// separate page. When buildConfigInfo is filled into the fabricatorConfig file, we'll add this page.
-	// REMARK: Will be run before the actual assemble, as for watchers.
-
-	var buildConfigInfoFile = _.get(fabricatorConfig, 'buildConfigInfoFile', '');
-	if (buildConfigInfoFile !== '') {
-		delete require.cache[require.resolve(buildConfigInfoFile)];  // This changes by the user!
-		fs.writeFileSync('./buildConfigInfo.json', JSON.stringify(require(buildConfigInfoFile)));
-	}
-}
-
 
 function constructAssembleSourcesToWatch() {
-	var buildConfigInfoFile = _.get(fabricatorConfig, 'buildConfigInfoFile', '');
-
 	return _.union(
 		fabricatorConfig.paths.views,
 		fabricatorConfig.paths.materials,
 		_.get(fabricatorConfig.paths, 'pages', []),
 		fabricatorConfig.paths.data,
-		fabricatorConfig.paths.docs,
-		buildConfigInfoFile !== '' ? [buildConfigInfoFile] : []
+		fabricatorConfig.paths.docs
 	);
 }
 

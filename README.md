@@ -69,6 +69,8 @@ The toolkitConfig file is used for two things:
 1. To add extra data you can use in your views and pages. Access through `toolkitConfig.{insertKeyHere}`.
 2. To fill in placeholders in sass files, like `/* key */` will become `key: value !default;`.
 
+These values can be documented within atoms.global under a config material.
+
 ### Available includes
 
 #### f-color-chip & f-color-chips

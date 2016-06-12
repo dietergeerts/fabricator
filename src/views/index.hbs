@@ -29,19 +29,3 @@ documentation: true
     </code></pre>
   </div>
 </div>
-{{#if buildConfigInfo}}
-  <div class="f-item-group">
-    <div class="f-item-heading-group">
-      <div class="f-item-heading">Configuration</div>
-    </div>
-    <div class="f-item-notes">
-      The following parameters can be configured to create a custom build:
-      {{#each buildConfigInfo}}
-        <h3>{{@key}}</h3>
-        {{#each this}}
-          <div><code>'{{@key}}'</code>: {{this}}</div><br/>
-        {{/each}}
-      {{/each}}
-    </div>
-  </div>
-{{/if}}
