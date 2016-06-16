@@ -99,3 +99,34 @@ Original Fabricator Logo by [Abby Putinski](https://abbyputinski.com/).
 ## License
 
 [The MIT License (MIT)](http://opensource.org/licenses/mit-license.php)
+
+
+
+// ngAnnotate is lost >> We should make frameworks configurable and add steps for it!
+// Maybe with an own gulp task/file that we can use here? Through an export?
+
+// FABRICATORCONFIG.JSON ///////////////////////////////////////////////////////////////////////////////////////////////
+//
+// The 'required' ones, which have the following defaults:
+//
+//	"useWebpack": true  // Webpack doesn't work well with bower modules!
+// >> Removed useWebpack, I think it didn't work earlier because of my fault not knowing it enough!
+//	"materials" : ["./src/materials/**/*"],
+//	"data"      : ["./src/data/**/*.{json,yml}"],
+//	"samples"   : ["./src/samples/**/*"],
+//	"docs"      : ["./src/docs/**/*.md"],
+//	"scripts"   : {  // Each prop will be a script file.
+// 		"toolkit": ["./src/assets/toolkit/scripts/toolkit.js"]
+// 	},
+//	"styles"    : {  // Each prop will be a stylesheet file.
+// 		"toolkit": ["./src/assets/toolkit/styles/toolkit.scss"] >> can do **/*.scss, because _ prefixed files will be ignored!
+// 	},
+//	"fonts"     : ["./src/assets/toolkit/fonts/**/*"],
+//	"images"    : ["./src/assets/toolkit/images/**/*"]
+//
+// The 'optional' ones:
+//
+//  "templates"          : ['']  // If you use your own templates (from another project).
+//	"dest"      :  ''   // A custom folder to build production to.
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

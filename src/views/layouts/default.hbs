@@ -6,7 +6,7 @@
   <title>{{package.name}} v{{package.version}}</title>
   <link rel="icon" type="image/x-icon" href="./{{baseurl}}/assets/toolkit/images/favicon.ico"/>
   {{#if fabricator}}
-    <link rel="stylesheet" href="./{{baseurl}}/assets/fabricator/styles/f.css">
+    <link rel="stylesheet" href="./{{baseurl}}/assets/fabricator/styles/fabricator.css">
   {{/if}}
   {{#unless documentation}}
     {{#each toolkitConfig.toolkitStyles}}
@@ -23,7 +23,7 @@
   {% body %}
 {{#if fabricator}}
   </div>
-  <script src="./{{baseurl}}/assets/fabricator/scripts/f.js"></script>
+  <script src="./{{baseurl}}/assets/fabricator/scripts/fabricator.js"></script>
 {{/if}}
 {{#unless documentation}}
   {{#each toolkitConfig.toolkitScripts}}

@@ -2,8 +2,9 @@
 
 var _          = require('lodash');
 var concat     = require('gulp-concat');
-var config     = require('./config');
+var config     = require('./../config');
 var csso       = require('gulp-csso');
+var del        = require('del');
 var gulp       = require('gulp');
 var gulpif     = require('gulp-if');
 var merge      = require('merge2');
@@ -12,7 +13,11 @@ var replace    = require('gulp-replace-task');
 var sass       = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 
-module.exports = function () {
+module.exports.clean = function (callback) {
+	del(config.toolkit.paths.dest.styles, {force: true}, callback);
+};
+
+module.exports.run = function () {
 
 	var styleReplacements = config.toolkit.paths.toolkitConfig
 		? generateStyleReplacements(config.toolkit.paths.toolkitConfig)
@@ -35,7 +40,7 @@ module.exports = function () {
 
 function generateStyleReplacements(path) {
 
-	return fillWithDataAndReturn({}, require('../' + path));
+	return fillWithDataAndReturn({}, require('../../' + path));
 
 	function fillWithDataAndReturn(replacements, data) {
 		

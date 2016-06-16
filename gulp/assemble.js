@@ -3,7 +3,7 @@
 var assemble = require('fabricator-assemble');
 var config   = require('./config');
 
-module.exports = function (callback) {
+module.exports.run = function (callback) {
 
 	assemble({
 		data: config.composeGlob(

@@ -4,7 +4,16 @@ var _      = require('lodash');
 var config = require('./config');
 var fs     = require('fs');
 
-module.exports = function (callback) {
+module.exports.clearCache = function (callback) {
+
+	if (config.toolkit.paths.toolkitConfig) {
+		delete require.cache[require.resolve('../' + config.toolkit.paths.toolkitConfig)];
+	}
+
+	callback();
+};
+
+module.exports.generate = function (callback) {
 
 	fs.writeFileSync(
 		config.fabricator.paths.toolkitConfig,
