@@ -39,7 +39,12 @@ gulp.task('toolkitConfig:generate', ['toolkitConfig:clearCache'], getTask('toolk
 gulp.task('toolkitConfig:clearCache', getTask('toolkitConfig').clearCache);
 
 gulp.task('serve', function () {
-	var browserSync = browserSync.create();
+
+	browserSync({
+		server: {baseDir: config.fabricator.paths.dest.base},
+		notify: false,
+		logPrefix: 'FABRICATOR-BUILDER'
+	});
 
 	gulp.task('assemble:changed', ['assemble'], browserSync.reload);
 	gulp.task('fabricator:scripts:changed', ['fabricator:scripts'], browserSync.reload);
@@ -50,12 +55,6 @@ gulp.task('serve', function () {
 	gulp.task('toolkit:fonts:changed', ['toolkit:fonts'], browserSync.reload);
 	gulp.task('toolkit:images:changed', ['toolkit:images'], browserSync.reload);
 	gulp.task('toolkitConfig:changed', ['toolkit:styles', 'assemble'], browserSync.reload);
-
-	browserSync.init({
-		server: {baseDir: config.fabricator.paths.dest.base},
-		notify: false,
-		logPrefix: 'FABRICATOR-BUILDER'
-	});
 
 	gulp.watch(getAssembleSources(), ['assemble:changed']);
 	gulp.watch(config.fabricator.paths.scripts, ['fabricator:scripts:changed'])
