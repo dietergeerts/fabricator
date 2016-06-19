@@ -12,8 +12,8 @@ $code-colors: (
 	purple    : #A71D5D,
 	maroon    : #A71D5D,
 	green     : #63A35C,
-	light-gray: #F7F7F7,
-	dark-gray : #969896
+	lightgray : #E3E4F2,
+	darkgray  : #838483
 );
 
 // base
@@ -38,7 +38,7 @@ table code {
 
 code,
 :not(pre) > code[class*='language-'],
-pre[class*='language-'] { background: darken(map-get($code-colors, light-gray), 9); }
+pre[class*='language-'] { background: map-get($code-colors, lightgray); }
 
 // inline code
 :not(pre) > code,
@@ -49,7 +49,7 @@ pre[class*='language-'] { background: darken(map-get($code-colors, light-gray), 
 	&.comment,
 	&.prolog,
 	&.doctype,
-	&.cdata { color: map-get($code-colors, dark-gray); }
+	&.cdata { color: map-get($code-colors, darkgray); }
 
 	&.punctuation,
 	&.string,
