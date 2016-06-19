@@ -23,7 +23,7 @@ module.exports.fabricator = {
 		package      : config.package,
 		samples      : config.samples,
 		scripts      : './src/assets/scripts/fabricator.js',
-		styles       : './src/assets/styles/fabricator.scss',
+		styles       : './src/assets/styles/**/*.scss',
 		templates    : config.templates,
 		toolkitConfig: './toolkitConfig.json',
 		views        : ["./src/views/**/*", "!./src/views/+(layouts)/**"]
