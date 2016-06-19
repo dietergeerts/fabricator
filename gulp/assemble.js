@@ -8,7 +8,8 @@ module.exports.run = function (callback) {
 	assemble({
 		data: config.composeGlob(
 			config.fabricator.paths.data,
-			config.fabricator.paths.toolkitConfig
+			config.fabricator.paths.toolkitConfig,
+			config.fabricator.paths.package
 		),
 		dest     : config.fabricator.paths.dest.base,
 		docs     : config.fabricator.paths.docs,

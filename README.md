@@ -101,6 +101,8 @@ Original Fabricator Logo by [Abby Putinski](https://abbyputinski.com/).
 [The MIT License (MIT)](http://opensource.org/licenses/mit-license.php)
 
 
+handlebar helpers included: f-color-chip & f-color-chips
+
 
 // ngAnnotate is lost >> We should make frameworks configurable and add steps for it!
 // Maybe with an own gulp task/file that we can use here? Through an export?

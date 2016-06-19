@@ -13,12 +13,13 @@ module.exports.fabricator = {
 		data: config.data,
 		dest: {
 			base   : dst,
+			images : dst + '/assets/fabricator/images',
 			samples: dst + '/assets/samples',
 			scripts: dst + '/assets/fabricator/scripts',
 			styles : dst + '/assets/fabricator/styles'
 		},
 		docs         : config.docs,
-		favicon      : './src/favicon.ico',
+		favicon      : './src/assets/images/favicon.ico',
 		materials    : config.materials,
 		package      : config.package,
 		samples      : config.samples,

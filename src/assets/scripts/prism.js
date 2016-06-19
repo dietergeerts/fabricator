@@ -1,4 +1,5 @@
 /* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript */
+
 self = (typeof window !== 'undefined')
 	? window   // if in browser
 	: (
@@ -425,7 +426,7 @@ return self.Prism;
 if (typeof module !== 'undefined' && module.exports) {
 	module.exports = Prism;
 }
-;
+
 Prism.languages.markup = {
 	'comment': /<!--[\w\W]*?-->/,
 	'prolog': /<\?.+?\?>/,
@@ -467,7 +468,7 @@ Prism.hooks.add('wrap', function(env) {
 		env.attributes['title'] = env.content.replace(/&amp;/, '&');
 	}
 });
-;
+
 Prism.languages.css = {
 	'comment': /\/\*[\w\W]*?\*\//,
 	'atrule': {
@@ -517,7 +518,8 @@ if (Prism.languages.markup) {
 			alias: 'language-css'
 		}
 	}, Prism.languages.markup.tag);
-};
+}
+
 Prism.languages.clike = {
 	'comment': [
 		{
@@ -550,7 +552,7 @@ Prism.languages.clike = {
 	'ignore': /&(lt|gt|amp);/i,
 	'punctuation': /[{}[\];(),.:]/
 };
-;
+
 Prism.languages.javascript = Prism.languages.extend('clike', {
 	'keyword': /\b(break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|false|finally|for|function|get|if|implements|import|in|instanceof|interface|let|new|null|package|private|protected|public|return|set|static|super|switch|this|throw|true|try|typeof|var|void|while|with|yield)\b/,
 	'number': /\b-?(0x[\dA-Fa-f]+|\d*\.?\d+([Ee][+-]?\d+)?|NaN|-?Infinity)\b/,
@@ -579,4 +581,3 @@ if (Prism.languages.markup) {
 		}
 	});
 }
-;
