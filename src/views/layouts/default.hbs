@@ -14,7 +14,7 @@
     {{/each}}
   {{/unless}}
 </head>
-<body {{#if fabricator}}class="f-body"{{/if}}>
+<body {{#if fabricator}}class="f-body{{#if documentation}} f-docs{{/if}}"{{/if}}>
 <!--Made with Fabricator-Builder: https://github.com/dietergeerts/fabricator-builder-->
 {{#if fabricator}}
   {{> f-icons}}

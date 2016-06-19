@@ -25,12 +25,10 @@
 
 .f-item-heading-group { padding-bottom: 6px; border-bottom: 1px solid $base; }
 
-.f-item-heading, .f-item-notes { font-size: 14px; font-family: $font; color: $base; }
+.f-item-heading, .f-item-notes, .f-docs .f-item-preview { font-size: 14px; font-family: $font; }
+
+.f-item-heading { color: $base; } .f-item-notes, .f-docs .f-item-preview { color: $dark; }
 
 .f-item-heading-link:hover { cursor: pointer; color: $light-hl; background: $base; font-size: 16px; }
-
-.f-item-notes { color: $dark; }
-
-.f-item-preview { }
 
 .f-item-code { }
