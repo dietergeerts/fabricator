@@ -12,7 +12,7 @@
 
 .f-item-notes, .f-item-preview, .f-item-code { margin-top: 18px; }
 
-.f-item-notes { max-width: 500px; text-align: justify; }
+.f-item-notes > *:not(pre) { max-width: 600px; text-align: justify; }
 
 .f-item-hidden { display: none; }
 
@@ -25,7 +25,7 @@
 
 .f-item-heading-group { padding-bottom: 6px; border-bottom: 1px solid $base; }
 
-.f-item-heading, .f-item-notes, .f-docs .f-item-preview { font-size: 14px; font-family: $font; }
+.f-item-heading, .f-item-notes, .f-docs .f-item-preview { font-size: 16px; font-family: $font; }
 
 .f-item-heading { color: $base; } .f-item-notes, .f-docs .f-item-preview { color: $dark; }
 
