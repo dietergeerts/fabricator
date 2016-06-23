@@ -4,9 +4,9 @@ var _           = require('lodash');
 var browserSync = require('browser-sync');
 var gulp        = require('gulp');
 
-module.exports = function (fabricatorConfig, toolkitConfig) {
+module.exports = function (fabricatorConfig) {
 
-	var config  = require('./gulp/config')(fabricatorConfig, toolkitConfig);
+	var config  = require('./gulp/config')(fabricatorConfig);
 	var webpack = require('./gulp/webpack')(config);
 
 	gulp.task('f:default', ['f:assemble', 'f:assets', 'f:fabricator:favicon'], function () {

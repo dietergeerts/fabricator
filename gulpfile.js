@@ -7,8 +7,5 @@ var fabricator = require('./index');
 var gulp       = require('gulp');
 
 gulp.task('default', function () {
-	fabricator(
-		require('./test/fabricatorConfig'), 
-		require('./test/toolkitConfig')
-	);
+	fabricator(require('./test/fabricatorConfig'));
 });

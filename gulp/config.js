@@ -3,7 +3,7 @@
 var _      = require('lodash');
 var gutil  = require('gulp-util');
 
-module.exports = function (fabricatorConfig, toolkitConfig) {
+module.exports = function (fabricatorConfig) {
 
 	var config = {};
 	var dev = gutil.env.dev;
@@ -45,7 +45,7 @@ module.exports = function (fabricatorConfig, toolkitConfig) {
 			images       : fabricatorConfig.images,
 			scripts      : fabricatorConfig.scripts,
 			styles       : fabricatorConfig.styles,
-			toolkitConfig: gutil.env.toolkitConfig
+			toolkitConfig: fabricatorConfig.toolkitConfig
 		}
 	};
 

@@ -19,5 +19,6 @@
 
 
   "samples"   : ["./src/samples/**/*"],
-  "images"    : ["./src/assets/toolkit/images/**/*"]
+  "images"    : ["./src/assets/toolkit/images/**/*"],
+  "toolkitConfig": "./test/toolkitConfig.json"
 }

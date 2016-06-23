@@ -1,10 +1,10 @@
 'use strict';
 
-var _      = require('lodash');
-var fs     = require('fs');
+var _  = require('lodash');
+var fs = require('fs');
 
 module.exports = function (config) {
-	
+
 	var tasks = {};
 
 	tasks.clearCache = function (callback) {
