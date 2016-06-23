@@ -3,15 +3,13 @@
   "version": "2.0.0",
   "description": "A tool for building website UI toolkits",
   "homepage": "https://github.com/dietergeerts/fabricator",
-
-  "main": "README.md",
+  "main": "./index.js",
   "scripts": {
     "prestart": "npm install",
     "start": "gulp --dev",
     "prebuild": "npm install",
     "build": "gulp",
-    "test": "npm run build -- --config=\"./test/fabricatorConfig.json\" --toolkitConfig=\"./test/toolkitConfig\"",
-    "teststart": "npm start -- --config=\"./test/fabricatorConfig.json\" --toolkitConfig=\"./test/toolkitConfig\""
+    "test": "npm run build"
   },
   "keywords": [
     "toolkit",

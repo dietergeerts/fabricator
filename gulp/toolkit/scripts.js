@@ -1,13 +1,18 @@
 'use strict';
 
-var config  = require('./../config');
-var del     = require('del');
-var webpack = require('./../webpack');
+var del = require('del');
 
-module.exports.clean = function (callback) {
-	del(config.toolkit.paths.dest.scripts, {force: true}, callback);
-};
+module.exports = function (config, webpack) {
+	
+	var tasks = {};
 
-module.exports.run = function (callback) {
-	return webpack.compile(webpack.toolkit)(callback);
+	tasks.clean = function (callback) {
+		del(config.toolkit.paths.dest.scripts, {force: true}, callback);
+	};
+
+	tasks.run = function (callback) {
+		return webpack.compile(webpack.toolkit)(callback);
+	};
+
+	return tasks;
 };

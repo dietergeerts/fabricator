@@ -2,51 +2,56 @@
 
 var _      = require('lodash');
 var gutil  = require('gulp-util');
-var config = require('../' + gutil.env.config);
 
-var dev = gutil.env.dev;
-var dst = dev ? './dist' : config.dest;
+module.exports = function (fabricatorConfig, toolkitConfig) {
 
-module.exports.fabricator = {
-	dev: dev,
-	paths: {
-		data: config.data,
-		dest: {
-			base   : dst,
-			images : dst + '/assets/fabricator/images',
-			samples: dst + '/assets/samples',
-			scripts: dst + '/assets/fabricator/scripts',
-			styles : dst + '/assets/fabricator/styles'
-		},
-		docs         : config.docs,
-		favicon      : './src/assets/images/favicon.ico',
-		materials    : config.materials,
-		package      : config.package,
-		samples      : config.samples,
-		scripts      : './src/assets/scripts/fabricator.js',
-		styles       : './src/assets/styles/**/*.scss',
-		templates    : config.templates,
-		toolkitConfig: './toolkitConfig.json',
-		views        : ["./src/views/**/*", "!./src/views/+(layouts)/**"]
-	}
-};
+	var config = {};
+	var dev = gutil.env.dev;
+	var dst = dev ? './dist' : fabricatorConfig.dest;
 
-module.exports.toolkit = {
-	paths: {
-		dest: {
-			fonts  : dst + '/assets/toolkit/fonts',
-			images : dst + '/assets/toolkit/images',
-			scripts: dst + '/assets/toolkit/scripts',
-			styles : dst + '/assets/toolkit/styles'
-		},
-		fonts        : config.fonts,
-		images       : config.images,
-		scripts      : config.scripts,
-		styles       : config.styles,
-		toolkitConfig: gutil.env.toolkitConfig
-	}
-};
+	config.fabricator = {
+		dev: dev,
+		paths: {
+			data: fabricatorConfig.data,
+			dest: {
+				base   : dst,
+				images : dst + '/assets/fabricator/images',
+				samples: dst + '/assets/samples',
+				scripts: dst + '/assets/fabricator/scripts',
+				styles : dst + '/assets/fabricator/styles'
+			},
+			docs         : fabricatorConfig.docs,
+			favicon      : './src/assets/images/favicon.ico',
+			materials    : fabricatorConfig.materials,
+			package      : fabricatorConfig.package,
+			samples      : fabricatorConfig.samples,
+			scripts      : './src/assets/scripts/fabricator.js',
+			styles       : './src/assets/styles/**/*.scss',
+			templates    : fabricatorConfig.templates,
+			toolkitConfig: './toolkitConfig.json',
+			views        : ["./src/views/**/*", "!./src/views/+(layouts)/**"]
+		}
+	};
 
-module.exports.composeGlob = function () {
-	return _(arguments).flatten().value();
+	config.toolkit = {
+		paths: {
+			dest: {
+				fonts  : dst + '/assets/toolkit/fonts',
+				images : dst + '/assets/toolkit/images',
+				scripts: dst + '/assets/toolkit/scripts',
+				styles : dst + '/assets/toolkit/styles'
+			},
+			fonts        : fabricatorConfig.fonts,
+			images       : fabricatorConfig.images,
+			scripts      : fabricatorConfig.scripts,
+			styles       : fabricatorConfig.styles,
+			toolkitConfig: gutil.env.toolkitConfig
+		}
+	};
+
+	config.composeGlob = function () {
+		return _(arguments).flatten().value();
+	};
+
+	return config;
 };
