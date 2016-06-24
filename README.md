@@ -3,7 +3,7 @@
 [![devDependency Status](https://david-dm.org/dietergeerts/fabricator-builder/dev-status.svg)](https://david-dm.org/dietergeerts/fabricator-builder#info=devDependencies)
 
 <p align="center">
-  <img src="https://rawgit.com/dietergeerts/fabricator/master/logo.svg" width="300">
+  <img src="https://rawgit.com/dietergeerts/fabricator/master/logo.svg" width="400">
 </p>
 
 # Fabricator builder
@@ -13,7 +13,8 @@
 Fabricator builder is a tool for building website UI toolkits - _think ["Tiny Bootstraps, for Every Client"](http://daverupert.com/2013/04/responsive-deliverables/#tiny-bootstraps-for-every-client)_
 
 This is a builder version of the [original Fabricator project](https://github.com/fbrctr/fabricator), 
-which means you create your project, add the needed configuration files and let Fabricator builder build your toolkit.
+which means you create your project,  
+add the needed configuration files and let Fabricator builder build your toolkit.
 
 ## Quick Start
 
@@ -66,10 +67,6 @@ Original Fabricator Logo by [Abby Putinski](https://abbyputinski.com/)
 
 # TODO: Place following in docs!
 
-
-
-
-
 ### Config file
 
 The config file can just be an empty object. It's used to tell Fabricator builder what your paths and configuration is.
@@ -119,8 +116,6 @@ TODO: Add jshint and jsrc files with gulp task to check javascript files! Maybe 
 //
 // The 'required' ones, which have the following defaults:
 //
-//	"useWebpack": true  // Webpack doesn't work well with bower modules!
-// >> Removed useWebpack, I think it didn't work earlier because of my fault not knowing it enough!
 //	"materials" : ["./src/materials/**/*"],
 //	"data"      : ["./src/data/**/*.{json,yml}"],
 //	"samples"   : ["./src/samples/**/*"],
