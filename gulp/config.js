@@ -1,7 +1,7 @@
 'use strict';
 
-var _      = require('lodash');
-var gutil  = require('gulp-util');
+var _     = require('lodash');
+var gutil = require('gulp-util');
 
 module.exports = function (fabricatorConfig) {
 
@@ -22,6 +22,8 @@ module.exports = function (fabricatorConfig) {
 			},
 			docs         : fabricatorConfig.docs,
 			favicon      : './src/assets/images/favicon.ico',
+            jscsrc       : './.jscsrc',
+            jshintrc     : './.jshintrc',
 			materials    : fabricatorConfig.materials,
 			package      : fabricatorConfig.package,
 			samples      : fabricatorConfig.samples,
@@ -43,6 +45,8 @@ module.exports = function (fabricatorConfig) {
 			},
 			fonts        : fabricatorConfig.fonts,
 			images       : fabricatorConfig.images,
+            jscsrc       : fabricatorConfig.jscsrc,
+            jshintrc     : fabricatorConfig.jshintrc,
 			scripts      : fabricatorConfig.scripts,
 			styles       : fabricatorConfig.styles,
 			toolkitConfig: fabricatorConfig.toolkitConfig

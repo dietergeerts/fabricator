@@ -6,51 +6,69 @@
   <img src="https://rawgit.com/dietergeerts/fabricator/master/logo.svg" width="300">
 </p>
 
-# REMARK: In Development!
-
-I forked this from the fabricator project and transformed it so it can be used to build toolkits. So you can build your
-toolkit through configuration, and this project will then build it for you. I waited to see if I could merge my changes
-into the original project, but it appears that won't happen. So I'm making it a different project that will do the same
-as the original, but as a builder, and try to keep it in sync with the features of the original. The rest of this readme
-is still from the original though, I'll update everything asap.
-
 # Fabricator builder
 
 > _fabricate_ - to make by assembling parts or sections.
 
-Fabricator builder is a tool for building website UI toolkits - _think ["Tiny Bootstraps, for Every Client"]
-(http://daverupert.com/2013/04/responsive-deliverables/#tiny-bootstraps-for-every-client)_
+Fabricator builder is a tool for building website UI toolkits - _think ["Tiny Bootstraps, for Every Client"](http://daverupert.com/2013/04/responsive-deliverables/#tiny-bootstraps-for-every-client)_
 
-It's a builder version of the [original Fabricator project](https://github.com/fbrctr/fabricator), which means you
-create your project, add the needed configuration files and let Fabricator builder build your toolkit.
+This is a builder version of the [original Fabricator project](https://github.com/fbrctr/fabricator), 
+which means you create your project, add the needed configuration files and let Fabricator builder build your toolkit.
 
 ## Quick Start
 
-### Installing Fabricator builder
+###### Add the dependency
 
 ```
 $ npm install fabricator-builder --save-dev
 ```
 
-### Setup your package.json
+###### Build your toolkit
 
 ```javascript
-{
-	"scripts": {
-		"prestart": "npm install",
-		"start": "cd node_modules && cd fabricator-builder && npm start -- --config=\"../../fabricatorConfig.json\"" --toolkitConfig=\"../../toolkitConfig.json\" && cd .. && cd ..",
-		"prebuild": "npm install",
-		"build": "cd node_modules && cd fabricator-builder && npm run build -- --config=\"../../fabricatorConfig.json\"" --toolkitConfig=\"../../toolkitConfig.json\" && cd .. && cd ..",
-	}
-}
-```
+// Inside your gulpfile.js
 
-Both the config and toolkitConfig files are optional.
+var fabricatorBuilder = require('fabricator-builder');
+var gulp              = require('gulp');
+
+gulp.task('default', function () {
+    fabricatorBuilder(require('./fabricatorConfig'));
+    // You can check the docs on info about the configuration.
+});
+```
 
 ## Documentation
 
-Also see the [original Fabricator project](https://github.com/fbrctr/fabricator) for more info. I'll only document the
-build process by config and all the extra options.
+#### [Read the wiki →](https://github.com/dietergeerts/fabricator-builder/wiki)
+
+## Demo/Starter project
+
+#### [Check out the starter project →](https://github.com/dietergeerts/fabricator-starter)
+#### [Check out the demo →](http://www.dworks.be/fabricator-builder-demo/)
+
+## Credits
+
+Fabricator builder created by [Dieter Geerts](https://github.com/dietergeerts)
+
+Original Fabricator created by [Luke Askew](http://twitter.com/lukeaskew)
+
+Original Fabricator Logo by [Abby Putinski](https://abbyputinski.com/)
+
+## License
+
+[The MIT License (MIT)](http://opensource.org/licenses/mit-license.php)
+
+
+
+
+
+
+
+# TODO: Place following in docs!
+
+
+
+
 
 ### Config file
 
@@ -88,17 +106,6 @@ You can use includes to render color chips. like this:
 {{/each}}
 ```
 
-## Credits
-
-Fabricator builder created by [Dieter Geerts](http://github.com/dietergeerts).
-
-Original Fabricator created by [Luke Askew](http://twitter.com/lukeaskew).
-
-Original Fabricator Logo by [Abby Putinski](https://abbyputinski.com/).
-
-## License
-
-[The MIT License (MIT)](http://opensource.org/licenses/mit-license.php)
 
 
 handlebar helpers included: f-color-chip & f-color-chips
@@ -133,3 +140,21 @@ TODO: Add jshint and jsrc files with gulp task to check javascript files! Maybe 
 //	"dest"      :  ''   // A custom folder to build production to.
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+usage example: 
+
+'use strict';
+
+// This file is just for testing, the real toolkit will always use gulp, and then
+// start our tasks with it by calling the fabricator we have exported with index.js.
+
+var fabricator = require('./index');
+var gulp       = require('gulp');
+
+gulp.task('default', function () {
+	fabricator(require('./test/fabricatorConfig'));
+});
+
+
+--dev param for serve and no minification etc....

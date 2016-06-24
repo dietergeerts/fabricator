@@ -2,7 +2,7 @@
   "name": "fabricator-builder",
   "version": "2.0.0",
   "description": "A tool for building website UI toolkits",
-  "homepage": "https://github.com/dietergeerts/fabricator",
+  "homepage": "https://github.com/dietergeerts/fabricator-builder",
   "main": "./index.js",
   "scripts": {
     "prestart": "npm install",
@@ -19,7 +19,7 @@
     "patterns",
     "library"
   ],
-  "author": "Dieter Geerts",
+  "author": "Dieter Geerts <dieter@dworks.be>",
   "licenses": "MIT",
   "repository": {
     "type": "git",
@@ -29,29 +29,33 @@
     "node": ">=0.12.0",
     "npm": ">=2.0.0"
   },
-  "devDependencies": {
-    "babel-core": "^6",
-    "babel-loader": "^6",
-    "babel-preset-es2015": "^6",
-    "babel-preset-stage-2": "^6",
+  "dependencies": {
+    "babel-core": "6",
+    "babel-loader": "6",
+    "babel-preset-es2015": "6",
+    "babel-preset-stage-2": "6",
     "browser-sync": "2.13.0",
-    "del": "^1.1.1",
+    "del": "1.1.1",
     "fabricator-assemble": "dietergeerts/fabricator-assemble.git#bugfix/combine-grouping-and-ordering",
-    "gulp": "^3.8.11",
-    "gulp-autoprefixer": "^2.2.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-csso": "^1.0.0",
-    "gulp-if": "^1.2.5",
-    "gulp-imagemin": "^2.2.1",
-    "gulp-replace-task": "^0.2.1",
-    "gulp-sass": "^2.2.0",
-    "gulp-sourcemaps": "^1.5.2",
-    "gulp-uglify": "^1.2.0",
-    "gulp-util": "^3.0.4",
-    "imports-loader": "^0.6.3",
-    "lodash": "^3.10.0",
-    "merge2": "^0.3.6",
-    "script-loader": "^0.6.1",
-    "webpack": "^1.8.11"
+    "gulp": "3.8.11",
+    "gulp-autoprefixer": "2.2.0",
+    "gulp-concat": "2.6.0",
+    "gulp-csso": "1.0.0",
+    "gulp-if": "1.2.5",
+    "gulp-imagemin": "2.2.1",
+    "gulp-jscs": "3.0.2",
+    "gulp-jshint": "2.0.1",
+    "gulp-replace-task": "0.2.1",
+    "gulp-sass": "2.2.0",
+    "gulp-sourcemaps": "1.5.2",
+    "gulp-uglify": "1.2.0",
+    "gulp-util": "3.0.4",
+    "jshint": "2.9.2",
+    "jshint-practical": "0.1.0",
+    "lodash": "3.10.0",
+    "merge2": "0.3.6",
+    "webpack": "1.8.11"
+  },
+  "devDependencies": {
   }
 }

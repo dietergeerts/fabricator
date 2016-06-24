@@ -22,15 +22,17 @@ module.exports = function (fabricatorConfig) {
 	gulp.task('f:assets:toolkit', ['f:toolkit:scripts', 'f:toolkit:styles', 'f:toolkit:fonts']);
 
 	gulp.task('f:fabricator:favicon', getFabricatorTask('favicon').run);
-	gulp.task('f:fabricator:scripts', ['f:fabricator:scripts:clean'], getFabricatorTask('scripts').run);
+	gulp.task('f:fabricator:scripts', ['f:fabricator:scripts:clean', 'f:fabricator:scripts:analyze'], getFabricatorTask('scripts').run);
 	gulp.task('f:fabricator:scripts:clean', getFabricatorTask('scripts').clean);
+    gulp.task('f:fabricator:scripts:analyze', getFabricatorTask('scripts').analyze);
 	gulp.task('f:fabricator:styles', ['f:fabricator:styles:clean'], getFabricatorTask('styles').run);
 	gulp.task('f:fabricator:styles:clean', getFabricatorTask('styles').clean);
 	gulp.task('f:fabricator:samples', ['f:fabricator:samples:clean'], getFabricatorTask('samples').run);
 	gulp.task('f:fabricator:samples:clean', getFabricatorTask('samples').clean);
 
-	gulp.task('f:toolkit:scripts', ['f:toolkit:scripts:clean'], getToolkitTask('scripts').run);
+	gulp.task('f:toolkit:scripts', ['f:toolkit:scripts:clean', 'f:toolkit:scripts:analyze'], getToolkitTask('scripts').run);
 	gulp.task('f:toolkit:scripts:clean', getToolkitTask('scripts').clean);
+    gulp.task('f:toolkit:scripts:analyze', getToolkitTask('scripts').analyze);
 	gulp.task('f:toolkit:styles', ['f:toolkit:styles:clean', 'f:toolkitConfig:clearCache'], getToolkitTask('styles').run);
 	gulp.task('f:toolkit:styles:clean', getToolkitTask('styles').clean);
 	gulp.task('f:toolkit:fonts', ['f:toolkit:fonts:clean'], getToolkitTask('fonts').run);
@@ -61,11 +63,11 @@ module.exports = function (fabricatorConfig) {
 
 		gulp.watch(getAssembleSources(), ['f:assemble:changed']);
 		gulp.watch(config.fabricator.paths.scripts, ['f:fabricator:scripts:changed'])
-			.on('change', webpack.cleanCache(webpack.fabricator));
+            .on('change', webpack.cleanCache(webpack.fabricator));
 		gulp.watch(config.fabricator.paths.styles, ['f:fabricator:styles:changed']);
 		gulp.watch(config.fabricator.paths.samples, ['f:fabricator:samples:changed']);
 		gulp.watch(_(config.toolkit.paths.scripts).values().flatten().uniq().value(), ['f:toolkit:scripts:changed'])
-			.on('change', webpack.cleanCache(webpack.toolkit));
+            .on('change', webpack.cleanCache(webpack.toolkit));
 		gulp.watch(_(config.toolkit.paths.styles).values().flatten().uniq().value(), ['f:toolkit:styles:changed']);
 		gulp.watch(config.toolkit.paths.fonts, ['f:toolkit:fonts:changed']);
 		gulp.watch(config.toolkit.paths.images, ['f:toolkit:images:changed']);
