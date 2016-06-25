@@ -21,8 +21,10 @@ module.exports = function (fabricatorConfig, dev) {
 			},
 			docs         : fabricatorConfig.docs,
 			favicon      : toFabricatorPath('./src/assets/images/favicon.ico'),
+            includes     : toFabricatorPath('./src/includes/**/*'),
             jscsrc       : toFabricatorPath('./.jscsrc'),
             jshintrc     : toFabricatorPath('./.jshintrc'),
+            layouts      : toFabricatorPath('./src/layouts/**/*'),
 			materials    : fabricatorConfig.materials,
 			package      : fabricatorConfig.package,
 			samples      : fabricatorConfig.samples,
@@ -30,10 +32,7 @@ module.exports = function (fabricatorConfig, dev) {
 			styles       : toFabricatorPath('./src/assets/styles/**/*.scss'),
 			templates    : fabricatorConfig.templates,
 			toolkitConfig: toFabricatorPath('./toolkitConfig.json'),
-			views        : [
-                toFabricatorPath("./src/views/**/*"),
-                "!" + toFabricatorPath("./src/views/+(layouts)/**")
-            ]
+			views        : toFabricatorPath("./src/views/**/*")
 		}
 	};
 
