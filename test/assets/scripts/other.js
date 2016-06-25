@@ -2,6 +2,6 @@
 'use strict';
 
 /* @ngInject */
-function Controller($templateCache, data, test) {}
+function Controller($templateCache, data) {}
 
 Controller('test', 'test');

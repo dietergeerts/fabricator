@@ -44,9 +44,9 @@ module.exports = function (config) {
 
 	return tasks;
 
- 	function generateStyleReplacements(path) {
+ 	function generateStyleReplacements(filePath) {
 
-        return fillWithDataAndReturn({}, require(config.getWorkingPath(path)));
+        return fillWithDataAndReturn({}, require(path.resolve(filePath)));
 
 		function fillWithDataAndReturn(replacements, data) {
 
