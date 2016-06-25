@@ -7,7 +7,7 @@
   "data"     : "./test/data/**/*.{json,yml}",
   "samples"  : "./test/samples/**/*",
   "scripts"  : {
-    "toolkit": "./test/assets/scripts/toolkit.js"
+    "toolkit": "./test/assets/prepared/toolkit.js"
   },
   "fonts"    : "./test/assets/toolkit/fonts/**/*",
   "images"   : "./test/assets/toolkit/images/**/*",

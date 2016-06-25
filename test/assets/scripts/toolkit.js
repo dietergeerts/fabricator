@@ -1,5 +1,8 @@
+
 /**
  * Toolkit JavaScript
  */
 
-'use strict';
+function toolkitTest() {}
+
+toolkitTest();

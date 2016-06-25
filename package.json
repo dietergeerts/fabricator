@@ -58,5 +58,7 @@
     "script-loader": "0.7.0",
     "webpack": "1.8.11"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "gulp-ng-annotate": "2.0.0"
+  }
 }
