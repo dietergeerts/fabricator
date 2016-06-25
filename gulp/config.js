@@ -6,14 +6,7 @@ var path = require('path');
 module.exports = function (fabricatorConfig, dev) {
 
 	var config = {};
-
-    // Using this project as a node module requires us to work with absolute paths to stuff in here!
-    // Node will always think './path' formats are from the calling node module! So be careful with this!
-    config.toFabricatorPath = function (filePath) {
-        return path.normalize(path.join(__dirname, '..', filePath));
-    };
-
-    var dst = dev ? config.toFabricatorPath('./dist') : fabricatorConfig.dest;
+    var dst = dev ? toFabricatorPath('./dist') : fabricatorConfig.dest;
 
 	config.fabricator = {
 		dev: dev,
@@ -27,19 +20,19 @@ module.exports = function (fabricatorConfig, dev) {
 				styles : path.join(dst, 'assets/fabricator/styles')
 			},
 			docs         : fabricatorConfig.docs,
-			favicon      : config.toFabricatorPath('./src/assets/images/favicon.ico'),
-            jscsrc       : config.toFabricatorPath('./.jscsrc'),
-            jshintrc     : config.toFabricatorPath('./.jshintrc'),
+			favicon      : toFabricatorPath('./src/assets/images/favicon.ico'),
+            jscsrc       : toFabricatorPath('./.jscsrc'),
+            jshintrc     : toFabricatorPath('./.jshintrc'),
 			materials    : fabricatorConfig.materials,
 			package      : fabricatorConfig.package,
 			samples      : fabricatorConfig.samples,
-			scripts      : config.toFabricatorPath('./src/assets/scripts/fabricator.js'),
-			styles       : config.toFabricatorPath('./src/assets/styles/**/*.scss'),
+			scripts      : toFabricatorPath('./src/assets/scripts/fabricator.js'),
+			styles       : toFabricatorPath('./src/assets/styles/**/*.scss'),
 			templates    : fabricatorConfig.templates,
-			toolkitConfig: config.toFabricatorPath('./toolkitConfig.json'),
+			toolkitConfig: toFabricatorPath('./toolkitConfig.json'),
 			views        : [
-                config.toFabricatorPath("./src/views/**/*"),
-                "!" + config.toFabricatorPath("./src/views/+(layouts)/**")
+                toFabricatorPath("./src/views/**/*"),
+                "!" + toFabricatorPath("./src/views/+(layouts)/**")
             ]
 		}
 	};
@@ -67,4 +60,10 @@ module.exports = function (fabricatorConfig, dev) {
 	};
 
 	return config;
+
+    // Using this project as a node module requires us to work with absolute paths to stuff in here!
+    // Node will always think './path' formats are from the calling node module! So be careful with this!
+    function toFabricatorPath(filePath) {
+        return path.normalize(path.join(__dirname, '..', filePath));
+    }
 };
