@@ -27,12 +27,12 @@ module.exports = function (config) {
 
 	tasks.fabricator = _.defaultsDeep({
 		entry: {fabricator: config.fabricator.paths.scripts},
-		output: {path: config.getPathFromMain(config.fabricator.paths.dest.scripts)}
+		output: {path: path.resolve(__dirname, '..', config.fabricator.paths.dest.scripts)}
 	}, defaults);
 
 	tasks.toolkit = _.defaultsDeep({
 		entry: config.toolkit.paths.scripts,
-		output: {path: config.getPathFromMain(config.toolkit.paths.dest.scripts)}
+		output: {path: path.resolve(__dirname, '..', config.toolkit.paths.dest.scripts)}
 	}, defaults);
 
 	tasks.compile = function (options) {

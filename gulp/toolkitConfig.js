@@ -10,7 +10,7 @@ module.exports = function (config) {
 	tasks.clearCache = function (callback) {
 
 		if (config.toolkit.paths.toolkitConfig) {
-			delete require.cache[require.resolve(config.getPathFromMain(config.toolkit.paths.toolkitConfig))];
+			delete require.cache[require.resolve('../' + config.toolkit.paths.toolkitConfig)];
 		}
 
 		callback();
@@ -30,7 +30,7 @@ module.exports = function (config) {
 	function generateData() {
 
 		var projectData = config.toolkit.paths.toolkitConfig
-			? require(config.getPathFromMain(config.toolkit.paths.toolkitConfig))
+			? require('../' + config.toolkit.paths.toolkitConfig)
 			: {};
 
 		return _(projectData)

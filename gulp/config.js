@@ -56,10 +56,5 @@ module.exports = function (fabricatorConfig, dev) {
 		return _(arguments).flatten().value();
 	};
 
-    config.getPathFromMain = function (path) {
-        return nodePath.join(nodePath.dirname(require.main.filename), '..', '..', '..', path);
-        // require.main.filename = 'absolute\path\to\project\node_modules\gulp\bin\'
-    };
-
 	return config;
 };

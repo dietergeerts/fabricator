@@ -46,7 +46,7 @@ module.exports = function (config) {
 
  	function generateStyleReplacements(path) {
 
-        return fillWithDataAndReturn({}, require(config.getPathFromMain(path)));
+        return fillWithDataAndReturn({}, require('../../' + path));
 
 		function fillWithDataAndReturn(replacements, data) {
 
