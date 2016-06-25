@@ -10,7 +10,16 @@ var gutil      = require('gulp-util');
 var ngAnnotate = require('gulp-ng-annotate');
 
 gulp.task('default', ['scripts:prepare'], function () {
-	fabricator(require('./test/fabricatorConfig'), gutil.env.dev);
+
+    // Start Fabricator Builder.
+    fabricator(require('./test/fabricatorConfig'), gutil.env.dev);
+
+    // If dev option is on, Fabricator Builder will have browserSync setup!
+    // So we can now add watchers, to re-run our own preparation tasks.
+    if (gutil.env.dev) {
+
+        gulp.watch('./test/assets/scripts/**/*.js', ['scripts:prepare']);
+    }
 });
 
 gulp.task('scripts:prepare', function () {

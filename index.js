@@ -5,13 +5,13 @@ var browserSync = require('browser-sync');
 var gulp        = require('gulp');
 
 module.exports = function (fabricatorConfig, dev) {
-    
+
     var config  = require('./gulp/config')(fabricatorConfig, dev);
 	var webpack = require('./gulp/webpack')(config);
 
 	gulp.task('f:default', ['f:assemble', 'f:assets', 'f:fabricator:favicon'], function () {
-		if (config.fabricator.dev) {
-			gulp.start('serve');
+        if (config.fabricator.dev) {
+			gulp.start('serve'); // gulp.start = push to tasks queue.
 		}
 	});
 
@@ -84,8 +84,8 @@ module.exports = function (fabricatorConfig, dev) {
 			]).flatten().value();
 		}
 	});
-
-	gulp.start('f:default');
+    
+    gulp.start('f:default'); // gulp.start = push to tasks queue.
 
 	function getTask(name) {
 		return require('./gulp/' + name)(config, webpack);
