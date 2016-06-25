@@ -10,7 +10,7 @@ module.exports = function (config) {
 	tasks.clearCache = function (callback) {
 
 		if (config.toolkit.paths.toolkitConfig) {
-			delete require.cache[require.resolve('../' + config.toolkit.paths.toolkitConfig)];
+			delete require.cache[require.resolve(config.toolkit.paths.toolkitConfig)];
 		}
 
 		callback();
