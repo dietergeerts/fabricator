@@ -49,3 +49,4 @@ jspm_packages
 
 # We generate our own toolkitConfig file as we add data besides the optional tookitConfig file of the project.
 /toolkitConfig.json
+/test/dest/

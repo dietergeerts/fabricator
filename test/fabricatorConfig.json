@@ -1,24 +1,18 @@
 {
-  "data"     : "./test/data/**/*.{json,yml}",
-  "dest"     : "./dest",
-  "docs"     : "./test/docs/**/*.md",
-  "fonts"    : "./test/assets/toolkit/fonts/**/*",
-  "materials": "./test/materials/**/*",
+  "dest"     : "./test/dest",
   "package"  : "./test/package.json",
+  "docs"     : "./test/docs/**/*.md",
+  "materials": "./test/materials/**/*",
+  "templates": "./test/templates/**/*",
+  "data"     : "./test/data/**/*.{json,yml}",
+  "samples"  : "./test/samples/**/*",
   "scripts"  : {
     "toolkit": "./test/assets/scripts/toolkit.js"
   },
+  "fonts"    : "./test/assets/toolkit/fonts/**/*",
+  "images"   : "./test/assets/toolkit/images/**/*",
   "styles"   : {
-    "toolkit": "./test/assets/styles/toolkit.scss"
+    "toolkit": "./test/assets/styles/*.scss"
   },
-  "templates": "./test/views/templates/**/*",
-
-
-
-
-
-
-  "samples"   : ["./src/samples/**/*"],
-  "images"    : ["./src/assets/toolkit/images/**/*"],
   "toolkitConfig": "./test/toolkitConfig.json"
 }

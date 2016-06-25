@@ -1,6 +1,7 @@
 "use strict";
 
 var _       = require('lodash');
+var gutil   = require('gulp-util');
 var path    = require('path');
 var webpack = require('webpack');
 
@@ -20,7 +21,7 @@ module.exports = function (config) {
 
 	var tasks = {};
 
-	if (!config.dev) {
+	if (!config.fabricator.dev) {
 		defaults.plugins.push(new webpack.optimize.UglifyJsPlugin());
 	}
 

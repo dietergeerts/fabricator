@@ -5,7 +5,8 @@
 
 var fabricator = require('./index');
 var gulp       = require('gulp');
+var gutil      = require('gulp-util');
 
 gulp.task('default', function () {
-	fabricator(require('./test/fabricatorConfig'));
+	fabricator(require('./test/fabricatorConfig'), gutil.env.dev);
 });

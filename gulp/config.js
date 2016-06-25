@@ -1,12 +1,10 @@
 'use strict';
 
 var _     = require('lodash');
-var gutil = require('gulp-util');
 
-module.exports = function (fabricatorConfig) {
+module.exports = function (fabricatorConfig, dev) {
 
 	var config = {};
-	var dev = gutil.env.dev;
 	var dst = dev ? './dist' : fabricatorConfig.dest;
 
 	config.fabricator = {
