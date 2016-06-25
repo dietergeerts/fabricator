@@ -1,0 +1,83 @@
+/**
+ * Github-like theme for Prism.js
+ * @author Luke Askew http://github.com/lukeaskew
+ * @author Dieter Geerts http://github.com/dietergeerts
+ */
+
+// color vars
+$code-colors: (
+	blue      : #183691,
+	teal      : #0086B3,
+	black     : #333333,
+	purple    : #A71D5D,
+	maroon    : #A71D5D,
+	green     : #63A35C,
+	lightgray : #E3E4F2,
+	darkgray  : #838483
+);
+
+// base
+code,
+code[class*='language-'],
+pre[class*='language-'] {
+	color: map-get($code-colors, black);
+	font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+	text-align: left; white-space: pre; word-spacing: normal; tab-size: 4; hyphens: none;
+	line-height: 1.4; direction: ltr; cursor: text; letter-spacing: normal;
+}
+
+// code blocks
+pre[class*='language-'] {
+	overflow: auto; margin: 1em 0; padding: 1.2em; border-radius: 0; font-size: 85%;
+	border-left: 2px solid darken(map-get($code-colors, lightgray), 10);
+}
+
+p code,
+li code,
+table code {
+	margin: 0; border-radius: 3px; padding: 0.2em 0; font-size: 85%;
+	&:before, &:after { letter-spacing: -0.2em; content: '\00a0'; }
+}
+
+code,
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] { background: map-get($code-colors, lightgray); }
+
+// inline code
+:not(pre) > code,
+:not(pre) > code[class*='language-'] { padding: 0.1em; border-radius: 0.3em; color: map-get($code-colors, maroon); }
+
+// token colors
+.token {
+	&.comment,
+	&.prolog,
+	&.doctype,
+	&.cdata { color: map-get($code-colors, darkgray); }
+
+	&.punctuation,
+	&.string,
+	&.atrule,
+	&.attr-value { color: map-get($code-colors, blue); }
+
+	&.property,
+	&.tag { color: map-get($code-colors, green); }
+
+	&.boolean,
+	&.number { color: map-get($code-colors, teal); }
+
+	&.selector,
+	&.attr-name,
+	&.attr-value .punctuation:first-child,
+	&.keyword,
+	&.regex,
+	&.important { color: map-get($code-colors, maroon); }
+
+	&.operator,
+	&.entity,
+	&.url,
+	.language-css &.string { color: map-get($code-colors, purple); }
+
+	&.entity { cursor: help; }
+}
+
+.namespace { opacity: 0.7; }

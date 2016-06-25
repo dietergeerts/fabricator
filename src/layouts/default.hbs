@@ -1,0 +1,35 @@
+<!doctype html>
+<html {{#if fabricator}}class="f-html"{{/if}}>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{package.name}} v{{package.version}}</title>
+  <link rel="icon" type="image/x-icon" href="./{{baseurl}}/assets/fabricator/images/favicon.ico"/>
+  {{#if fabricator}}
+    <link rel="stylesheet" href="./{{baseurl}}/assets/fabricator/styles/fabricator.css">
+  {{/if}}
+  {{#unless documentation}}
+    {{#each toolkitConfig.toolkitStyles}}
+      <link rel="stylesheet" href="./{{../baseurl}}/assets/toolkit/styles/{{this}}.css">
+    {{/each}}
+  {{/unless}}
+</head>
+<body {{#if fabricator}}class="f-body{{#if documentation}} f-docs{{/if}}"{{/if}}>
+<!--Made with Fabricator-Builder: https://github.com/dietergeerts/fabricator-builder-->
+{{#if fabricator}}
+  {{> f-icons}}
+  {{> f-menu}}
+  <div class="f-container">
+{{/if}}
+  {% body %}
+{{#if fabricator}}
+  </div>
+  <script src="./{{baseurl}}/assets/fabricator/scripts/fabricator.js"></script>
+{{/if}}
+{{#unless documentation}}
+  {{#each toolkitConfig.toolkitScripts}}
+    <script src="./{{../baseurl}}/assets/toolkit/scripts/{{this}}.js"></script>
+  {{/each}}
+{{/unless}}
+</body>
+</html>

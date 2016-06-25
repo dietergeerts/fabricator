@@ -1,0 +1,13 @@
+{
+  "colors": {
+    "primary": {
+      "Dark" : "#1E1E1E",
+      "Light": "#F2F2F2"
+    },
+    "secondary": {
+      "Red"   : "#C93706",
+      "Yellow": "#FCCF50",
+      "Blue"  : "#27668F"
+    }
+  }
+}

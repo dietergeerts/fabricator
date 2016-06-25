@@ -1,0 +1,59 @@
+
+
+// MAIN LAYOUT
+
+.f-html { }
+
+.f-body { margin: 0; }
+
+.f-menu { position: fixed; top: 0; left: 0; right: 0; z-index: 2000; }
+
+.f-container { margin: 36px 20px 20px 20px; z-index: 0; }
+
+
+// MAIN STYLING
+
+.f-body { background: #FFFFFF; }
+
+
+// MENU LAYOUT
+
+.f-menu { display: flex; flex-wrap: wrap; .f-control { padding-top: 4px; } }
+
+.f-menu-item, .f-menu-toggle { line-height: 30px; }
+
+.f-menu-item { padding: 0 14px; }
+
+.f-menu-toggle { padding: 0 5px; margin-left: -14px; &:not(.f-active) + .f-menu { display: none; } }
+
+
+// MENU STYLING
+
+.f-menu { background: $dark; color: $light; box-shadow: 0 0 8px 4px rgba($dark-hl, 0.4); font-family: $font; }
+
+.f-menu .f-control svg { fill: $light; }
+
+.f-menu-item, .f-menu-toggle { font-size: 14px; text-transform: uppercase; }
+
+.f-menu-toggle { &:before { content: '\25BC'; } }
+
+
+// MENU ALTERNATIVE STYLING
+
+.f-menu-item, .f-menu-toggle { &:hover { cursor: pointer; } }
+
+.f-menu-item, .f-menu-toggle, .f-menu .f-control { &:hover, &.f-active { background: $dark-hl; } }
+
+.f-menu-item, .f-menu-toggle { &:hover, &.f-active { color: $light-hl; } }
+
+.f-menu .f-control { &:hover, &.f-active { svg { fill: $light-hl; } } }
+
+
+// VIEW LAYOUT
+
+.f-view-header { padding-bottom: 6px; }
+
+
+// VIEW STYLING
+
+.f-view-header { text-transform: uppercase; color: $base; border-bottom: 1px solid $base; font-family: $font; }

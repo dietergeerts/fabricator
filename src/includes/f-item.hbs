@@ -1,0 +1,24 @@
+<div class="f-item-group" id="{{@key}}">
+  <div class="f-item-heading-group">
+    <div class="f-item-heading">{{name}}</div>
+    {{#unless items}}
+      <div class="f-controls">
+        {{#if notes}}
+          <span class="f-control" data-f-toggle-control="notes" title="Toggle Notes">
+            <svg><use xlink:href="#f-icon-notes"></use></svg>
+          </span>
+        {{/if}}
+        <span class="f-control" data-f-toggle-control="code" title="Toggle Code">
+          <svg><use xlink:href="#f-icon-code"></use></svg>
+        </span>
+      </div>
+    {{/unless}}
+  </div>
+  {{#if items}}
+    {{#each items}}
+      {{> f-item this}}
+    {{/each}}
+  {{else}}
+    {{> f-item-content this}}
+  {{/if}}
+</div>
