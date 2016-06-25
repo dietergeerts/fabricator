@@ -1,6 +1,7 @@
 'use strict';
 
-var _     = require('lodash');
+var _        = require('lodash');
+var nodePath = require('path');
 
 module.exports = function (fabricatorConfig, dev) {
 
@@ -54,6 +55,11 @@ module.exports = function (fabricatorConfig, dev) {
 	config.composeGlob = function () {
 		return _(arguments).flatten().value();
 	};
+
+    config.getPathFromMain = function (path) {
+        return nodePath.join(nodePath.dirname(require.main.filename), '..', '..', '..', path);
+        // require.main.filename = 'absolute\path\to\project\node_modules\gulp\bin\'
+    };
 
 	return config;
 };

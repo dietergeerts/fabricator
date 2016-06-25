@@ -7,13 +7,14 @@ var del        = require('del');
 var gulp       = require('gulp');
 var gulpif     = require('gulp-if');
 var merge      = require('merge2');
+var path       = require('path');
 var prefix     = require('gulp-autoprefixer');
 var replace    = require('gulp-replace-task');
 var sass       = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 
 module.exports = function (config) {
-	
+
 	var tasks = {};
 
 	tasks.clean = function (callback) {
@@ -40,12 +41,12 @@ module.exports = function (config) {
 				.pipe(gulp.dest(config.toolkit.paths.dest.styles));
 		}
 	};
-	
+
 	return tasks;
-	
+
  	function generateStyleReplacements(path) {
 
-        return fillWithDataAndReturn({}, require('../../' + path));
+        return fillWithDataAndReturn({}, require(config.getPathFromMain(path)));
 
 		function fillWithDataAndReturn(replacements, data) {
 
