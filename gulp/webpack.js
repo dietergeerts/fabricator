@@ -27,7 +27,7 @@ module.exports = function (config) {
 
 	tasks.fabricator = _.defaultsDeep({
 		entry: {fabricator: config.fabricator.paths.scripts},
-		output: {path: path.resolve(__dirname, '..', config.fabricator.paths.dest.scripts)}
+		output: {path: path.resolve(config.getWorkingPath(config.fabricator.paths.dest.scripts))}
 	}, defaults);
 
 	tasks.toolkit = _.defaultsDeep({
