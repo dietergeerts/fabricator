@@ -32,7 +32,7 @@ module.exports = function (config) {
 
 	tasks.toolkit = _.defaultsDeep({
 		entry: config.toolkit.paths.scripts,
-		output: {path: path.resolve(__dirname, '..', config.toolkit.paths.dest.scripts)}
+		output: {path: path.resolve(config.getWorkingPath(config.toolkit.paths.dest.scripts))}
 	}, defaults);
 
 	tasks.compile = function (options) {

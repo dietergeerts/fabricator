@@ -55,6 +55,10 @@ module.exports = function (fabricatorConfig, dev) {
 	config.composeGlob = function () {
 		return _(arguments).flatten().value();
 	};
+    
+    config.getWorkingPath = function (path) {
+        return nodePath.join(process.cwd(), path);
+    };
 
 	return config;
 };
