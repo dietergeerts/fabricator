@@ -13,6 +13,9 @@ var defaults = {
 		loaders: ['babel'],
 		presets: ['es2015', 'stage-2']
 	}]},
+    resolveLoader: {
+        root: path.join(__dirname, '..', 'node_modules')
+    },
 	plugins: [],
 	cache: {}
 };
