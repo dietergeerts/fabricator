@@ -1,7 +1,6 @@
 "use strict";
 
 var _       = require('lodash');
-var gutil   = require('gulp-util');
 var path    = require('path');
 var webpack = require('webpack');
 
@@ -22,47 +21,25 @@ var defaults = {
 
 module.exports = function (config) {
 
-	var tasks = {};
+	var webpackConfig = {};
 
 	if (!config.fabricator.dev) {
 		defaults.plugins.push(new webpack.optimize.UglifyJsPlugin());
 	}
 
-	tasks.fabricator = _.defaultsDeep({
+	webpackConfig.fabricator = _.defaultsDeep({
 		entry: {fabricator: config.fabricator.paths.scripts},
 		output: {path: path.resolve(config.fabricator.paths.dest.scripts)}
 	}, defaults);
 
-	tasks.toolkit = _.defaultsDeep({
+	webpackConfig.toolkit = _.defaultsDeep({
 		entry: config.toolkit.paths.scripts,
 		output: {path: path.resolve(config.toolkit.paths.dest.scripts)}
 	}, defaults);
 
-	tasks.compile = function (options) {
-		return function (callback) {
-			webpack(options).run(function (error, result) {
-
-				if (error) {
-					logError(error);
-				}
-
-				result = result.toJson();
-				if (result.errors.length) {
-					result.errors.forEach(logError);
-				}
-
-				callback();
-			});
-
-			function logError(error) {
-				gutil.log(gutil.colors.red(error));
-			}
-		};
-	};
-
 	// Because webpackCompiler.watch() isn't being used, so
 	// manually remove the changed file path from the cache.
-	tasks.cleanCache = function (options) {
+	webpackConfig.cleanCache = function (options) {
 		return function (e) {
 			var keys = Object.keys(options.cache);
 			var key, matchedKey;
@@ -81,5 +58,5 @@ module.exports = function (config) {
 		}
 	};
 
-	return tasks;
+	return webpackConfig;
 };

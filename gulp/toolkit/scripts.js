@@ -1,16 +1,17 @@
 'use strict';
 
-var _      = require('lodash');
-var concat = require('gulp-concat');
-var del    = require('del');
-var gulp   = require('gulp');
-var gulpif = require('gulp-if');
-var jscs   = require('gulp-jscs');
-var jshint = require('gulp-jshint');
-var merge  = require('merge2');
-var uglify = require('gulp-uglify');
+var _       = require('lodash');
+var concat  = require('gulp-concat');
+var del     = require('del');
+var gulp    = require('gulp');
+var gulpif  = require('gulp-if');
+var jscs    = require('gulp-jscs');
+var jshint  = require('gulp-jshint');
+var merge   = require('merge2');
+var uglify  = require('gulp-uglify');
+var webpack = require('webpack-stream');
 
-module.exports = function (config, webpack) {
+module.exports = function (config, webpackConfig) {
 
 	var tasks = {};
 
@@ -28,9 +29,11 @@ module.exports = function (config, webpack) {
             .pipe(jshint.reporter('fail')); // Fail on warnings and errors >> add ignores in code if necessary!
     };
 
-    tasks.run = function (callback) {
+    tasks.run = function () {
         if (config.toolkit.useWebpack) {
-		    webpack.compile(webpack.toolkit)(callback);
+            return gulp.src(_(config.toolkit.paths.scripts).values().flatten().value())
+                .pipe(webpack(webpackConfig.toolkit))
+                .pipe(gulp.dest(config.toolkit.paths.dest.scripts));
         } else {
             return merge(_(config.toolkit.paths.scripts).toPairs().map(createScriptStream).value());
         }

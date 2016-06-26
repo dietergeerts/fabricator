@@ -6,8 +6,8 @@ var gulp        = require('gulp');
 
 module.exports = function (fabricatorConfig, dev) {
 
-    var config  = require('./gulp/config')(fabricatorConfig, dev);
-	var webpack = require('./gulp/webpack')(config);
+    var config        = require('./gulp/config')(fabricatorConfig, dev);
+	var webpackConfig = require('./gulp/webpackConfig')(config);
 
 	gulp.task('f:default', ['f:assemble', 'f:assets', 'f:fabricator:favicon'], function () {
         if (config.fabricator.dev) {
@@ -63,11 +63,11 @@ module.exports = function (fabricatorConfig, dev) {
 
 		gulp.watch(getAssembleSources(), ['f:assemble:changed']);
 		gulp.watch(config.fabricator.paths.scripts, ['f:fabricator:scripts:changed'])
-            .on('change', webpack.cleanCache(webpack.fabricator));
+            .on('change', webpackConfig.cleanCache(webpackConfig.fabricator));
 		gulp.watch(config.fabricator.paths.styles, ['f:fabricator:styles:changed']);
 		gulp.watch(config.fabricator.paths.samples, ['f:fabricator:samples:changed']);
 		gulp.watch(_(config.toolkit.paths.scripts).values().flatten().uniq().value(), ['f:toolkit:scripts:changed'])
-            .on('change', webpack.cleanCache(webpack.toolkit));
+            .on('change', webpackConfig.cleanCache(webpackConfig.toolkit));
 		gulp.watch(_(config.toolkit.paths.styles).values().flatten().uniq().value(), ['f:toolkit:styles:changed']);
 		gulp.watch(config.toolkit.paths.fonts, ['f:toolkit:fonts:changed']);
 		gulp.watch(config.toolkit.paths.images, ['f:toolkit:images:changed']);
@@ -88,14 +88,14 @@ module.exports = function (fabricatorConfig, dev) {
     gulp.start('f:default'); // gulp.start = push to tasks queue.
 
 	function getTask(name) {
-		return require('./gulp/' + name)(config, webpack);
+		return require('./gulp/' + name)(config, webpackConfig);
 	}
 
 	function getFabricatorTask(name) {
-		return require('./gulp/fabricator/' + name)(config, webpack);
+		return require('./gulp/fabricator/' + name)(config, webpackConfig);
 	}
 
 	function getToolkitTask(name) {
-		return require('./gulp/toolkit/' + name)(config, webpack);
+		return require('./gulp/toolkit/' + name)(config, webpackConfig);
 	}
 };
