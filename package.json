@@ -1,6 +1,6 @@
 {
   "name": "fabricator-builder",
-  "version": "3.1.3",
+  "version": "3.1.4",
   "description": "A tool for building website UI toolkits",
   "homepage": "https://github.com/dietergeerts/fabricator-builder",
   "main": "./index.js",
