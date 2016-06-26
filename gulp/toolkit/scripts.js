@@ -30,7 +30,7 @@ module.exports = function (config, webpack) {
 
     tasks.run = function (callback) {
         if (config.toolkit.useWebpack) {
-		    return webpack.compile(webpack.toolkit)(callback);
+		    webpack.compile(webpack.toolkit)(callback);
         } else {
             return merge(_(config.toolkit.paths.scripts).toPairs().map(createScriptStream).value());
         }

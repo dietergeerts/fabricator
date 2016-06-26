@@ -24,7 +24,7 @@ module.exports = function (config, webpack) {
     };
 
 	tasks.run = function (callback) {
-		return webpack.compile(webpack.fabricator)(callback);
+		webpack.compile(webpack.fabricator)(callback);
 	};
 
 	return tasks;

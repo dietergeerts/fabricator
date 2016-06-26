@@ -1,6 +1,6 @@
 {
   "name": "fabricator-builder",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "A tool for building website UI toolkits",
   "homepage": "https://github.com/dietergeerts/fabricator-builder",
   "main": "./index.js",
@@ -42,7 +42,6 @@
     "gulp-concat": "2.6.0",
     "gulp-csso": "2.0.0",
     "gulp-if": "2.0.1",
-    "gulp-imagemin": "3.0.1",
     "gulp-jscs": "4.0.0",
     "gulp-jshint": "2.0.1",
     "gulp-replace-task": "0.11.0",
