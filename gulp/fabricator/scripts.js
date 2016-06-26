@@ -9,8 +9,8 @@ module.exports = function (config, webpack) {
 
 	var tasks = {};
 
-	tasks.clean = function (callback) {
-		del(config.fabricator.paths.dest.scripts, {force: true}, callback);
+	tasks.clean = function () {
+		return del(config.fabricator.paths.dest.scripts, {force: true});
 	};
 
     tasks.analyze = function (callback) {

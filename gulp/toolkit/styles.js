@@ -17,8 +17,8 @@ module.exports = function (config) {
 
 	var tasks = {};
 
-	tasks.clean = function (callback) {
-		del(config.toolkit.paths.dest.styles, {force: true}, callback);
+	tasks.clean = function () {
+		return del(config.toolkit.paths.dest.styles, {force: true});
 	};
 
 	tasks.run = function () {
@@ -27,7 +27,7 @@ module.exports = function (config) {
 			? generateStyleReplacements(config.toolkit.paths.toolkitConfig)
 			: {};
 
-		return merge(_(config.toolkit.paths.styles).pairs().map(createStyleStream).value());
+		return merge(_(config.toolkit.paths.styles).toPairs().map(createStyleStream).value());
 
 		function createStyleStream(namedSrc) {
 			return gulp.src(namedSrc[1])

@@ -1,8 +1,10 @@
 'use strict';
 
 var _      = require('lodash');
+var concat = require('gulp-concat');
 var del    = require('del');
 var gulp   = require('gulp');
+var gulpif = require('gulp-if');
 var jscs   = require('gulp-jscs');
 var jshint = require('gulp-jshint');
 var merge  = require('merge2');
@@ -12,11 +14,11 @@ module.exports = function (config, webpack) {
 
 	var tasks = {};
 
-	tasks.clean = function (callback) {
-		del(config.toolkit.paths.dest.scripts, {force: true}, callback);
+	tasks.clean = function () {
+		return del(config.toolkit.paths.dest.scripts, {force: true});
 	};
 
-    tasks.analyze = function (callback) {
+    tasks.analyze = function () {
         return gulp.src(_(config.toolkit.paths.scripts).values().flatten().value())
             .pipe(jscs({configPath: config.toolkit.paths.jscsrc || config.fabricator.paths.jscsrc, fix: true}))
             .pipe(jscs.reporter())
@@ -30,7 +32,7 @@ module.exports = function (config, webpack) {
         if (config.toolkit.useWebpack) {
 		    return webpack.compile(webpack.toolkit)(callback);
         } else {
-            return merge(_(config.toolkit.paths.scripts).pairs().map(createScriptStream).value());
+            return merge(_(config.toolkit.paths.scripts).toPairs().map(createScriptStream).value());
         }
 	};
 

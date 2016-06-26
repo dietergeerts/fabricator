@@ -3,22 +3,19 @@
     if (typeof require !== 'undefined') {
         require('./prism');
     }
-
-
+    
     /**
      * Global `fabricator` object
      * @namespace
      */
     var fabricator = window.fabricator = {};
 
-
     /**
      * Default options
      * @type {Object}
      */
     fabricator.options = {toggles: {notes: true, code: false}};
-
-
+    
     /**
      * Feature detection
      * @type {Object}
@@ -42,7 +39,6 @@
         sessionStorage.fabricator = sessionStorage.fabricator || JSON.stringify(fabricator.options);
     }
 
-
     /**
      * Get current option values from session storage
      * @return {Object}
@@ -50,7 +46,6 @@
     fabricator.getOptions = function () {
         return (fabricator.test.sessionStorage) ? JSON.parse(sessionStorage.fabricator) : fabricator.options;
     };
-
 
     /**
      * Build color chips
@@ -69,7 +64,6 @@
 
         return this;
     };
-
 
     /**
      * Handler for preview and code toggles
@@ -127,8 +121,7 @@
             }
         }
     };
-
-
+    
     /**
      * Handler for single item code toggling
      */
@@ -154,7 +147,6 @@
         }
     };
 
-
     /**
      * Automatically select code when code block is clicked
      */
@@ -176,8 +168,7 @@
             selection.addRange(range);
         }
     };
-
-
+    
     /**
      * Init the deep menu toggles.
      * @returns {Window.fabricator}
@@ -204,8 +195,7 @@
             }
         }
     };
-
-
+    
     /**
      * Initialization
      */
@@ -215,7 +205,6 @@
         .buildColorChips()
         .bindCodeAutoSelect()
         .initDeepMenuToggles();
-
 
     /*
      * Utility functions

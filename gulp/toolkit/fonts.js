@@ -7,8 +7,8 @@ module.exports = function (config) {
 
 	var tasks = {};
 
-	tasks.clean = function (callback) {
-		del(config.toolkit.paths.dest.fonts, {force: true}, callback);
+	tasks.clean = function () {
+		return del(config.toolkit.paths.dest.fonts, {force: true});
 	};
 
 	tasks.run = function () {

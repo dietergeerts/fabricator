@@ -10,11 +10,11 @@ var sass       = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 
 module.exports = function (config) {
-	
+
 	var tasks = {};
 
-	tasks.clean = function (callback) {
-		del(config.fabricator.paths.dest.styles, {force: true}, callback);
+	tasks.clean = function () {
+		return del(config.fabricator.paths.dest.styles, {force: true});
 	};
 
 	tasks.run = function () {

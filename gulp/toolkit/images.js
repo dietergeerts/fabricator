@@ -5,11 +5,11 @@ var gulp     = require('gulp');
 var imagemin = require('gulp-imagemin');
 
 module.exports = function (config) {
-	
+
 	var tasks = {};
 
-	tasks.clean = function (callback) {
-		del(config.toolkit.paths.dest.images, {force: true}, callback);
+	tasks.clean = function () {
+		return del(config.toolkit.paths.dest.images, {force: true});
 	};
 
 	tasks.run = function () {
