@@ -207,7 +207,7 @@
     "validateCommentPosition": null,
     "validateIndentation": 4,
     "validateLineBreaks": null,
-    "validateNewlineAfterArrayElements": true,
+    "validateNewlineAfterArrayElements": null,
     "validateOrderInObjectKeys": null,
     "validateParameterSeparator": ", ",
     "validateQuoteMarks": false
