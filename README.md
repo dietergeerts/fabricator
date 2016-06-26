@@ -24,6 +24,12 @@ add the needed configuration files and let Fabricator builder build your toolkit
 $ npm install fabricator-builder --save-dev
 ```
 
+**There currently is a dependency which npm package isn't up-to-date, so you better use the git repo as dependency:**
+
+```
+"fabricator-builder": "dietergeerts/fabricator.git#3.0.0"
+```
+
 ###### Build your toolkit
 
 ```javascript
