@@ -20,7 +20,7 @@ module.exports = function (config, webpackConfig) {
 	};
 
     tasks.analyze = function () {
-        return gulp.src(_(config.toolkit.paths.scripts).values().flatten().value())
+        return gulp.src(config.toolkit.paths.analyze)
             .pipe(jscs({configPath: config.toolkit.paths.jscsrc || config.fabricator.paths.jscsrc, fix: true}))
             .pipe(jscs.reporter())
             .pipe(jscs.reporter('fail')) // Fail on warnings and errors >> add ignores in code if necessary!

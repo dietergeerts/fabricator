@@ -6,6 +6,7 @@
   "templates": "./test/templates/**/*",
   "data"     : "./test/data/**/*.{json,yml}",
   "samples"  : "./test/samples/**/*",
+  "analyze"  : "./test/assets/prepared/toolkit.js",
   "scripts"  : {
     "toolkit": "./test/assets/prepared/toolkit.js"
   },
