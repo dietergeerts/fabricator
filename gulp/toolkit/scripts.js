@@ -43,8 +43,8 @@ module.exports = function (config, webpackConfig) {
 
     function createScriptStream(namedSrc) {
         return gulp.src(namedSrc[1])
-            .pipe(concat(namedSrc[0] + '.js'))
             .pipe(gulpif(!config.fabricator.dev, uglify()))
+            .pipe(concat(namedSrc[0] + '.js'))
             .pipe(gulp.dest(config.toolkit.paths.dest.scripts));
     }
 };

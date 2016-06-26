@@ -37,7 +37,7 @@ module.exports = function (fabricatorConfig, dev) {
 	};
 
 	config.toolkit = {
-        useWebpack: fabricatorConfig.useWebpack,
+        useWebpack: _.has(fabricatorConfig, 'useWebpack') ? fabricatorConfig.useWebpack : true,
         paths: {
 			dest: {
 				fonts  : path.join(dst, 'assets/toolkit/fonts'),
