@@ -1,4 +1,4 @@
-[![GitHub release](https://img.shields.io/github/release/dietergeerts/fabricator-builder.svg)]()
+[![GitHub version](https://badge.fury.io/gh/dietergeerts%2Ffabricator-builder.svg)](https://badge.fury.io/gh/dietergeerts%2Ffabricator-builder)
 [![Build Status](https://travis-ci.org/dietergeerts/fabricator-builder.svg)](https://travis-ci.org/dietergeerts/fabricator-builder)
 [![Dependency Status](https://david-dm.org/dietergeerts/fabricator-builder.svg)](https://david-dm.org/dietergeerts/fabricator-builder)
 
