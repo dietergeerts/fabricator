@@ -8,7 +8,7 @@
     "requireArrowFunctions": null,
 
     "disallowCapitalizedComments": null,
-    "requireCapitalizedComments": {"allExcept": ["pragma"]},
+    "requireCapitalizedComments": null,
 
     "disallowCommaBeforeLineBreak": null,
     "requireCommaBeforeLineBreak": true,
