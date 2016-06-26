@@ -21,7 +21,7 @@ module.exports = function (config) {
 		return gulp.src(config.fabricator.paths.styles)
 			.pipe(sourcemaps.init())
 			.pipe(sass().on('error', sass.logError))
-			.pipe(prefix({browsers: ['last 2 versions']}))
+			.pipe(prefix('last 1 version'))
 			.pipe(gulpif(!config.fabricator.dev, csso()))
 			.pipe(concat('fabricator.css'))
 			.pipe(sourcemaps.write())

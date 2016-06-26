@@ -34,7 +34,7 @@ module.exports = function (config) {
 				.pipe(sourcemaps.init())
 				.pipe(replace({patterns: [{json: styleReplacements}], usePrefix: false}))
 				.pipe(sass().on('error', sass.logError))
-                .pipe(prefix({browsers: ['last 2 versions']}))
+				.pipe(prefix('last 1 version'))
 				.pipe(gulpif(!config.fabricator.dev, csso()))
 				.pipe(concat(namedSrc[0] + '.css'))
 				.pipe(sourcemaps.write())
