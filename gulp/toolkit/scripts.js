@@ -5,6 +5,8 @@ var del    = require('del');
 var gulp   = require('gulp');
 var jscs   = require('gulp-jscs');
 var jshint = require('gulp-jshint');
+var merge  = require('merge2');
+var uglify = require('gulp-uglify');
 
 module.exports = function (config, webpack) {
 
@@ -25,8 +27,19 @@ module.exports = function (config, webpack) {
     };
 
     tasks.run = function (callback) {
-		return webpack.compile(webpack.toolkit)(callback);
+        if (config.toolkit.useWebpack) {
+		    return webpack.compile(webpack.toolkit)(callback);
+        } else {
+            return merge(_(config.toolkit.paths.scripts).pairs().map(createScriptStream).value());
+        }
 	};
 
 	return tasks;
+
+    function createScriptStream(namedSrc) {
+        return gulp.src(namedSrc[1])
+            .pipe(concat(namedSrc[0] + '.js'))
+            .pipe(gulpif(!config.fabricator.dev, uglify()))
+            .pipe(gulp.dest(config.toolkit.paths.dest.scripts));
+    }
 };

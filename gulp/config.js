@@ -37,7 +37,8 @@ module.exports = function (fabricatorConfig, dev) {
 	};
 
 	config.toolkit = {
-		paths: {
+        useWebpack: fabricatorConfig.useWebpack,
+        paths: {
 			dest: {
 				fonts  : path.join(dst, 'assets/toolkit/fonts'),
 				images : path.join(dst, 'assets/toolkit/images'),
