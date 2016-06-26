@@ -64,7 +64,7 @@
     "disallowParenthesesAroundArrowParam": null,
     "requireParenthesesAroundArrowParam": null,
 
-    "disallowQuotedKeysInObjects": true,
+    "disallowQuotedKeysInObjects": null,
     "requireQuotedKeysInObjects": null,
 
     "disallowSemicolons": null,
