@@ -55,7 +55,7 @@
     "disallowPaddingNewLinesBeforeLineComments": null,
     "requirePaddingNewLinesBeforeLineComments": {"allExcept": "firstAfterCurly"},
 
-    "disallowPaddingNewlinesInBlocks": true,
+    "disallowPaddingNewlinesInBlocks": null,
     "requirePaddingNewlinesInBlocks": null,
 
     "disallowPaddingNewLinesInObjects": null,
@@ -176,7 +176,7 @@
     "disallowNotOperatorsInConditionals": null,
     "disallowSpaceBeforeSemicolon": true,
     "disallowTabs": true,
-    "disallowTrailingWhitespace": true,
+    "disallowTrailingWhitespace": null,
     "disallowUnusedParams": null,
     "disallowVar": null,
     "jsDoc": null,
@@ -202,7 +202,7 @@
     "requireSpread": null,
     "requireTemplateStrings": null,
     "requireVarDeclFirst": null,
-    "safeContextKeyword": ["vm"],
+    "safeContextKeyword": ["vm", "$ctrl"],
     "validateAlignedFunctionParameters": null,
     "validateCommentPosition": null,
     "validateIndentation": 4,
@@ -210,5 +210,5 @@
     "validateNewlineAfterArrayElements": true,
     "validateOrderInObjectKeys": null,
     "validateParameterSeparator": ", ",
-    "validateQuoteMarks": "'"
+    "validateQuoteMarks": false
 }

@@ -27,8 +27,10 @@
     "debug"        : false,
     "eqnull"       : true,
     "evil"         : false,
-    "expr"         : false,
+    "expr"         : true,
     "lastsemic"    : false,
+    "laxbreak"     : true,
+    "laxcomma"     : true,
     "loopfunc"     : true,
     "moz"          : false,
     "noyield"      : false,
@@ -48,6 +50,7 @@
         "angular"  : false,
         "assert"   : false,
         "inject"   : false,
-        "sinon"    : false
+        "sinon"    : false,
+        "_"        : false
     }
 }

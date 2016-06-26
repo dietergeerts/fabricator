@@ -21,7 +21,7 @@ module.exports = function (config, webpackConfig) {
 
     tasks.analyze = function () {
         return gulp.src(config.toolkit.paths.analyze)
-            .pipe(jscs({configPath: config.toolkit.paths.jscsrc || config.fabricator.paths.jscsrc, fix: true}))
+            .pipe(jscs({configPath: config.toolkit.paths.jscsrc || config.fabricator.paths.jscsrc}))
             .pipe(jscs.reporter())
             .pipe(jscs.reporter('fail')) // Fail on warnings and errors >> add ignores in code if necessary!
             .pipe(jshint(config.toolkit.paths.jshintrc || config.fabricator.paths.jshintrc))
