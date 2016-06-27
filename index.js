@@ -19,7 +19,7 @@ module.exports = function (fabricatorConfig, dev) {
 
 	gulp.task('f:assets', ['f:assets:fabricator', 'f:assets:toolkit']);
 	gulp.task('f:assets:fabricator', ['f:fabricator:scripts', 'f:fabricator:styles', 'f:fabricator:samples']);
-	gulp.task('f:assets:toolkit', ['f:toolkit:analyze', 'f:toolkit:scripts', 'f:toolkit:styles', 'f:toolkit:fonts']);
+	gulp.task('f:assets:toolkit', ['f:toolkit:analyze', 'f:toolkit:scripts', 'f:toolkit:styles', 'f:toolkit:fonts', 'f:toolkit:images']);
 
 	gulp.task('f:fabricator:favicon', getFabricatorTask('favicon').run);
 	gulp.task('f:fabricator:scripts', ['f:fabricator:scripts:clean', 'f:fabricator:scripts:analyze'], getFabricatorTask('scripts').run);
