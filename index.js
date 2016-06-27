@@ -67,7 +67,7 @@ module.exports = function (fabricatorConfig, dev) {
             .on('change', webpackConfig.cleanCache(webpackConfig.fabricator));
 		gulp.watch(config.fabricator.paths.styles, ['f:fabricator:styles:changed']);
 		gulp.watch(config.fabricator.paths.samples, ['f:fabricator:samples:changed']);
-        gulp.watch(_(config.toolkit.paths.analyze).values().flatten().uniq().value(), ['f:toolkit:analyze:changed']);
+        gulp.watch(config.toolkit.paths.analyze, ['f:toolkit:analyze:changed']);
 		gulp.watch(_(config.toolkit.paths.scripts).values().flatten().uniq().value(), ['f:toolkit:scripts:changed'])
             .on('change', webpackConfig.cleanCache(webpackConfig.toolkit));
 		gulp.watch(_(config.toolkit.paths.styles).values().flatten().uniq().value(), ['f:toolkit:styles:changed']);

@@ -1,8 +1,8 @@
 {
   "colors": {
     "primary": {
-      "Dark" : "#1E1E1E",
-      "Light": "#F2F2F2"
+      "$dark" : "#1E1E1E",
+      "$light": "#F2F2F2"
     },
     "secondary": {
       "Red"   : "#C93706",

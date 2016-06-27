@@ -2,6 +2,11 @@
  * Toolkit styles
  */
 
+/* $dark */
+
+@import "includes/variables";
+@import "includes/include";
+
 body {
 	font-family: sans-serif;
 }
