@@ -1,6 +1,6 @@
 {
   "name": "fabricator-builder",
-  "version": "3.2.3",
+  "version": "3.2.2",
   "description": "A tool for building website UI toolkits",
   "homepage": "https://github.com/dietergeerts/fabricator-builder",
   "main": "./index.js",
@@ -36,7 +36,7 @@
     "babel-preset-stage-2": "6.5.0",
     "browser-sync": "2.13.0",
     "del": "2.2.1",
-    "fabricator-assemble": "dietergeerts/fabricator-assemble.git#bugfix/combine-grouping-and-ordering",
+    "fabricator-assemble": "1.1.12",
     "gulp": "3.9.1",
     "gulp-autoprefixer": "2.2.0",
     "gulp-concat": "2.6.0",
