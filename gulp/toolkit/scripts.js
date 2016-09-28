@@ -23,10 +23,12 @@ module.exports = function (config, webpackConfig) {
         return gulp.src(config.toolkit.paths.analyze)
             .pipe(jscs({configPath: config.toolkit.paths.jscsrc || config.fabricator.paths.jscsrc}))
             .pipe(jscs.reporter())
-            .pipe(jscs.reporter('fail')) // Fail on warnings and errors >> add ignores in code if necessary!
+            // Fail on warnings and errors >> add ignores in code if necessary!
+            .pipe(gulpif(!config.fabricator.dev, jscs.reporter('fail')))
             .pipe(jshint(config.toolkit.paths.jshintrc || config.fabricator.paths.jshintrc))
             .pipe(jshint.reporter('jshint-practical'))
-            .pipe(jshint.reporter('fail')); // Fail on warnings and errors >> add ignores in code if necessary!
+            // Fail on warnings and errors >> add ignores in code if necessary!
+            .pipe(gulpif(!config.fabricator.dev, jshint.reporter('fail')));
     };
 
     tasks.run = function () {

@@ -9,7 +9,9 @@
     "start": "gulp --dev",
     "prebuild": "npm install",
     "build": "gulp",
-    "test": "npm run build"
+    "test": "npm run build",
+    "preversion": "npm run test",
+    "postversion": "git push && git push --tags"
   },
   "keywords": [
     "toolkit",
