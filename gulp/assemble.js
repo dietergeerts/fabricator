@@ -1,7 +1,8 @@
 'use strict';
 
+var _        = require('lodash');
 var assemble = require('fabricator-assemble');
-var helpers  = require('handlebars-helpers');
+var helpers  = flattenHelpers(require('handlebars-helpers/lib/'));
 
 module.exports = function (config) {
 
@@ -31,5 +32,18 @@ module.exports = function (config) {
 		callback();
 	};
 
-	return tasks;
+    return tasks;
 };
+
+function flattenHelpers(helpers) {
+    return _(helpers)
+        .toPairs()
+        .map(function (helperGroup) {
+            return _(helperGroup[1])
+                .toPairs()
+                .value();
+        })
+        .flatten()
+        .fromPairs()
+        .value();
+}
