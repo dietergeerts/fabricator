@@ -1,6 +1,7 @@
 'use strict';
 
 var assemble = require('fabricator-assemble');
+var helpers  = require('handlebars-helpers');
 
 module.exports = function (config) {
 
@@ -23,7 +24,8 @@ module.exports = function (config) {
 			views         : config.composeGlob(
 				config.fabricator.paths.views,
 				config.fabricator.paths.templates
-			)
+			),
+            helpers: helpers
 		});
 
 		callback();
