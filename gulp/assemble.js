@@ -2,7 +2,7 @@
 
 var _        = require('lodash');
 var assemble = require('fabricator-assemble');
-var helpers  = flattenHelpers(require('handlebars-helpers/lib/'));
+var helpers  = prepareHelpers(require('handlebars-helpers/lib/'));
 
 module.exports = function (config) {
 
@@ -35,7 +35,7 @@ module.exports = function (config) {
     return tasks;
 };
 
-function flattenHelpers(helpers) {
+function prepareHelpers(helpers) {
     return _(helpers)
         .toPairs()
         .map(function (helperGroup) {
@@ -45,5 +45,8 @@ function flattenHelpers(helpers) {
         })
         .flatten()
         .fromPairs()
+        .mapKeys(function (value, key) {
+            return 'hh' + _.upperFirst(key);
+        })
         .value();
 }
