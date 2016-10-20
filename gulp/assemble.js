@@ -4,7 +4,6 @@ var _          = require('lodash');
 var assemble   = require('fabricator-assemble');
 var handlebars = require('handlebars');
 var hhelpers   = require('handlebars-helpers/lib/');
-var path       = require('path');
 
 module.exports = function (config, iconCache) {
 
