@@ -12,11 +12,4 @@ icons: [
 ]
 ---
 
-{{#icons}}
-  <span>
-    <svg>
-      <use xlink:href="./{{baseurl}}/assets/toolkit/icons/icons.svg#{{.}}"/>
-    </svg>
-    {{.}}
-  </span>
-{{/icons}}
+{{#icons}}<span>{{svgIcon .}}{{.}}</span>{{/icons}}

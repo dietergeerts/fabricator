@@ -1,11 +1,11 @@
 'use strict';
 
 var del      = require('del');
+var foreach  = require('gulp-each');
 var gulp     = require('gulp');
-var svgStore = require('gulp-svgstore');
 var svgMin   = require('gulp-svgmin');
 
-module.exports = function (config) {
+module.exports = function (config, iconCache) {
 
     var tasks = {};
 
@@ -16,9 +16,14 @@ module.exports = function (config) {
     tasks.run = function () {
         return gulp.src(config.toolkit.paths.icons)
             .pipe(svgMin())
-            .pipe(svgStore({inlineSvg: true}))
+            .pipe(foreach(storeInIconCache))
             .pipe(gulp.dest(config.toolkit.paths.dest.icons));
     };
 
     return tasks;
+
+    function storeInIconCache(content, file, callback) {
+        iconCache[file.path.substring(file.base.length, file.path.length - 4)] = content;
+        callback(null, content);
+    }
 };

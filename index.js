@@ -15,7 +15,7 @@ module.exports = function (fabricatorConfig, dev) {
 		}
 	});
 
-	gulp.task('f:assemble', ['f:toolkitConfig:generate'], getTask('assemble').run);
+	gulp.task('f:assemble', ['f:toolkitConfig:generate', 'f:toolkit:icons'], getTask('assemble').run);
 
 	gulp.task('f:assets', ['f:assets:fabricator', 'f:assets:toolkit']);
 	gulp.task('f:assets:fabricator', ['f:fabricator:scripts', 'f:fabricator:styles', 'f:fabricator:samples']);
@@ -61,7 +61,7 @@ module.exports = function (fabricatorConfig, dev) {
         gulp.task('f:toolkit:scripts:changed', ['f:toolkit:scripts'], browserSync.reload);
 		gulp.task('f:toolkit:styles:changed', ['f:toolkit:styles'], browserSync.reload);
 		gulp.task('f:toolkit:fonts:changed', ['f:toolkit:fonts'], browserSync.reload);
-		gulp.task('f:toolkit:icons:changed', ['f:toolkit:icons'], browserSync.reload);
+		gulp.task('f:toolkit:icons:changed', ['f:toolkit:icons', 'f:assemble'], browserSync.reload);
 		gulp.task('f:toolkit:images:changed', ['f:toolkit:images'], browserSync.reload);
 		gulp.task('f:toolkitConfig:changed', ['f:toolkit:styles', 'f:assemble'], browserSync.reload);
 
