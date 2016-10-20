@@ -15,7 +15,7 @@ module.exports = function (config, webpackConfig) {
 	};
 
     tasks.analyze = function () {
-        return gulp.src(config.fabricator.paths.scripts)
+        return gulp.src(config.fabricator.paths.analyze)
             .pipe(jscs({configPath: config.fabricator.paths.jscsrc, fix: true}))
             .pipe(jscs.reporter())
             .pipe(jscs.reporter('fail')) // Fail on warnings and errors >> add ignores in code if necessary!

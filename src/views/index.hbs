@@ -33,3 +33,31 @@ documentation: true
     </code></pre>
   </div>
 </div>
+<div class="f-item-group">
+  <div class="f-item-heading-group">
+    <div class="f-item-heading">Svg icons usage</div>
+  </div>
+  <div class="f-item-notes">
+    <p>
+      Svg icons from the <code>`icons`</code> folder will be packed together into one <code>`icons.svg`</code> file.
+      This can then be used like the example below.<br/><br/>
+      <em>
+        (Using the icons externally will not work in IE. You can use
+        <a href="https://www.npmjs.com/package/svg4everybody">svg4everybody</a> to overcome this.)
+      </em>
+    </p>
+  </div>
+  <div class="f-item-code">
+    <pre><code class="language-markup">
+      &lt;!--When the icons.svg is added inline into the html page.--&gt;
+      &lt;svg&gt;
+        &lt;use xlink:href=&quot;#id&quot;/script&gt;
+      &lt;/svg&gt;
+
+      &lt;!--When not inlining the icons.svg file, so using it externally.--&gt;
+      &lt;svg&gt;
+        &lt;use xlink:href=&quot;path/to/toolkit/icons/icons.svg#id&quot;/script&gt;
+      &lt;/svg&gt;
+    </code></pre>
+  </div>
+</div>

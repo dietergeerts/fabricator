@@ -1,0 +1,22 @@
+---
+notes: |
+  All svg icons used in the application.
+
+icons: [
+  add,
+  check,
+  delete,
+  edit,
+  link,
+  more
+]
+---
+
+{{#icons}}
+  <span>
+    <svg>
+      <use xlink:href="./{{baseurl}}/assets/toolkit/icons/icons.svg#{{.}}"/>
+    </svg>
+    {{.}}
+  </span>
+{{/icons}}
