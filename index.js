@@ -15,11 +15,11 @@ module.exports = function (fabricatorConfig, dev) {
 		}
 	});
 
-	gulp.task('f:assemble', ['f:toolkitConfig:generate'], getTask('assemble').run);
+	gulp.task('f:assemble', ['f:toolkitConfig:generate', 'f:toolkit:icons'], getTask('assemble').run);
 
 	gulp.task('f:assets', ['f:assets:fabricator', 'f:assets:toolkit']);
 	gulp.task('f:assets:fabricator', ['f:fabricator:scripts', 'f:fabricator:styles', 'f:fabricator:samples']);
-	gulp.task('f:assets:toolkit', ['f:toolkit:analyze', 'f:toolkit:scripts', 'f:toolkit:styles', 'f:toolkit:fonts', 'f:toolkit:images']);
+	gulp.task('f:assets:toolkit', ['f:toolkit:analyze', 'f:toolkit:scripts', 'f:toolkit:styles', 'f:toolkit:fonts', 'f:toolkit:icons', 'f:toolkit:images']);
 
 	gulp.task('f:fabricator:favicon', getFabricatorTask('favicon').run);
 	gulp.task('f:fabricator:scripts', ['f:fabricator:scripts:clean', 'f:fabricator:scripts:analyze'], getFabricatorTask('scripts').run);
@@ -37,6 +37,8 @@ module.exports = function (fabricatorConfig, dev) {
 	gulp.task('f:toolkit:styles:clean', getToolkitTask('styles').clean);
 	gulp.task('f:toolkit:fonts', ['f:toolkit:fonts:clean'], getToolkitTask('fonts').run);
 	gulp.task('f:toolkit:fonts:clean', getToolkitTask('fonts').clean);
+    gulp.task('f:toolkit:icons', ['f:toolkit:icons:clean'], getToolkitTask('icons').run);
+    gulp.task('f:toolkit:icons:clean', getToolkitTask('icons').clean);
 	gulp.task('f:toolkit:images', ['f:toolkit:images:clean'], getToolkitTask('images').run);
 	gulp.task('f:toolkit:images:clean', getToolkitTask('images').clean);
 
@@ -59,6 +61,7 @@ module.exports = function (fabricatorConfig, dev) {
         gulp.task('f:toolkit:scripts:changed', ['f:toolkit:scripts'], browserSync.reload);
 		gulp.task('f:toolkit:styles:changed', ['f:toolkit:styles'], browserSync.reload);
 		gulp.task('f:toolkit:fonts:changed', ['f:toolkit:fonts'], browserSync.reload);
+		gulp.task('f:toolkit:icons:changed', ['f:toolkit:icons', 'f:assemble'], browserSync.reload);
 		gulp.task('f:toolkit:images:changed', ['f:toolkit:images'], browserSync.reload);
 		gulp.task('f:toolkitConfig:changed', ['f:toolkit:styles', 'f:assemble'], browserSync.reload);
 
@@ -72,6 +75,7 @@ module.exports = function (fabricatorConfig, dev) {
             .on('change', webpackConfig.cleanCache(webpackConfig.toolkit));
 		gulp.watch(_(config.toolkit.paths.styles).values().flatten().uniq().value(), ['f:toolkit:styles:changed']);
 		gulp.watch(config.toolkit.paths.fonts, ['f:toolkit:fonts:changed']);
+		gulp.watch(config.toolkit.paths.icons, ['f:toolkit:icons:changed']);
 		gulp.watch(config.toolkit.paths.images, ['f:toolkit:images:changed']);
 		gulp.watch(config.toolkit.paths.toolkitConfig, ['f:toolkitConfig:changed']);
 
@@ -86,7 +90,7 @@ module.exports = function (fabricatorConfig, dev) {
 			]).flatten().value();
 		}
 	});
-    
+
     gulp.start('f:default'); // gulp.start = push to tasks queue.
 
 	function getTask(name) {

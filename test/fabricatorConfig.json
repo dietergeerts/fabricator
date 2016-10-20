@@ -10,8 +10,9 @@
   "scripts"  : {
     "toolkit": "./test/assets/prepared/toolkit.js"
   },
-  "fonts"    : "./test/assets/toolkit/fonts/**/*",
-  "images"   : "./test/assets/toolkit/images/**/*",
+  "fonts"    : "./test/assets/fonts/**/*",
+  "icons"    : "./test/assets/icons/**/*",
+  "images"   : "./test/assets/images/**/*",
   "styles"   : {
     "toolkit": "./test/assets/styles/*.scss"
   },

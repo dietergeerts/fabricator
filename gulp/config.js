@@ -28,7 +28,8 @@ module.exports = function (fabricatorConfig, dev) {
 			materials    : fabricatorConfig.materials,
 			package      : fabricatorConfig.package,
 			samples      : fabricatorConfig.samples,
-			scripts      : toFabricatorPath('./src/assets/scripts/fabricator.js'),
+            analyze      : toFabricatorPath('./src/assets/scripts/fabricator.js'),
+            scripts      : toFabricatorPath('./src/assets/scripts/fabricator.js'),
 			styles       : toFabricatorPath('./src/assets/styles/**/*.scss'),
 			templates    : fabricatorConfig.templates,
 			toolkitConfig: toFabricatorPath('./toolkitConfig.json'),
@@ -42,11 +43,13 @@ module.exports = function (fabricatorConfig, dev) {
             analyze: fabricatorConfig.analyze,
 			dest   : {
 				fonts  : path.join(dst, 'assets/toolkit/fonts'),
+				icons  : path.join(dst, 'assets/toolkit/icons'),
 				images : path.join(dst, 'assets/toolkit/images'),
 				scripts: path.join(dst, 'assets/toolkit/scripts'),
 				styles : path.join(dst, 'assets/toolkit/styles')
 			},
 			fonts        : fabricatorConfig.fonts,
+			icons        : fabricatorConfig.icons,
 			images       : fabricatorConfig.images,
             jscsrc       : fabricatorConfig.jscsrc,
             jshintrc     : fabricatorConfig.jshintrc,
