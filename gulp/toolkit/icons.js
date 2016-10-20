@@ -2,7 +2,6 @@
 
 var del      = require('del');
 var gulp     = require('gulp');
-var rename   = require('gulp-rename');
 var svgStore = require('gulp-svgstore');
 var svgMin   = require('gulp-svgmin');
 
