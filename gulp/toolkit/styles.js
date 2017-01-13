@@ -4,10 +4,12 @@ var _          = require('lodash');
 var concat     = require('gulp-concat');
 var csso       = require('gulp-csso');
 var del        = require('del');
+var flexFixes  = require('postcss-flexbugs-fixes');
 var gulp       = require('gulp');
 var gulpif     = require('gulp-if');
 var merge      = require('merge2');
 var path       = require('path');
+var postCss    = require('gulp-postcss');
 var prefix     = require('gulp-autoprefixer');
 var replace    = require('gulp-replace-task');
 var sass       = require('gulp-sass');
@@ -34,6 +36,7 @@ module.exports = function (config) {
 				.pipe(sourcemaps.init())
 				.pipe(replace({patterns: [{json: styleReplacements}], usePrefix: false}))
 				.pipe(sass().on('error', sass.logError))
+                .pipe(postCss([flexFixes]))
 				.pipe(prefix('last 1 version'))
 				.pipe(gulpif(!config.fabricator.dev, csso()))
 				.pipe(concat(namedSrc[0] + '.css'))
