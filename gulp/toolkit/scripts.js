@@ -23,8 +23,8 @@ module.exports = function (config, webpackConfig) {
 
     tasks.analyze = function () {
 
-        const jsFilter = filter('*.js', {restore: true});
-        const tsFilter = filter('*.ts', {restore: true});
+        var jsFilter = filter('*.js', {restore: true});
+        var tsFilter = filter('*.ts', {restore: true});
 
         return gulp.src(config.toolkit.paths.analyze)
             .pipe(jsFilter)
