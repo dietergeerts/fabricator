@@ -16,5 +16,9 @@
   "styles"   : {
     "toolkit": "./test/assets/styles/*.scss"
   },
-  "toolkitConfig": "./test/toolkitConfig.json"
+  "toolkitConfig": "./test/toolkitConfig.json",
+  "typescript": {
+    "dest": "./test/lib",
+    "comp": "./test/assets/scripts/typescript/**/*.ts"
+  }
 }

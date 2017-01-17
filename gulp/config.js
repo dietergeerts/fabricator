@@ -47,7 +47,8 @@ module.exports = function (fabricatorConfig, dev) {
 				icons  : path.join(dst, 'assets/toolkit/icons'),
 				images : path.join(dst, 'assets/toolkit/images'),
 				scripts: path.join(dst, 'assets/toolkit/scripts'),
-				styles : path.join(dst, 'assets/toolkit/styles')
+				styles : path.join(dst, 'assets/toolkit/styles'),
+                ts     : _.get(fabricatorConfig, 'typescript.dest', '')
 			},
 			fonts        : fabricatorConfig.fonts,
 			icons        : fabricatorConfig.icons,
@@ -57,6 +58,7 @@ module.exports = function (fabricatorConfig, dev) {
 			scripts      : fabricatorConfig.scripts,
 			styles       : fabricatorConfig.styles,
 			toolkitConfig: fabricatorConfig.toolkitConfig,
+            ts           : _.get(fabricatorConfig, 'typescript.comp', ''),
             tslint       : fabricatorConfig.tslint
 		}
 	};

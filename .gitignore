@@ -51,3 +51,4 @@ jspm_packages
 /toolkitConfig.json
 /test/dest/
 /test/assets/prepared/
+/test/lib/

@@ -12,7 +12,9 @@ module.exports = function (fabricatorConfig, dev) {
 	gulp.task('f:default', ['f:assemble', 'f:assets', 'f:fabricator:favicon'], function () {
         if (config.fabricator.dev) {
 			gulp.start('serve'); // gulp.start = push to tasks queue.
-		}
+		} else if (fabricatorConfig.typescript) {
+            gulp.start('f:toolkit:ts'); // For generating the libs to consume ts in other modules.
+        }
 	});
 
 	gulp.task('f:assemble', ['f:toolkitConfig:generate', 'f:toolkit:icons'], getTask('assemble').run);
@@ -44,6 +46,9 @@ module.exports = function (fabricatorConfig, dev) {
 
 	gulp.task('f:toolkitConfig:generate', ['f:toolkitConfig:clearCache'], getTask('toolkitConfig').generate);
 	gulp.task('f:toolkitConfig:clearCache', getTask('toolkitConfig').clearCache);
+
+	gulp.task('f:toolkit:ts:clean', getToolkitTask('ts').clean);
+	gulp.task('f:toolkit:ts', ['f:toolkit:ts:clean'], getToolkitTask('ts').run);
 
 	gulp.task('serve', function () {
 
