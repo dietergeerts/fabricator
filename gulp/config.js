@@ -33,6 +33,7 @@ module.exports = function (fabricatorConfig, dev) {
 			styles       : toFabricatorPath('./src/assets/styles/**/*.scss'),
 			templates    : fabricatorConfig.templates,
 			toolkitConfig: toFabricatorPath('./toolkitConfig.json'),
+            tslint       : toFabricatorPath('./tslint.json'),
 			views        : toFabricatorPath("./src/views/**/*")
 		}
 	};
@@ -55,7 +56,8 @@ module.exports = function (fabricatorConfig, dev) {
             jshintrc     : fabricatorConfig.jshintrc,
 			scripts      : fabricatorConfig.scripts,
 			styles       : fabricatorConfig.styles,
-			toolkitConfig: fabricatorConfig.toolkitConfig
+			toolkitConfig: fabricatorConfig.toolkitConfig,
+            tslint       : fabricatorConfig.tslint
 		}
 	};
 

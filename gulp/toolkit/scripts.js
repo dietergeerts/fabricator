@@ -3,11 +3,13 @@
 var _       = require('lodash');
 var concat  = require('gulp-concat');
 var del     = require('del');
+var filter  = require('gulp-filter');
 var gulp    = require('gulp');
 var gulpif  = require('gulp-if');
 var jscs    = require('gulp-jscs');
 var jshint  = require('gulp-jshint');
 var merge   = require('merge2');
+var tslint  = require('gulp-tslint');
 var uglify  = require('gulp-uglify');
 var webpack = require('webpack-stream');
 
@@ -20,7 +22,12 @@ module.exports = function (config, webpackConfig) {
 	};
 
     tasks.analyze = function () {
+
+        const jsFilter = filter('*.js', {restore: true});
+        const tsFilter = filter('*.ts', {restore: true});
+
         return gulp.src(config.toolkit.paths.analyze)
+            .pipe(jsFilter)
             .pipe(jscs({configPath: config.toolkit.paths.jscsrc || config.fabricator.paths.jscsrc}))
             .pipe(jscs.reporter())
             // Fail on warnings and errors >> add ignores in code if necessary!
@@ -28,7 +35,13 @@ module.exports = function (config, webpackConfig) {
             .pipe(jshint(config.toolkit.paths.jshintrc || config.fabricator.paths.jshintrc))
             .pipe(jshint.reporter('jshint-practical'))
             // Fail on warnings and errors >> add ignores in code if necessary!
-            .pipe(gulpif(!config.fabricator.dev, jshint.reporter('fail')));
+            .pipe(gulpif(!config.fabricator.dev, jshint.reporter('fail')))
+            .pipe(jsFilter.restore)
+            .pipe(tsFilter)
+            .pipe(tslint({configuration: config.toolkit.paths.tslint || config.fabricator.paths.tslint}))
+            // Fail on warnings and errors >> add ignores in code if necessary!
+            .pipe(tslint.report({emitError: !config.fabricator.dev}))
+            .pipe(tsFilter.restore);
     };
 
     tasks.run = function () {

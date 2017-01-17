@@ -11,11 +11,18 @@ var defaults = {
 		exclude: /(node_modules|prism\.js)/,
 		loaders: ['babel'],
 		presets: ['es2015', 'stage-2']
+	}, {
+		test: /\.ts$/,
+		exclude: /(node_modules)/,
+		loaders: ['ts-loader']
 	}]},
     resolveLoader: {
         root: path.join(__dirname, '..', 'node_modules')
     },
-	plugins: [],
+    resolve: {
+        extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+    },
+    plugins: [],
 	cache: {}
 };
 
@@ -34,7 +41,8 @@ module.exports = function (config) {
 
 	webpackConfig.toolkit = _.defaultsDeep({
 		entry: config.toolkit.paths.scripts,
-		output: {path: path.resolve(config.toolkit.paths.dest.scripts)}
+		output: {path: path.resolve(config.toolkit.paths.dest.scripts)},
+        ts: {transpileOnly: config.fabricator.dev}
 	}, defaults);
 
 	// Because webpackCompiler.watch() isn't being used, so
