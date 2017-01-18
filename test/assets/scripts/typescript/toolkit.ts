@@ -1,3 +1,3 @@
-import { Controller } from './other';
+import { Controller } from "./other";
 
 let controller = new Controller();

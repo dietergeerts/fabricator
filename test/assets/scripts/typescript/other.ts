@@ -1,3 +1,3 @@
 export class Controller {
-    test: string = 'test';
+    public test: string = "test";
 }
