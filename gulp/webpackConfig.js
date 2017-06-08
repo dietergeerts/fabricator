@@ -10,7 +10,7 @@ var defaults = {
 		test: /\.js$/,
 		exclude: /(node_modules|prism\.js)/,
 		loaders: ['babel'],
-		presets: ['es2015', 'stage-2']
+		presets: ['env']
 	}, {
 		test: /\.ts$/,
 		exclude: /(node_modules)/,
