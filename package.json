@@ -51,7 +51,7 @@
     "gulp-jshint": "2.0.1",
     "gulp-postcss": "6.2.0",
     "gulp-replace-task": "0.11.0",
-    "gulp-sass": "2.3.2",
+    "gulp-sass": "3.1.0",
     "gulp-sourcemaps": "1.6.0",
     "gulp-svgmin": "1.2.3",
     "gulp-tslint": "7.0.1",
