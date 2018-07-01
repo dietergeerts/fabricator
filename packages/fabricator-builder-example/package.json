@@ -1,0 +1,23 @@
+{
+  "name": "@fabricator/builder-example",
+  "version": "0.0.0",
+  "description": "Example on how to setup webpack for a Fabricator toolkit",
+  "author": "Dieter Geerts <dieter@dworks.be> (https://dietergeerts.github.io/)",
+  "license": "GPL-3.0",
+  "keywords": [
+    "toolkit",
+    "styleguide"
+  ],
+  "homepage": "https://github.com/dietergeerts/fabricator#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dietergeerts/fabricator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dietergeerts/fabricator/issues"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
