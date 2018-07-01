@@ -127,3 +127,7 @@ typings/
 ### Sass template
 .sass-cache/
 *.css.map
+
+### Custom globs
+# Build directories
+dist/
