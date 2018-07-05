@@ -6,6 +6,7 @@ const LOG_PREFIX = '[fabricator-builder]';
 
 /**
  * @typedef {Object} FabricatorBuilderOptions
+ * @property {string} sourcePackage - Package JSON, to extract name, version, ...
  * @property {string} sourceDirectory - Absolute path to toolkit source directory
  */
 
@@ -14,6 +15,13 @@ const LOG_PREFIX = '[fabricator-builder]';
  * @returns {Object}
  */
 module.exports = options => {
+  if (!options.sourcePackage) {
+    throw new Error(
+      `${LOG_PREFIX} the \`sourcePackage\` option is not set.`
+      + ` We need this to extract info like name and version.`,
+    );
+  }
+
   if (!path.isAbsolute(options.sourceDirectory)) {
     throw new Error(
       `${LOG_PREFIX} the \`sourceDirectory\` option needs to be an absolute path.`
@@ -57,6 +65,7 @@ module.exports = options => {
     },
     plugins: [
       new webpack.DefinePlugin({
+        __TOOLKIT_PKG__: JSON.stringify(options.sourcePackage),
         __TOOLKIT_SRC__: JSON.stringify(options.sourceDirectory),
       }),
       new HtmlWebpackPlugin(),
