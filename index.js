@@ -1,3 +1,4 @@
+import _find from 'lodash/fp/find';
 import _forEach from 'lodash/fp/forEach';
 import _zipWith from 'lodash/fp/zipWith';
 
@@ -36,6 +37,12 @@ iframe.style.boxSizing = 'border-box';
 iframe.style.gridArea = 'docs';
 root.appendChild(iframe);
 
+let selection = window.location.hash.slice(1);
+if (selection) {
+  const doc = _find({ filename: selection }, docs);
+  doc && (iframe.src = doc.doc);
+}
+
 const nav = document.createElement('nav');
 nav.style.gridArea = 'nav';
 _forEach((doc) => {
@@ -48,6 +55,8 @@ _forEach((doc) => {
   link.onclick = ($event) => {
     $event.preventDefault();
     iframe.src = doc.doc;
+    selection = doc.filename;
+    history.pushState(null, null, `#${doc.filename}`)
   };
   nav.appendChild(link);
 }, docs);
