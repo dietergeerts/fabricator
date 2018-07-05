@@ -1,5 +1,37 @@
 {
-	"devDependencies": {
-		"lerna": "^2.11.0"
-	}
+  "name": "fabricator-builder",
+  "version": "5.0.0-alpha",
+  "description": "A tool for building website UI toolkits",
+  "author": "Dieter Geerts <dieter@dworks.be> (https://dietergeerts.github.io/)",
+  "license": "GPL-3.0",
+  "keywords": [
+    "toolkit",
+    "styleguide"
+  ],
+  "homepage": "https://github.com/dietergeerts/fabricator#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dietergeerts/fabricator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dietergeerts/fabricator/issues"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "webpack": "^4.15.0"
+  },
+  "dependencies": {
+    "extract-loader": "^2.0.1",
+    "file-loader": "^1.1.11",
+    "highlight.js": "^9.12.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "lodash": "^4.17.10",
+    "markdown-it": "^8.4.1",
+    "markdown-it-loader": "^0.7.0",
+    "webpack": "^4.15.0"
+  }
 }

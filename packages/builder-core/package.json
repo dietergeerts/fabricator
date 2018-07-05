@@ -20,6 +20,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "peerDependencies": {
+    "babel-loader": "^7.1.4"
+  },
   "dependencies": {
     "lodash": "^4.17.10"
   }

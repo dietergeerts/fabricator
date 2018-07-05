@@ -1,4 +1,5 @@
-const _forEach = require('lodash/fp/forEach');
+import _forEach from 'lodash/fp/forEach';
+import './index.css';
 
 /**
  * @returns {HTMLElement}
@@ -57,7 +58,7 @@ const createNav = (storyNavs, onclick) => {
  * @param {Array<FabricatorBuilderStoryNav>} storyNavs
  * @returns {HTMLElement}
  */
-module.exports = function fabricatorTheme(storyNavs) {
+export function fabricatorTheme(storyNavs) {
   console.log('[@fabricator/builder-theme-default] Building theme...');
   console.log('[@fabricator/builder-theme-default] Theme built');
   const root = createRoot();
@@ -71,4 +72,4 @@ module.exports = function fabricatorTheme(storyNavs) {
   root.appendChild(nav);
   root.appendChild(iframe);
   return root;
-};
+}

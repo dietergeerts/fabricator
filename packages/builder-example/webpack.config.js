@@ -1,3 +1,6 @@
+const fabricatorBuilderCoreConfig = require('@fabricator/builder-core/webpack.config');
+const fabricatorBuilderThemeDefaultConfig = require('@fabricator/builder-theme-default/webpack.config');
+const webpackMerge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // When using html to write your docs/previews, these loaders can be used,
@@ -18,13 +21,17 @@ const docsAndPreviewsAsHtml = {
   ],
 };
 
-module.exports = {
-  module: {
-    rules: [
-      docsAndPreviewsAsHtml,
+module.exports = webpackMerge(
+  fabricatorBuilderCoreConfig,
+  fabricatorBuilderThemeDefaultConfig,
+  {
+    module: {
+      rules: [
+        docsAndPreviewsAsHtml,
+      ],
+    },
+    plugins: [
+      new HtmlWebpackPlugin(),
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin(),
-  ],
-};
+);

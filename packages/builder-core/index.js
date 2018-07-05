@@ -1,4 +1,4 @@
-const _map = require('lodash/fp/map');
+import _map from 'lodash/fp/map';
 
 /**
  * @typedef {Object} FabricatorBuilderOptions
@@ -24,12 +24,11 @@ const _map = require('lodash/fp/map');
  */
 const toStoryNavs = _map(story => ({ label: story.filename, href: story.story }));
 
-
 /**
  * @param {FabricatorBuilderOptions} options
  */
-module.exports = function fabricatorBuild(options) {
+export function fabricatorBuild(options) {
   console.log('[@fabricator/builder-core] Building toolkit...');
   document.body.appendChild(options.theme(toStoryNavs(options.stories)));
   console.log('[@fabricator/builder-core] Toolkit built');
-};
+}
