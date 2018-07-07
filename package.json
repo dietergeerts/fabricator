@@ -1,6 +1,6 @@
 {
   "name": "fabricator-builder",
-  "version": "5.0.0-alpha",
+  "version": "5.0.0-alpha.1",
   "description": "A tool for building website UI toolkits",
   "author": "Dieter Geerts <dieter@dworks.be> (https://dietergeerts.github.io/)",
   "license": "GPL-3.0",
@@ -21,17 +21,28 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
-    "webpack": "^4.15.0"
+    "webpack": "^4"
   },
   "dependencies": {
-    "extract-loader": "^2.0.1",
-    "file-loader": "^1.1.11",
-    "highlight.js": "^9.12.0",
-    "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.2.0",
-    "lodash": "^4.17.10",
-    "markdown-it": "^8.4.1",
-    "markdown-it-loader": "^0.7.0",
-    "webpack": "^4.15.0"
+    "css-loader": "1.0.0",
+    "extract-loader": "2.0.1",
+    "file-loader": "1.1.11",
+    "highlight.js": "9.12.0",
+    "html-loader": "0.5.5",
+    "html-webpack-plugin": "3.2.0",
+    "loader-utils": "1.1.0",
+    "lodash": "4.17.10",
+    "markdown-it": "8.4.1",
+    "markdown-it-custom-block": "0.1.1",
+    "markdown-it-loader": "0.7.0",
+    "spawn-loader": "6.0.0",
+    "vue": "2.5.16",
+    "vue-html-loader": "1.2.4",
+    "vue-loader": "15.2.4",
+    "vue-template-compiler": "2.5.16",
+    "webpack": "4.15.0"
+  },
+  "devDependencies": {
+    "debug-loader": "0.0.1"
   }
 }
