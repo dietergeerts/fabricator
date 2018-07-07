@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const markdownItCustomBlock = require('markdown-it-custom-block');
-const markdownItPrism = require('markdown-it-prism');
 
 const LOG_PREFIX = '[fabricator-builder]';
 
@@ -74,16 +73,24 @@ module.exports = options => {
 <head>
   <meta charset="UTF-8">
   <title><%= title %></title>
+  <link href="<%= styleDocs %>" rel="stylesheet">
+  <link href="<%= styleDocsContainer %>" rel="stylesheet">
   <link href="<%= styleCode %>" rel="stylesheet">
 </head>
-<body>
+<body class="markdown-body">
 <%= content %>
 </body>
 </html>
 `,
                 data: {
                   title: `${options.sourcePackage.name} v${options.sourcePackage.version}`,
-                  styleCode: path.resolve(__dirname, 'node_modules/prismjs/themes/prism.css'),
+                  // For now, I use the markdown styling, as that was the easiest to find,
+                  // and it's used for the same purpose as a toolkit: documentation.
+                  // Notice the `markdown-body` class, which is needed for the github css.
+                  // TODO: Make sure this is gotten in another way and embedded into a real theme.
+                  styleDocs: path.resolve(__dirname, 'node_modules/github-markdown-css/github-markdown.css'),
+                  styleDocsContainer: path.resolve(__dirname, './theme-docs.css'),
+                  styleCode: path.resolve(__dirname, 'node_modules/highlight.js/styles/github-gist.css'),
                 },
               },
             },
@@ -91,7 +98,6 @@ module.exports = options => {
               loader: 'fb-markdown-it-loader',
               options: {
                 use: [
-                  markdownItPrism,
                   [markdownItCustomBlock, {
                     'require': src => `<script src="${src}"></script>`,
                   }],
