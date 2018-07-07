@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const markdownItCustomBlock = require('markdown-it-custom-block');
+const markdownItPrism = require('markdown-it-prism');
 
 const LOG_PREFIX = '[fabricator-builder]';
 
@@ -53,14 +54,44 @@ module.exports = options => {
               loader: 'fb-html-loader',
               options: {
                 attrs: [
+                  'link:href',
                   'script:src',
                 ],
+              },
+            },
+            // To enable the use of user defined templates, it may be better to
+            // use the complex loader and one to load the template based on the
+            // given path, so that the template is also included as dependency.
+            // TODO: load template based on filename, for dependency inclusion.
+            // The complex loader can also be used to require assets like styles
+            // that then can be injected into the template....
+            {
+              loader: 'fb-wrapper-loader',
+              options: {
+                template: `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <link href="<%= styleCode %>" rel="stylesheet">
+</head>
+<body>
+<%= content %>
+</body>
+</html>
+`,
+                data: {
+                  title: `${options.sourcePackage.name} v${options.sourcePackage.version}`,
+                  styleCode: path.resolve(__dirname, 'node_modules/prismjs/themes/prism.css'),
+                },
               },
             },
             {
               loader: 'fb-markdown-it-loader',
               options: {
                 use: [
+                  markdownItPrism,
                   [markdownItCustomBlock, {
                     'require': src => `<script src="${src}"></script>`,
                   }],
@@ -103,6 +134,21 @@ module.exports = options => {
           issuer: /\.docs\.vue$/,
           loader: 'fb-vue-loader',
         },
+        // We include stylesheets as part of the default theme, in order to
+        // have some nice looking UI and documentation pages with code blocks.
+        // We define these inside the html templates being used, so we can
+        // just extract them with the file loader and be done.
+        {
+          test: /\.css$/,
+          include: path.resolve(__dirname),
+          use: [
+            { loader: 'fb-file-loader' },
+            // { loader: 'fb-css-loader' },
+            // TODO: Figure out how to combine css with file loader.
+            // For the moment, we use plain css files, so actually, there is no
+            // need to use the css loader here, though it may be useful later.
+          ],
+        },
       ],
     },
     resolve: {
@@ -116,6 +162,7 @@ module.exports = options => {
         // To make sure loaders aren't mixed from this and the consumer package
         // we'll have to use aliasing, and redirect these to our `node_modules`.
         [
+          'css-loader',
           'debug-loader',
           'extract-loader',
           'file-loader',
@@ -123,6 +170,7 @@ module.exports = options => {
           'markdown-it-loader',
           'spawn-loader',
           'vue-loader',
+          'wrapper-loader',
         ].reduce((alias, loader) => {
           alias[`fb-${loader}`] = path.resolve(__dirname, `node_modules/${loader}`);
           return alias;
