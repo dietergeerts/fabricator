@@ -139,13 +139,15 @@ module.exports = options => {
             // TODO: Create reproduction sample: https://github.com/vuejs/vue-loader/issues/1355
             {
               resourceQuery: /forInjection/,
-              loader: 'fb-vue-loader',
+              loader: 'vue-loader',
             },
-            // The vue loader will split up the request for the different parts,
-            // and thus this workaround is needed, to enable the normal working of it.
+            // Because the way the vue loader works, it's impossible to have separate rules in this
+            // builder and in the users' project. So we'll NEED to define vue, and it's loaders as
+            // peer dependencies, and let the user know the rules for vue will be defined here.
+            // Which imho isn't good, as rules for the resources of the user should be defined in
+            // the actual toolkit! (same applies to the runtime alias, as the user will use it too!)
             {
-              resourceQuery: /vue/,
-              loader: 'fb-vue-loader',
+              loader: 'vue-loader',
             },
           ],
         },
@@ -166,12 +168,6 @@ module.exports = options => {
         },
       ],
     },
-    resolve: {
-      alias: {
-        // Vue uses the runtime version by default, which we don't want.
-        'fb-vue': path.resolve(__dirname, 'node_modules/vue/dist/vue'),
-      },
-    },
     resolveLoader: {
       alias: Object.assign(
         // To make sure loaders aren't mixed from this and the consumer package
@@ -184,7 +180,6 @@ module.exports = options => {
           'html-loader',
           'markdown-it-loader',
           'spawn-loader',
-          'vue-loader',
           'wrapper-loader',
         ].reduce((alias, loader) => {
           alias[`fb-${loader}`] = path.resolve(__dirname, `node_modules/${loader}`);

@@ -21,6 +21,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
+    "vue": "^2",
+    "vue-html-loader": "^1",
+    "vue-loader": "^15",
+    "vue-template-compiler": "^2",
     "webpack": "^4"
   },
   "dependencies": {
@@ -37,10 +41,6 @@
     "markdown-it-custom-block": "0.1.1",
     "markdown-it-loader": "0.7.0",
     "spawn-loader": "6.0.0",
-    "vue": "2.5.16",
-    "vue-html-loader": "1.2.4",
-    "vue-loader": "15.2.4",
-    "vue-template-compiler": "2.5.16",
     "webpack": "4.15.0",
     "wrapper-loader": "1.0.1"
   },
