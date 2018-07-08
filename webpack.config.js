@@ -146,6 +146,7 @@ module.exports = options => {
             // peer dependencies, and let the user know the rules for vue will be defined here.
             // Which imho isn't good, as rules for the resources of the user should be defined in
             // the actual toolkit! (same applies to the runtime alias, as the user will use it too!)
+            // TODO: Document about the fact that an alias is needed for vue not be the runtime version.
             {
               loader: 'vue-loader',
             },
