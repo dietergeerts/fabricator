@@ -96,7 +96,7 @@ module.exports = options => {
                 use: [
                   [markdownItCustomBlock, {
                     'require': src => `<script src="${src}?forRequire"></script>`,
-                    'preview': src => `<iframe src="${src}?forPreview"></iframe>`,
+                    'preview': src => `<iframe src="${src}?forPreview" width="100%" height="300px"></iframe>`,
                   }],
                 ],
               },
