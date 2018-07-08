@@ -42,19 +42,15 @@ module.exports = options => {
           test: /\.docs\.md$/,
           include: options.sourceDirectory,
           use: [
-            {
-              loader: 'fb-file-loader',
-              options: {
-                name: '[name].[hash].html',
-              },
-            },
-            { loader: 'fb-extract-loader' },
+            'fb-file-loader?name=[name].[hash].html',
+            'fb-extract-loader',
             {
               loader: 'fb-html-loader',
               options: {
                 attrs: [
                   'link:href',
                   'script:src',
+                  'iframe:src',
                 ],
               },
             },
@@ -99,7 +95,8 @@ module.exports = options => {
               options: {
                 use: [
                   [markdownItCustomBlock, {
-                    'require': src => `<script src="${src}"></script>`,
+                    'require': src => `<script src="${src}?forRequire"></script>`,
+                    'preview': src => `<iframe src="${src}?forPreview"></iframe>`,
                   }],
                 ],
               },
@@ -114,31 +111,43 @@ module.exports = options => {
           include: path.resolve(__dirname),
           loader: 'vue-loader',
         },
-        // Feature to enable Vue docs injection into the markdown ones.
-        // Example use-case: auto-generate color maps based on sass-docs.
+        // Feature to enable Vue docs/previews injection into the markdown docs.
+        // Example use-case: auto-generate docs based on f.e. sassdocs, using
+        // previews with the source assets, ....
         {
-          test: /\.docs\.vue$/,
+          test: /\.vue$/,
           include: options.sourceDirectory,
-          issuer: /\.docs\.md$/,
-          use: [
+          oneOf: [
             {
-              loader: 'fb-spawn-loader',
-              options: {
-                name: '[name].[chunkhash].js',
-              },
+              resourceQuery: /forPreview/,
+              use: [
+                'fb-file-loader?name=[name].[hash].html',
+                'fb-extract-loader',
+                'fb-html-loader?attrs=script:src',
+                'fb-html-preview-vue-loader',
+              ],
             },
-            { loader: 'fb-html-inject-vue-loader' },
-            // { loader: 'fb-vue-loader' },
+            {
+              resourceQuery: /forRequire/,
+              use: [
+                'fb-spawn-loader?name=[name].[chunkhash].js',
+                'fb-html-inject-vue-loader',
+              ],
+            },
+            // This is a workaround to load the `(docs|preview).vue` files, as using
+            // the remainingRequest inside the pitch phase doesn't work for now.
+            // TODO: Create reproduction sample: https://github.com/vuejs/vue-loader/issues/1355
+            {
+              resourceQuery: /forInjection/,
+              loader: 'fb-vue-loader',
+            },
+            // The vue loader will split up the request for the different parts,
+            // and thus this workaround is needed, to enable the normal working of it.
+            {
+              resourceQuery: /vue/,
+              loader: 'fb-vue-loader',
+            },
           ],
-        },
-        // This is a workaround to load the `docs.vue` files, as using the
-        // remainingRequest inside the pitch phase doesn't work for now.
-        // TODO: Create reproduction sample: https://github.com/vuejs/vue-loader/issues/1355
-        {
-          test: /\.docs\.vue$/,
-          include: options.sourceDirectory,
-          issuer: /\.docs\.vue$/,
-          loader: 'fb-vue-loader',
         },
         // We include stylesheets as part of the default theme, in order to
         // have some nice looking UI and documentation pages with code blocks.
@@ -185,6 +194,7 @@ module.exports = options => {
         // In the future, we can extract these and add unit tests and publish.
         [
           'html-inject-vue-loader',
+          'html-preview-vue-loader',
         ].reduce((alias, loader) => {
           alias[`fb-${loader}`] = path.resolve(__dirname, `./loaders/${loader}`);
           return alias;
