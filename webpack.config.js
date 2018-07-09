@@ -32,7 +32,7 @@ module.exports = options => {
   }
 
   return {
-    entry: path.resolve(__dirname, './index.js'),
+    entry: path.resolve(__dirname, 'index.js'),
     module: {
       rules: [
         // Main entry points for the documentation pages, written in markdown.
@@ -42,10 +42,10 @@ module.exports = options => {
           test: /\.docs\.md$/,
           include: options.sourceDirectory,
           use: [
-            'fb-file-loader?name=[name].[hash].html',
-            'fb-extract-loader',
+            'file-loader?name=[name].[hash].html',
+            'extract-loader',
             {
-              loader: 'fb-html-loader',
+              loader: 'html-loader',
               options: {
                 attrs: [
                   'link:href',
@@ -61,7 +61,7 @@ module.exports = options => {
             // The complex loader can also be used to require assets like styles
             // that then can be injected into the template....
             {
-              loader: 'fb-wrapper-loader',
+              loader: 'wrapper-loader',
               options: {
                 template: `
 <!DOCTYPE html>
@@ -85,13 +85,13 @@ module.exports = options => {
                   // Notice the `markdown-body` class, which is needed for the github css.
                   // TODO: Make sure this is gotten in another way and embedded into a real theme.
                   styleDocs: path.resolve(__dirname, 'node_modules/github-markdown-css/github-markdown.css'),
-                  styleDocsContainer: path.resolve(__dirname, './theme/docs.css'),
+                  styleDocsContainer: path.resolve(__dirname, 'theme/docs.css'),
                   styleCode: path.resolve(__dirname, 'node_modules/highlight.js/styles/github-gist.css'),
                 },
               },
             },
             {
-              loader: 'fb-markdown-it-loader',
+              loader: 'markdown-it-loader',
               options: {
                 use: [
                   [markdownItCustomBlock, {
@@ -121,17 +121,17 @@ module.exports = options => {
             {
               resourceQuery: /forPreview/,
               use: [
-                'fb-file-loader?name=[name].[hash].html',
-                'fb-extract-loader',
-                'fb-html-loader?attrs=script:src',
-                'fb-html-preview-vue-loader',
+                'file-loader?name=[name].[hash].html',
+                'extract-loader',
+                'html-loader?attrs=script:src',
+                'html-preview-vue-loader',
               ],
             },
             {
               resourceQuery: /forRequire/,
               use: [
-                'fb-spawn-loader?name=[name].[chunkhash].js',
-                'fb-html-inject-vue-loader',
+                'spawn-loader?name=[name].[chunkhash].js',
+                'html-inject-vue-loader',
               ],
             },
             // This is a workaround to load the `(docs|preview).vue` files, as using
@@ -160,8 +160,8 @@ module.exports = options => {
           test: /\.css$/,
           include: path.resolve(__dirname),
           use: [
-            { loader: 'fb-file-loader' },
-            // { loader: 'fb-css-loader' },
+            { loader: 'file-loader' },
+            // { loader: 'css-loader' },
             // TODO: Figure out how to combine css with file loader.
             // For the moment, we use plain css files, so actually, there is no
             // need to use the css loader here, though it may be useful later.
@@ -170,32 +170,15 @@ module.exports = options => {
       ],
     },
     resolveLoader: {
-      alias: Object.assign(
-        // To make sure loaders aren't mixed from this and the consumer package
-        // we'll have to use aliasing, and redirect these to our `node_modules`.
-        [
-          'css-loader',
-          'debug-loader',
-          'extract-loader',
-          'file-loader',
-          'html-loader',
-          'markdown-it-loader',
-          'spawn-loader',
-          'wrapper-loader',
-        ].reduce((alias, loader) => {
-          alias[`fb-${loader}`] = path.resolve(__dirname, `node_modules/${loader}`);
-          return alias;
-        }, {}),
-        // We also create custom loaders for things we can't find loaders for.
-        // In the future, we can extract these and add unit tests and publish.
-        [
-          'html-inject-vue-loader',
-          'html-preview-vue-loader',
-        ].reduce((alias, loader) => {
-          alias[`fb-${loader}`] = path.resolve(__dirname, `./loaders/${loader}`);
-          return alias;
-        }, {}),
-      ),
+      // We also create custom loaders for things we can't find loaders for.
+      // In the future, we can extract these and add unit tests and publish.
+      alias: [
+        'html-inject-vue-loader',
+        'html-preview-vue-loader',
+      ].reduce((alias, loader) => {
+        alias[loader] = path.resolve(__dirname, `loaders/${loader}`);
+        return alias;
+      }, {}),
     },
     plugins: [
       new webpack.DefinePlugin({
