@@ -10,6 +10,15 @@ const LOG_PREFIX = '[fabricator-builder]';
 // so we can have different versions of loaders. We need to take into account
 // that npm can install a module in our own node_modules or in the parent
 // node_modules directory, so an absolute path will not always work!!!
+// We could use an alias in the package.json file, but with loaders that depend
+// on other packages, this could lead to a real dependency hell. So I think it
+// would be better to define them through a webpack alias and an absolute path,
+// but for this, we'll first have to check the location of the module!
+// Though I do believe this will give us a hard time, so maybe it's better to
+// go with the default way of dealing with them, and that is declaring peer
+// dependencies, as we are used by the parent in a webpack context, so we are
+// in fact kind of a plugin/config for webpack, so everything we use in it is
+// then a peer dependency....
 
 /**
  * @typedef {Object} FabricatorBuilderOptions
