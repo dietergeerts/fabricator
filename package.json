@@ -17,6 +17,11 @@
     "url": "https://github.com/dietergeerts/fabricator/issues"
   },
   "main": "index.js",
+  "files": [
+    "loaders/",
+    "theme/",
+    "webpack.config.js"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
