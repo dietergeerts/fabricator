@@ -6,6 +6,11 @@ const markdownItCustomBlock = require('markdown-it-custom-block');
 
 const LOG_PREFIX = '[fabricator-builder]';
 
+// TODO: Check if we can move some peerDependencies to our own dependencies,
+// so we can have different versions of loaders. We need to take into account
+// that npm can install a module in our own node_modules or in the parent
+// node_modules directory, so an absolute path will not always work!!!
+
 /**
  * @typedef {Object} FabricatorBuilderOptions
  * @property {string} sourcePackage - Package JSON, to extract name, version, ...
@@ -84,9 +89,9 @@ module.exports = options => {
                   // and it's used for the same purpose as a toolkit: documentation.
                   // Notice the `markdown-body` class, which is needed for the github css.
                   // TODO: Make sure this is gotten in another way and embedded into a real theme.
-                  styleDocs: 'github-markdown-css/github-markdown.css',
+                  styleDocs: '~github-markdown-css/github-markdown.css',
                   styleDocsContainer: path.resolve(__dirname, 'theme/docs.css'),
-                  styleCode: 'highlight.js/styles/github-gist.css',
+                  styleCode: '~highlight.js/styles/github-gist.css',
                 },
               },
             },
@@ -158,7 +163,12 @@ module.exports = options => {
         // just extract them with the file loader and be done.
         {
           test: /\.css$/,
-          include: path.resolve(__dirname),
+          include: [
+            path.resolve(__dirname, 'theme'),
+            /node_modules(\\|\/)highlight.js/,
+            /node_modules(\\|\/)github-markdown-css/,
+          ],
+          issuer: /\.docs\.md$/,
           use: [
             { loader: 'file-loader' },
             // { loader: 'css-loader' },
