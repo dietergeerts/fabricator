@@ -24,5 +24,8 @@
   "homepage": "https://github.com/dietergeerts/fabricator#readme",
   "peerDependencies": {
     "webpack": "^4"
+  },
+  "dependencies": {
+    "clean-webpack-plugin": "^0.1.19"
   }
 }
