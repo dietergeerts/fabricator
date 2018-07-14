@@ -1,0 +1,28 @@
+{
+  "name": "@fabricator/builder",
+  "version": "0.0.0",
+  "description": "Entry package for building toolkits/styleguides",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dietergeerts/fabricator.git"
+  },
+  "keywords": [
+    "toolkit",
+    "styleguide",
+    "fabricator",
+    "fabricator-builder"
+  ],
+  "author": "Dieter Geerts <dieter@dworks.be> (http://dietergeerts.github.io/)",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/dietergeerts/fabricator/issues"
+  },
+  "homepage": "https://github.com/dietergeerts/fabricator#readme",
+  "peerDependencies": {
+    "webpack": "^4"
+  }
+}
