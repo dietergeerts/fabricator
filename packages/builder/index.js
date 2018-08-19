@@ -11,6 +11,7 @@ const LOG_PREFIX = '[fabricator-builder]';
  */
 
 /**
+ * @param {Object} webpackConfig
  * @return {Object}
  */
 module.exports = (webpackConfig) => {
@@ -30,6 +31,17 @@ module.exports = (webpackConfig) => {
       output: {
         filename: '[name].[chunkhash].js',
         path: path.resolve(process.env.INIT_CWD, 'dist'),
+      },
+      module: {
+        rules: [
+          {
+            test: /README\.html$/,
+            include: webpackConfig.context,
+            use: [
+              'file-loader?name=[name].[hash].html',
+            ],
+          },
+        ],
       },
       plugins: [
         new CleanWebpackPlugin(['dist'], { root: process.env.INIT_CWD }),

@@ -25,6 +25,7 @@
   "homepage": "https://github.com/dietergeerts/fabricator#readme",
   "devDependencies": {
     "@fabricator/builder": "^0.0.0",
+    "file-loader": "^1.1.11",
     "webpack": "^4.16.0",
     "webpack-cli": "^3.0.8",
     "webpack-stylish": "^0.1.8"

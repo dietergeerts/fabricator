@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/dietergeerts/fabricator#readme",
   "peerDependencies": {
+    "file-loader": "^1",
     "webpack": "^4"
   },
   "dependencies": {
