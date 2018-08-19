@@ -8,13 +8,22 @@ const LOG_PREFIX = '[fabricator-builder]';
 
 /**
  * @typedef {Object} FabricatorBuilderOptions
+ * @property {RegExp} docsTest
  */
 
 /**
+ * @param {FabricatorBuilderOptions} options
  * @param {Object} webpackConfig
  * @return {Object}
  */
-module.exports = (webpackConfig) => {
+module.exports = (options, webpackConfig) => {
+  if (!options.docsTest) {
+    throw new Error(
+      `${LOG_PREFIX} the \`docsTest\` option has to be set.`
+      + ` We need this to require your documentation files.`,
+    );
+  }
+
   if (!webpackConfig.context) {
     throw new Error(
       `${LOG_PREFIX} the webpack \`context\` option has to be set.`
@@ -35,7 +44,7 @@ module.exports = (webpackConfig) => {
       module: {
         rules: [
           {
-            test: /README\.md$/,
+            test: options.docsTest,
             include: webpackConfig.context,
             use: [
               'file-loader?name=[name].[hash].html',
@@ -47,6 +56,7 @@ module.exports = (webpackConfig) => {
         new CleanWebpackPlugin(['dist'], { root: process.env.INIT_CWD }),
         new webpack.DefinePlugin({
           __TOOLKIT_SRC__: JSON.stringify(webpackConfig.context),
+          __TOOLKIT_DOCS__: options.docsTest,
         }),
         new HtmlWebpackPlugin(),
       ],
