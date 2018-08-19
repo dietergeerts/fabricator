@@ -35,7 +35,7 @@ module.exports = (webpackConfig) => {
       module: {
         rules: [
           {
-            test: /README\.html$/,
+            test: /README\.md$/,
             include: webpackConfig.context,
             use: [
               'file-loader?name=[name].[hash].html',
