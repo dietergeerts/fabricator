@@ -9,6 +9,7 @@ const LOG_PREFIX = '[fabricator-builder]';
 /**
  * @typedef {Object} FabricatorBuilderOptions
  * @property {RegExp} docsTest
+ * @property {function(): Array<Object>} docsPreLoaders
  */
 
 /**
@@ -21,6 +22,13 @@ module.exports = (options, webpackConfig) => {
     throw new Error(
       `${LOG_PREFIX} the \`docsTest\` option has to be set.`
       + ` We need this to require your documentation files.`,
+    );
+  }
+
+  if (!options.docsPreLoaders) {
+    throw new Error(
+      `${LOG_PREFIX} the \`docsPreLoaders\` option has to be set.`
+      + ` We need this to correctly load in documentation files.`,
     );
   }
 
@@ -48,7 +56,9 @@ module.exports = (options, webpackConfig) => {
             include: webpackConfig.context,
             use: [
               'file-loader?name=[name].[hash].html',
-            ],
+            ].concat(
+              options.docsPreLoaders(),
+            ),
           },
         ],
       },
