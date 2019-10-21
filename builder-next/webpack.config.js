@@ -99,7 +99,7 @@ module.exports = options => {
                   // Notice the `markdown-body` class, which is needed for the github css.
                   // TODO: Make sure this is gotten in another way and embedded into a real theme.
                   styleDocs: '~github-markdown-css/github-markdown.css',
-                  styleDocsContainer: path.resolve(__dirname, 'theme/docs.css'),
+                  styleDocsContainer: '~fabricator-builder/theme/docs.css',
                   styleCode: '~highlight.js/styles/github-gist.css',
                 },
               },
