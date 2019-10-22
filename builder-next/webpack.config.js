@@ -83,6 +83,7 @@ module.exports = options => {
 <head>
   <meta charset="UTF-8">
   <title><%= title %></title>
+  <% if (base) { %><base href="/<%- base %>/"><% } %>
   <link href="<%= styleDocs %>" rel="stylesheet">
   <link href="<%= styleDocsContainer %>" rel="stylesheet">
   <link href="<%= styleCode %>" rel="stylesheet">
@@ -93,6 +94,7 @@ module.exports = options => {
 </html>
 `,
                 data: {
+                  base: options.base,
                   title: `${options.sourcePackage.name} v${options.sourcePackage.version}`,
                   // For now, I use the markdown styling, as that was the easiest to find,
                   // and it's used for the same purpose as a toolkit: documentation.
@@ -138,7 +140,12 @@ module.exports = options => {
                 'file-loader?name=[name].[hash].html',
                 'extract-loader',
                 'html-loader?attrs=script:src',
-                'html-preview-vue-loader',
+                {
+                  loader: 'html-preview-vue-loader',
+                  options: {
+                    base: options.base,
+                  },
+                },
               ],
             },
             {
@@ -206,6 +213,12 @@ module.exports = options => {
       }),
       new VueLoaderPlugin(),
       new HtmlWebpackPlugin(),
+      new HtmlWebpackPlugin({
+        filename: '../index.html',
+        base: options.base,
+        title: options.title || 'Fabricator builder app',
+        template: path.resolve(__dirname, 'index.html'),
+      }),
     ],
   };
 };

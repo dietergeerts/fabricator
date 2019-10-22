@@ -10,6 +10,7 @@ module.exports = function () {
 // Also handy to add it to the dependencies so that it's watched.
 // TODO: Extract template in another step, this should just create html content.
 module.exports.pitch = function (remainingRequest) {
+  const options = loaderUtils.getOptions(this) || {};
   this.cacheable && this.cacheable();
   const componentRequest = `${remainingRequest.replace(/\?.*?$/, '')}?forRequire`;
   return `
@@ -18,6 +19,7 @@ module.exports.pitch = function (remainingRequest) {
 <head>
   <meta charset="UTF-8">
   <title>${this.resourcePath.split(/\\/).slice(-1)}</title>
+  ${options.base ? `<base href="/${options.base}/">` : '' }
 </head>
 <body>
 <script src=${loaderUtils.stringifyRequest(this, componentRequest)}></script>
