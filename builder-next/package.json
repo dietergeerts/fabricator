@@ -1,6 +1,6 @@
 {
   "name": "fabricator-builder",
-  "version": "5.0.0-alpha.7",
+  "version": "5.0.0-alpha.8",
   "description": "A tool for building website UI toolkits",
   "author": "Dieter Geerts <dieter@dworks.be> (https://dietergeerts.github.io/)",
   "license": "GPL-3.0",
